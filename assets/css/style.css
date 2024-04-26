@@ -300,6 +300,7 @@ h6 {
 
 /*====== Ecommerce Dashboard Css End ======*/
 
+}
 .login .container-fluid {
     width: auto;
     margin-top: 80px;
@@ -16490,11 +16491,10 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
 /* =======================================
       Authentication-page css start
  ========================================= */
-
 .common-img-bg {
-    background-size: cover;
     background: linear-gradient(45deg, #4099ff, #73b4ff);
     height: 100%;
+    background-size: cover;
 }
 
 .signin-card .auth-box button i,
@@ -16520,6 +16520,7 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
     border-radius: 30px;
     position: relative;
     display: block;
+
 }
 
 .login-card h1 {
@@ -21528,7 +21529,6 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
 
 .kho-sub {
     width: 500px;
-    border: 2px solid black;
     border-radius: 20px;
     height: 90px;
     margin: 0 40px;
@@ -21541,7 +21541,6 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
     justify-content: center;
     /* Căn giữa theo chiều ngang */
     background-color: #d9ebff;
-    border-color: #4F5467;
 }
 
 a .kho-sub {
@@ -21568,25 +21567,18 @@ a {
     padding-top: 7px;
 }
 /*table nvl*/
-.donhang tr th{
-    background-color: #007888;
-}
-.btn{
-    background-color: #007888;
-    padding:5px;
-    color: white;
-    margin-left: 500px;
-    margin-bottom: 10px;
-}
+
 .propose-list{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
 
 }
-.propose-list th{
-    background-color: #007888;
-}
-.listproduct th{
+.donhang tr th,
+.listproduct tr th,
+.bieumau tr th,
+.propose-list tr th,
+.propose-list-gd tr th,
+.listpropose tr th{
     background-color: #007888;
 }

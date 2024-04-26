@@ -10,6 +10,7 @@
             <table class="table table-border table-success">
                 <thead>
                     <tr>
+						<th>Ảnh</th>
                         <th>Tên nguyên vật liệu</th>
                         <th>Đơn vị tính</th>
                         <th>Số lượng</th>

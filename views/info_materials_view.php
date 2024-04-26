@@ -1,10 +1,12 @@
 <div class="warehouse">
         <div class="listproduct">
-            <table class="table table-bordered">
+        <h1 class="text-center">CHI TIẾT NGUYÊN VẬT LIỆU</h1>
+            <table class="table table-border table-success">
                 <thead>
                     <tr>
-                        <th>STT</th>
+                        <th>Ảnh</th>
                         <th>Mã lô</th>
+                        <th>Mã nguyên vật liệu</th>
                         <th>Tên Nguyên Vật Liệu</th>
                         <th>Đơn vị tính</th>
                         <th>Số Lượng Tồn</th>

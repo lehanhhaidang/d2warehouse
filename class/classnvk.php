@@ -170,6 +170,7 @@ class nhanvienkho
 			while ($row=mysql_fetch_array($ketqua))
 			{
 			// Lấy thông tin từ dữ liệu
+			$anh=$row['anh'];
 			$tenNguyenVatLieu = $row['tenNguyenVatLieu'];
 			$donViTinh = $row['donViTinh'];
 			$soLuong = $row['soLuong'];
@@ -177,6 +178,7 @@ class nhanvienkho
 			$NHH = $row['NHH'];
 			// In ra thông tin trong mẫu HTML
 			echo '<tr> 
+						<td><img src="./uploads/'.$anh.'" width="100px" height="100px"></td>
                         <td>'.$tenNguyenVatLieu.'</td>
                         <td>'.$donViTinh.'</td>
                         <td>'.$soLuong.'</td>
@@ -265,8 +267,10 @@ class nhanvienkho
 			$dem =1;
 			while ($row=mysql_fetch_array($ketqua))
 			{
+				$anh=$row['anh'];
 				$manvl = $row['maNguyenVatLieu'];
 				$maLoNVL = $row['maLoNVL'];
+				$maNVL=$row['maNguyenVatLieu'];
 				$tenNguyenVatLieu = $row['tenNguyenVatLieu'];
 				$donViTinh = $row['donViTinh'];
 				$soLuongTonnvl = $row['soLuongTonnvl'];
@@ -274,8 +278,9 @@ class nhanvienkho
 				$NHH = $row['NHH'];
 			echo '
            			<tr>
-                        <td>'.$dem.'</td>
+					   <td><img src="./uploads/'.$anh.'" width="100px" height="100px"></td>
                         <td>'.$maLoNVL.'</td>
+						<td>'.$maNVL.'</td>
 						<td>'.$tenNguyenVatLieu.'</td>
                         <td>'.$donViTinh.'</td>
                         <td>'.$soLuongTonnvl.'</td>
@@ -325,15 +330,20 @@ class nhanvienkho
 			$dem =1;
 			while ($row=mysql_fetch_array($ketqua))
 			{
-				$maThanhPham = $row['maThanhPham'];
+				$anh=$row['anh'];
+				$maLoTP=$row['maLoTP'];
+				$maTP=$row['maThanhPham'];
+				$tenThanhPham = $row['tenThanhPham'];
 				$donViTinh = $row['donViTinh'];
 				$soLuongTon = $row['soLuongTon'];
 				$NSX = $row['NSX'];
 				$NHH = $row['NHH'];
 			echo '
            			<tr>
-                        <td>'.$dem.'</td>
-						<td>'.$maThanhPham.'</td>
+					    <td><img src="./uploads/'.$anh.'" width="100px" height="100px"></td>
+						<td>'.$maLoTP.'</td>
+						<td>'.$maTP.'</td>
+						<td>'.$tenThanhPham.'</td>
                         <td>'.$donViTinh.'</td>
                         <td>'.$soLuongTon.'</td>
                         <td>'.$NSX.'</td>
@@ -1340,7 +1350,7 @@ class nhanvienkho
                     <td>'.$ngayNhap.'</td> 
                     <td>'.$loaiNhap.'</td> 
                     <td class="">'.$trangthai.'</td> 
-                    <td><a href="'.$url.'" class="btn btn-info">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
+                    <td><a href="'.$url.'" class="btn btn-info ml-auto mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
                 </tr>';
         }
     } else {
@@ -1379,7 +1389,7 @@ class nhanvienkho
                     <td>'.$ngayXuat.'</td> 
                     <td>'.$loaiXuat.'</td> 
                     <td>'.$trangthai.'</td> 
-                    <td><a href="'.$url.'" class="btn btn-info">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
+                    <td><a href="'.$url.'" class="btn btn-info ml-auto mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
                 </tr>';
         }
     } else {
@@ -1652,13 +1662,13 @@ public function list_propose_gd($sql)
 				<td>'.$tenDeXuat.'</td>';
 				if($trangThai=="Chờ duyệt")
 				{
-					echo '<td class="badge badge-warning">'.$trangThai.'</td>';
+					echo '<td class="badge badge-warning d-flex justify-content-center mt-3">'.$trangThai.'</td>';
 				}
 				else
 				{
-					echo '<td class="badge badge-primary">'.$trangThai.'</td>';
+					echo '<td class="badge badge-primary d-flex justify-content-center mt-3">'.$trangThai.'</td>';
 				}
-				echo '<td><a href="'.$url.'" class="btn btn-info">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
+				echo '<td><a href="'.$url.'" class="btn btn-info ml-auto mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
 			  </tr>';
 		
                 

@@ -1,6 +1,6 @@
 <h1 algin="center"class="text-center">DANH SÁCH BIỂU MẪU NHẬP</h1>
 <div class="propose-list">
-<table class="table-sm table-bordered table-hover table-success">
+<table class="table-sm table-border table-hover table-success">
         <thead>
             <tr>
                 <th>STT</th>

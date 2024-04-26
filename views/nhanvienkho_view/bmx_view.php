@@ -4,16 +4,16 @@ if (isset($_REQUEST['idBMX'])) {
 }
 ?>
 
-<h3 >BIỂU MẪU XUẤT KHO</h3>
-<p><b>Mã biểu mẫu: <?php echo $idBMX ?></b></p>
+<h3 class="text-center text-success">BIỂU MẪU XUẤT KHO</h3>
+<p class="text-center"><b>Mã biểu mẫu: <?php echo $idBMX ?></b></p>
 
 <div class="warehouse">
     <div class="warehouse-information">
-        <p><b>Tên người nhận:</b> <?php echo $p->pickColumn("select tenNguoiNhan from bieumauxuat
+        <p class="text-center"><b>Tên người nhận:</b> <?php echo $p->pickColumn("select tenNguoiNhan from bieumauxuat
         where maBMXuat = '$idBMX' limit 1"); ?></p>
-        <p><b>Ngày xuất:</b> <?php echo $p->pickColumn("select ngayXuat from bieumauxuat
+        <p class="text-center"><b>Ngày xuất:</b> <?php echo $p->pickColumn("select ngayXuat from bieumauxuat
         where maBMXuat = '$idBMX' limit 1"); ?></p>
-        <p><b>Kho xuất:</b> <?php echo $p->pickColumn("SELECT kho.tenKho
+        <p class="text-center"><b>Kho xuất:</b> <?php echo $p->pickColumn("SELECT kho.tenKho
             FROM bieumauxuat
             INNER JOIN kho ON bieumauxuat.maKho = kho.maKho
             WHERE bieumauxuat.maBMXuat = '$idBMX'"); ?>
@@ -22,7 +22,7 @@ if (isset($_REQUEST['idBMX'])) {
     </div>
 
     <div class="listproduct">
-        <table class="table table-bordered">
+        <table class="table table-border table-success table-hover">
             <thead>
                 <tr>
                     <th>STT</th>

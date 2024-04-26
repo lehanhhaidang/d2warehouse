@@ -1,10 +1,10 @@
-<h1 algin="center">DANH SÁCH ĐỀ XUẤT</h1>
+<h1 algin="center" class="text-center">DANH SÁCH ĐỀ XUẤT</h1>
 <div class="propose-list-gd">
-<table class="table table-bordered table-hover">
+<table class="table-sm table-border table-hover table-info mx-auto">
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Mã đề xuât</th>
+                <th>Mã đề xuất</th>
                 <th>Tên đề xuất</th>
                 <th>Trạng thái</th>
                 <th>Action</th>

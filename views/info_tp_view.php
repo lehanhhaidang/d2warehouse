@@ -1,10 +1,13 @@
 <div class="warehouse">
         <div class="listproduct">
-            <table class="table table bordered">
+        <h1 class="text-center">CHI TIẾT THÀNH PHẨM</h1>
+            <table class="table table-border table-success">
                 <thead>
                     <tr>
-                        <th>STT</th>
+                        <th>Ảnh</th>
+                        <th>Mã Lô Thành Phẩm</th>
                         <th>Mã Thành Phẩm</th>
+                        <th>Tên Thành Phẩm</th>
                         <th>Đơn vị tính</th>
                         <th>Số Lượng Tồn</th>
                         <th>Ngày sản xuất</th>

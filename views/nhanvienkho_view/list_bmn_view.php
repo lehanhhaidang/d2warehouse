@@ -1,6 +1,6 @@
-<h1 algin="center">DANH SÁCH BIỂU MẪU NHẬP</h1>
+<h1 algin="center" class="text-center">DANH SÁCH BIỂU MẪU NHẬP</h1>
 <div class="bieumau">
-<table class="table table-bordered table-hover">
+<table class="table-sm table-border table-hover table-success">
         <thead>
 
        

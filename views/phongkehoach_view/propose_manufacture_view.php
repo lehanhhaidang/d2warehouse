@@ -1,7 +1,7 @@
 <form action="create_dxxnvl.php" method="post">
     <h1 align="center">DANH SÁCH THÀNH PHẨM</h1>
     <div class="donhang">
-        <table class="table table-bordered table-hover table-success">
+        <table class="table table-border table-hover table-success">
             <thead>
                 <tr>
                     <th>Stt</th>
@@ -19,5 +19,7 @@
             </tbody>
         </table>
     </div>
-    <button type="submit" class="btn btn-success btn-outline-primary">Thêm Đề Xuất Sản Xuất</button>
+    <div class="text-center">
+    <button type="submit" class="btn btn-warning text-dark">Thêm Đề Xuất Sản Xuất</button>
+    </div>
 </form>

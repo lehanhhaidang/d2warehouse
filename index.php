@@ -17,10 +17,11 @@
 <?php 
     include ("includes/head.php")
 ?>
-
   <body>
+<div id="dangnhap">
 
-  <section class="login p-fixed d-flex text-center bg-primary common-img-bg">
+  <section class="login p-fixed d-flex text-center common-img-bg bg-primary  ">
+
         <!-- Container-fluid starts -->
         <div class="container">
             <div class="row">
@@ -34,7 +35,7 @@
                             <div class="auth-box">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-left txt-primary">Đăng nhập</h3>
+                                        <h3 class="text-center text-primary">Đăng nhập</h3>
                                         <h6 class="text-danger text-left">
                                             <?php 
                                                 if(isset($log_msg)){
@@ -69,7 +70,7 @@
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <input type="submit" name="admin_btn" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20" value="Đăng nhập">
+                                        <input type="submit" name="admin_btn" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20 mx-auto" value="Đăng nhập">
                                     </div>
                                 </div>
                                 <hr/>
@@ -98,7 +99,7 @@
         </div>
         <!-- end of container-fluid -->
     </section>
-	
+</div>
 
   
 
