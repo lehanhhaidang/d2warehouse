@@ -1204,28 +1204,6 @@ class nhanvienkho
 		}
 	}
 
-	public function countPNNVL() {
-        $result = mysql_query("SELECT * FROM phieunnvl", $this->connect());
-        $i = mysql_num_rows($result);
-        return $i;
-    }
-    public function countPXNVL() {
-        $result = mysql_query("SELECT * FROM phieuxnvl", $this->connect());
-        $i = mysql_num_rows($result);
-        return $i;
-    }
-    public function countPNTP() {
-        $result = mysql_query("SELECT * FROM phieuntp", $this->connect());
-        $i = mysql_num_rows($result);
-        return $i;
-    }
-    public function countPXTP() {
-        $result = mysql_query("SELECT * FROM phieuxtp", $this->connect());
-        $i = mysql_num_rows($result);
-        return $i;
-    }
-
-
 // =========================================================================
 	public function xuatdsnvl($sql)
 	{
@@ -1702,7 +1680,124 @@ public function list_propose_gd($sql)
 			}
 		}
 	}
-		
+	// ============BOTCHAT============
+	public function countPNNVL() {
+		$result = mysql_query("SELECT * FROM phieunnvl", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countPXNVL() {
+		$result = mysql_query("SELECT * FROM phieuxnvl", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countPNTP() {
+		$result = mysql_query("SELECT * FROM phieuntp", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countPXTP() {
+		$result = mysql_query("SELECT * FROM phieuxtp", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countDonhang() {
+		$result = mysql_query("SELECT * FROM donhang", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countNVL(){
+		$result= mysql_query("SELECT * FROM nguyenvatlieu", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countNVLton(){
+		$result= mysql_query("SELECT SUM(SoLuongTonnvl) AS total FROM nguyenvatlieu", $this->connect());
+		$row = mysql_fetch_row($result);
+		$total = $row[0];
+		return $total;
+	}
+	
+	public function countTP(){
+		$result= mysql_query("SELECT * FROM thanhpham", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countTPton(){
+		$result= mysql_query("SELECT SUM(soLuongTon) AS total FROM thanhpham", $this->connect());
+		$row = mysql_fetch_row($result);
+		$total = $row[0];
+		return $total;
+	}
+	public function countKho(){
+		$result= mysql_query("SELECT * FROM kho", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countKhonvl(){
+		$result= mysql_query("SELECT * FROM kho WHERE maKho LIKE 'KNVL%'", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countKhotp(){
+		$result= mysql_query("SELECT * FROM kho WHERE maKho LIKE 'KTP%'", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	
+	//giám đốc
+	//nvl
+	public function countphieuDuyet(){
+		$result= mysql_query("SELECT * FROM phieuycxnvl WHERE tinhTrang LIKE 'Duyệt%'", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countphieuTC(){
+		$result= mysql_query("SELECT * FROM phieuycxnvl WHERE tinhTrang LIKE 'Từ chối%'", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countphieuCD(){
+		$result= mysql_query("SELECT * FROM phieuycxnvl WHERE tinhTrang LIKE 'Chưa Duyệt%'", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	//tp
+	public function countphieuDuyetTP(){
+		$result= mysql_query("SELECT * FROM phieuycntp WHERE tinhTrang LIKE 'Duyệt%'", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countphieuTCTP(){
+		$result= mysql_query("SELECT * FROM phieuycntp WHERE tinhTrang LIKE 'Từ chối%'", $this->connect());
+		$i = mysql_num_rows($result);
+		return $i;
+	}
+	public function countphieuCDTP(){
+	$result= mysql_query("SELECT * FROM phieuycntp WHERE tinhTrang LIKE 'Chưa Duyệt%'", $this->connect());
+	$i = mysql_num_rows($result);
+	return $i;
+}
+public function countKHSX(){
+	$result= mysql_query("SELECT * FROM kehoachsx", $this->connect());
+	$i = mysql_num_rows($result);
+	return $i;
+}
+public function countBBKK(){
+	$result= mysql_query("SELECT * FROM bienbankiemke", $this->connect());
+	$i = mysql_num_rows($result);
+	return $i;
+}
+public function countYCNTP() {
+	$result = mysql_query("SELECT * FROM phieuycntp", $this->connect());
+	$i = mysql_num_rows($result);
+	return $i;
+}
+public function countYCXNVL() {
+	$result = mysql_query("SELECT * FROM phieuycxnvl", $this->connect());
+	$i = mysql_num_rows($result);
+	return $i;
+}
 
 
 
