@@ -1,3 +1,4 @@
+
 <?php 
 session_start();
 
@@ -34,9 +35,9 @@ if(isset($_SESSION['selected_products']) && is_array($_SESSION['selected_product
         // Thực hiện truy vấn để lấy thông tin về sản phẩm từ cơ sở dữ liệu
         $link = $p->connect();
         $sql = "SELECT * FROM thanhpham WHERE maThanhPham = '$maThanhPham'";
-        $result = mysql_query($sql, $link);
-        if ($result && mysql_num_rows($result) > 0) {
-            $row = mysql_fetch_assoc($result);
+        $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result); // Sử dụng mysqli_fetch_assoc thay vì mysql_fetch_assoc
             $maThanhPham = $row['maThanhPham'];
             $tenThanhPham = $row['tenThanhPham'];
             $donViTinh = $row['donViTinh'];
@@ -81,9 +82,9 @@ if(isset($_POST['tinhnvl']))
                 JOIN dinhmucnvl AS dm ON nvl.maNguyenVatLieu = dm.maNguyenVatLieu
                 WHERE dm.maThanhPham = '$maThanhPham'";
         $link = $p->connect();
-        $result = mysql_query($sql, $link);
-        if ($result && mysql_num_rows($result) > 0) {
-            while ($row = mysql_fetch_assoc($result)) {
+        $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+        if ($result && mysqli_num_rows($result) > 0) {
+            while ($row = mysqli_fetch_assoc($result)) { // Sử dụng mysqli_fetch_assoc thay vì mysql_fetch_assoc
                 $maNguyenVatLieu = $row['maNguyenVatLieu'];
                 $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
                 $donViTinh = $row['donViTinh'];
@@ -91,7 +92,9 @@ if(isset($_POST['tinhnvl']))
                 
                 // Lưu thông tin vào mảng
                 $nguyenVatLieuCanThiet[] = array(
-                    'maNguyenVatLieu' => $maNguyenVatLieu,
+                    'maNguyenVatLieu'
+
+ => $maNguyenVatLieu,
                     'soLuongCan' => $soLuongCan
                 );
                 
@@ -122,8 +125,8 @@ if(isset($_POST['insert_dexuat']))
     $link = $p->connect();
     
     // Lấy mã đề xuất lớn nhất từ bảng dexuat
-    $result_max_maDeXuat = mysql_query("SELECT MAX(CAST(SUBSTRING(maDeXuat, 3) AS UNSIGNED)) AS max_maDeXuat FROM dexuat");
-    $row_max_maDeXuat = mysql_fetch_assoc($result_max_maDeXuat);
+    $result_max_maDeXuat = mysqli_query($link, "SELECT MAX(CAST(SUBSTRING(maDeXuat, 3) AS UNSIGNED)) AS max_maDeXuat FROM dexuat"); // Sử dụng MySQLi thay vì MySQL
+    $row_max_maDeXuat = mysqli_fetch_assoc($result_max_maDeXuat); // Sử dụng mysqli_fetch_assoc thay vì mysql_fetch_assoc
     $max_maDeXuat = $row_max_maDeXuat['max_maDeXuat'];
     $next_maDeXuat = 'DX' . str_pad($max_maDeXuat + 1, 2, '0', STR_PAD_LEFT); // Tạo mã mới cho maDeXuat
     $tenDeXuat = "Đề xuất xuất nguyên vật liệu cho sản xuất"; // Tên đề xuất mặc định
@@ -136,7 +139,7 @@ if(isset($_POST['insert_dexuat']))
         // Thực hiện INSERT với các giá trị lấy từ mảng $nvl và mã đề xuất mới
         if($soLuong>0)
         {
-            if($result_insert = mysql_query("INSERT INTO dexuat (maDeXuat, tenDeXuat, maNVL, soLuong, trangThai) VALUES ('$next_maDeXuat', '$tenDeXuat', '$maNVL', $soLuong, '$trangThai')", $link)==1)
+            if($result_insert = mysqli_query($link, "INSERT INTO dexuat (maDeXuat, tenDeXuat, maNVL, soLuong, trangThai) VALUES ('$next_maDeXuat', '$tenDeXuat', '$maNVL', $soLuong, '$trangThai')")==1)
             {
                 echo '<script>';
                 echo 'window.onload = function() { $("#successModal").modal("show"); };';

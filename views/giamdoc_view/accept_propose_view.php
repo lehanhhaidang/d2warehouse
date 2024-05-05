@@ -43,7 +43,7 @@ if (isset($_REQUEST['idDX'])) {
             {
                 $link= $p->connect();
                 $sql = "UPDATE dexuat set trangThai ='Đã duyệt' where maDeXuat ='$idDX'";
-                mysql_query($sql,$link);
+                mysqli_query($link,$sql);
 
             
                 break;
@@ -52,7 +52,7 @@ if (isset($_REQUEST['idDX'])) {
             {
                 $link= $p->connect();
                 $sql = "UPDATE dexuat set trangThai ='Đã từ chối' where maDeXuat ='$idDX'";
-                mysql_query($sql,$link);
+                mysqli_query($link,$sql);
                 break;
             }
     }

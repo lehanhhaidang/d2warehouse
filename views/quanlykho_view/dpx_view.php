@@ -7,7 +7,7 @@
     <!-- Bảng xuất nguyên vật liệu -->
     <?php
     $link = $p->connect();
-    $result = mysql_query("select* from dexuat where tenDeXuat ='Đề xuất xuất nguyên vật liệu cho sản xuất' and trangThai ='Đã duyệt' group by maDeXuat", $link);
+    $result = mysqli_query($link, "select* from dexuat where tenDeXuat ='Đề xuất xuất nguyên vật liệu cho sản xuất' and trangThai ='Đã duyệt' group by maDeXuat");
     $count = 1; // Đưa biến count ra khỏi vòng lặp để đếm số thứ tự
     echo'<table class="table table-bordered table-hover">
     <thead>
@@ -22,8 +22,8 @@
         </tr>
     </thead>
     <tbody>';
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_array($result)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
             $maDeXuat = $row['maDeXuat'];
             $tenDeXuat = $row['tenDeXuat'];
             $trangThai = $row['trangThai'];
@@ -46,7 +46,7 @@
     <!-- Bảng đơn hàng -->
     <?php
     $link = $p->connect();
-    $result = mysql_query("select* from donhang", $link);
+    $result = mysqli_query($link, "select* from donhang");
     $count = 1; // Đưa biến count ra khỏi vòng lặp để đếm số thứ tự
     echo'<table class="table table-bordered table-hover">
     <thead>
@@ -63,8 +63,8 @@
         </tr>
     </thead>
     <tbody>';
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_array($result)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
             $maDonHang = $row['maDonHang'];
             $tenKhachHang = $row['tenKhachHang'];
             $ngayDatHang = $row['ngayDatHang'];
@@ -112,5 +112,3 @@
         display: none;
     }
 </style>
-
-

@@ -33,9 +33,9 @@ if(isset($_SESSION['selected_materials']) && is_array($_SESSION['selected_materi
         // Thực hiện truy vấn để lấy thông tin về sản phẩm từ cơ sở dữ liệu
         $link = $p->connect();
         $sql = "SELECT * FROM nguyenvatlieu WHERE maNguyenVatLieu = '$maNguyenVatLieu'";
-        $result = mysql_query($sql, $link);
-        if ($result && mysql_num_rows($result) > 0) {
-            $row = mysql_fetch_assoc($result);
+        $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+        if ($result && mysqli_num_rows($result) > 0) {
+            $row = mysqli_fetch_assoc($result);
             $maNguyenVatLieu = $row['maNguyenVatLieu'];
             $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
             $donViTinh = $row['donViTinh'];
@@ -64,8 +64,8 @@ if(isset($_POST['gui'])) {
   $link = $p->connect();
 
   // Lấy thông tin về mã đề xuất mới
-  $result_max_maDeXuat = mysql_query("SELECT MAX(CAST(SUBSTRING(maDeXuat, 3) AS UNSIGNED)) AS max_maDeXuat FROM dexuat");
-  $row_max_maDeXuat = mysql_fetch_assoc($result_max_maDeXuat);
+  $result_max_maDeXuat = mysqli_query($link, "SELECT MAX(CAST(SUBSTRING(maDeXuat, 3) AS UNSIGNED)) AS max_maDeXuat FROM dexuat"); // Sử dụng MySQLi thay vì MySQL
+  $row_max_maDeXuat = mysqli_fetch_assoc($result_max_maDeXuat);
   $max_maDeXuat = $row_max_maDeXuat['max_maDeXuat'];
   $next_maDeXuat = 'DX' . str_pad($max_maDeXuat + 1, 2, '0', STR_PAD_LEFT); // Tạo mã mới cho maDeXuat
   // Tên đề xuất mặc định
@@ -75,9 +75,8 @@ if(isset($_POST['gui'])) {
 
       if($soLuong>0)
       {
-          if($result_insert = mysql_query("INSERT INTO dexuat (maDeXuat, tenDeXuat, maNVL, soLuong, trangThai)
-          VALUES ('$next_maDeXuat', '$tenDeXuat', '$maNguyenVatLieu', '$soLuong', 'Chờ duyệt')", $link)==1)
-          {
+          if($result_insert = mysqli_query($link, "INSERT INTO dexuat (maDeXuat, tenDeXuat, maNVL, soLuong, trangThai)
+          VALUES ('$next_maDeXuat', '$tenDeXuat', '$maNguyenVatLieu', '$soLuong', 'Chờ duyệt')")) {
               echo '<script>';
               echo 'window.onload = function() { $("#successModal").modal("show"); };';
               echo '</script>';

@@ -71,9 +71,9 @@ if (isset($_REQUEST['idBMX'])) {
             JOIN nguyenvatlieu nv ON lgl.maNguyenVatLieu = nv.maNguyenVatLieu
         WHERE
             bmx.maBMXuat = '$idBMX'";
-            $result = mysql_query($sql, $link);
+            $result = mysqli_query($link,$sql);
                 $count =1;
-              while ($row = mysql_fetch_array($result)) {
+              while ($row = mysqli_fetch_array($result)) {
                 $tenSP = $row['tenNguyenVatLieu'];
                 $soLuong = $row['soLuong'];
                 $donViTinh = $row['donViTinh'];
@@ -130,9 +130,9 @@ if (isset($_REQUEST['idBMX'])) {
               JOIN nguyenvatlieu nv ON lgl.maNguyenVatLieu = nv.maNguyenVatLieu
           WHERE
               bmx.maBMXuat = '$idBMX'";
-              $result = mysql_query($sql, $link);
-              if (mysql_num_rows($result) > 0) {
-                while ($row = mysql_fetch_array($result)) {
+              $result = mysqli_query($link,$sql);
+              if (mysqli_num_rows($result) > 0) {
+                while ($row = mysqli_fetch_array($result)) {
                   
                   $tenSP = $row['tenNguyenVatLieu'];
                   $soLuong = $row['soLuong'];

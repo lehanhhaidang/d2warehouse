@@ -2,54 +2,60 @@
 class nhanvienkho
 {
 	public function connect()
-	{
-		$con = mysql_connect("localhost","root","");
-		if(!$con)
-		{
-			echo 'Không kết nối được csdl';
-			exit();
-		}
-		else
-		{
-			mysql_select_db("d2warehouse");
-			mysql_query("SET NAMES UTF8");
-			return $con;
-		}
-	}
-	public function pickColumn ($sql)
-	{
-		$link = $this -> connect();
-		$result = mysql_query($sql,$link);
-		$i = mysql_num_rows($result);
-		$value = '';
-		if($i>0)
-		{
-			while($row = mysql_fetch_array($result))
-			{
-				$value = $row[0];
-			}
-		}
-		return $value;
-	}
-	public function countRow ($sql)
+{
+    $con = mysqli_connect("localhost", "root", "", "d2warehouse");
+    if (!$con)
     {
-        $link = $this -> connect();
-		$result = mysql_query($sql,$link);
-		$i = mysql_num_rows($result);
-        return $i;
+        echo 'Không kết nối được csdl';
+        exit();
     }
-	public function InsertUpdate($sql)
-	{
-		$link = $this->connect();
-		if(mysql_query($sql,$link))
-		{
-			return 1;
-		}
-		else
-		{
-			return 0;
-		}
-	}
+    else
+    {
+        mysqli_set_charset($con, "utf8");
+        return $con;
+    }
+}
+
+public function pickColumn($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql);
+    $value = '';
+    if ($result)
+    {
+        $row = mysqli_fetch_array($result);
+        if ($row)
+        {
+            $value = $row[0];
+        }
+        mysqli_free_result($result);
+    }
+    mysqli_close($link);
+    return $value;
+}
+
+public function countRow($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql);
+    $i = 0;
+    if ($result)
+    {
+        $i = mysqli_num_rows($result);
+        mysqli_free_result($result);
+    }
+    mysqli_close($link);
+    return $i;
+}
+
+public function InsertUpdate($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql);
+    mysqli_close($link);
+    return $result ? 1 : 0;
+}
+
 	public function tongbm($sql)
 	{
 		$link = $this->connect();
@@ -76,30 +82,27 @@ class nhanvienkho
 	
 	
 	public function xuatdskhoNVL($sql)
-	{
-		$link = $this -> connect();
-		$ketqua = mysql_query($sql, $link);
-		$i = mysql_num_rows($ketqua);
-		if ($i >0)
-		{
-			while ($row=mysql_fetch_array($ketqua))
-			{
-				$makho = $row['maKho'];
-				$tenkho = $row['tenKho'];
-			
-			echo '
-            <a href="info_kho.php?maKho='.$makho.'">
-                <div class="kho-sub">'.$tenkho.'</div>
-            </a>
-        ';
-			}
-		}
-		else
-		{
-			echo 'Không có dữ liệu';
-		}
-		mysql_close($link);
-	}
+{
+    $link = $this->connect();
+    $ketqua = mysqli_query($link, $sql);
+    $i = mysqli_num_rows($ketqua);
+    if ($i > 0) {
+        while ($row = mysqli_fetch_array($ketqua)) {
+            $makho = $row['maKho'];
+            $tenkho = $row['tenKho'];
+            
+            echo '
+                <a href="info_kho.php?maKho='.$makho.'">
+                    <div class="kho-sub">'.$tenkho.'</div>
+                </a>
+            ';
+        }
+    } else {
+        echo 'Không có dữ liệu';
+    }
+    mysqli_close($link);
+}
+
 	
 	public function xuatdskhotp($sql)
 	{
@@ -128,71 +131,70 @@ class nhanvienkho
 	}
 	
 	public function xuatchitietkho($sql)
-	{
-		$link = $this->connect();
-		$ketqua = mysql_query($sql, $link);
+{
+    $link = $this->connect();
+    $ketqua = mysqli_query($link, $sql);
 
-		if ($ketqua) {
-			$row = mysql_fetch_array($ketqua);
+    if ($ketqua) {
+        $row = mysqli_fetch_array($ketqua);
 
-			// Lấy thông tin từ dữ liệu
-			$makho = $row['maKho'];
-			$tenkho = $row['tenKho'];
-			$maPhieu = $row['maPhieu'];
-			$diaChiKho = $row['diaChiKho'];
-			$dungLuongKhoToiDa = $row['dungLuongKhoToiDa'];
-			$tinhTrangKho = $row['tinhTrangKho'];
+        // Lấy thông tin từ dữ liệu
+        $makho = $row['maKho'];
+        $tenkho = $row['tenKho'];
+        $maPhieu = $row['maPhieu'];
+        $diaChiKho = $row['diaChiKho'];
+        $dungLuongKhoToiDa = $row['dungLuongKhoToiDa'];
+        $tinhTrangKho = $row['tinhTrangKho'];
 
-			// In ra thông tin trong mẫu HTML
-			echo '<h1 style="text-transform:uppercase;"class="text-center text-info">' . $tenkho . '</h1>';
-			echo '<h2 class="text-center text-dark">Mã kho: ' . $makho . '</h2>';
-			echo '<div class="warehouse" class="text-center text-dark">';
-			echo '    <div class="warehouse-information" class="text-center text-dark">';
-			echo '        <p class="text-center text-dark"><b>Địa chỉ:</b> ' . $diaChiKho . '</p>';
-			echo '        <p class="text-center text-dark"><b>Dung lượng kho tối đa:</b> ' . $dungLuongKhoToiDa . '</p>';
-			echo '        <p class="text-center text-dark"><b>Tình trạng:</b> ' . $tinhTrangKho . '</p>';
-			echo '        <h2 style="text-align: center; font-size: 1.8em;" class="text-dark"><b>Danh sách hàng hóa</b></h2>';
-			echo '    </div>';
-			} else {
-				echo 'Không có dữ liệu';
-			}
+        // In ra thông tin trong mẫu HTML
+        echo '<h1 style="text-transform:uppercase;" class="text-center text-info">' . $tenkho . '</h1>';
+        echo '<h2 class="text-center text-dark">Mã kho: ' . $makho . '</h2>';
+        echo '<div class="warehouse" class="text-center text-dark">';
+        echo '    <div class="warehouse-information" class="text-center text-dark">';
+        echo '        <p class="text-center text-dark"><b>Địa chỉ:</b> ' . $diaChiKho . '</p>';
+        echo '        <p class="text-center text-dark"><b>Dung lượng kho tối đa:</b> ' . $dungLuongKhoToiDa . '</p>';
+        echo '        <p class="text-center text-dark"><b>Tình trạng:</b> ' . $tinhTrangKho . '</p>';
+        echo '        <h2 style="text-align: center; font-size: 1.8em;" class="text-dark"><b>Danh sách hàng hóa</b></h2>';
+        echo '    </div>';
+    } else {
+        echo 'Không có dữ liệu';
+    }
 
-		mysql_close($link);
-	}
+    mysqli_close($link);
+}
+
 	
-	public function xuatLoKhoNVL($sql)
-	{
-		$link = $this->connect();
-		$ketqua = mysql_query($sql, $link);
+public function xuatLoKhoNVL($sql)
+{
+    $link = $this->connect();
+    $ketqua = mysqli_query($link, $sql);
 
-		if ($ketqua) 
-		{
-			while ($row=mysql_fetch_array($ketqua))
-			{
-			// Lấy thông tin từ dữ liệu
-			$anh=$row['anh'];
-			$tenNguyenVatLieu = $row['tenNguyenVatLieu'];
-			$donViTinh = $row['donViTinh'];
-			$soLuong = $row['soLuong'];
-			$NSX = $row['NSX'];
-			$NHH = $row['NHH'];
-			// In ra thông tin trong mẫu HTML
-			echo '<tr> 
-						<td><img src="./uploads/'.$anh.'" width="100px" height="100px"></td>
+    if ($ketqua) {
+        while ($row = mysqli_fetch_array($ketqua)) {
+            // Lấy thông tin từ dữ liệu
+            $anh = $row['anh'];
+            $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+            $donViTinh = $row['donViTinh'];
+            $soLuong = $row['soLuong'];
+            $NSX = $row['NSX'];
+            $NHH = $row['NHH'];
+            // In ra thông tin trong mẫu HTML
+            echo '<tr> 
+                        <td><img src="./uploads/'.$anh.'" width="100px" height="100px"></td>
                         <td>'.$tenNguyenVatLieu.'</td>
                         <td>'.$donViTinh.'</td>
                         <td>'.$soLuong.'</td>
                         <td>'.$NSX.'</td>
                         <td>'.$NHH.'</td>
                     </tr>';
-			}
-		} 
-			else {
-				echo 'Không có dữ liệu';
-			}
+        }
+    } else {
+        echo 'Không có dữ liệu';
+    }
 
-		mysql_close($link);
-	}
+    mysqli_close($link);
+}
+
 		
 	public function xuatLoKhoTP($sql)
 	{
@@ -258,44 +260,44 @@ class nhanvienkho
 	}
 	
 	public function xuatChiTietNVL($sql)
-	{
-		$link = $this -> connect();
-		$ketqua = mysql_query($sql, $link);
-		$i = mysql_num_rows($ketqua);
-		if ($i >0)
-		{
-			$dem =1;
-			while ($row=mysql_fetch_array($ketqua))
-			{
-				$anh=$row['anh'];
-				$manvl = $row['maNguyenVatLieu'];
-				$maLoNVL = $row['maLoNVL'];
-				$maNVL=$row['maNguyenVatLieu'];
-				$tenNguyenVatLieu = $row['tenNguyenVatLieu'];
-				$donViTinh = $row['donViTinh'];
-				$soLuongTonnvl = $row['soLuongTonnvl'];
-				$NSX = $row['NSX'];
-				$NHH = $row['NHH'];
-			echo '
-           			<tr>
-					   <td><img src="./uploads/'.$anh.'" width="100px" height="100px"></td>
-                        <td>'.$maLoNVL.'</td>
-						<td>'.$maNVL.'</td>
-						<td>'.$tenNguyenVatLieu.'</td>
-                        <td>'.$donViTinh.'</td>
-                        <td>'.$soLuongTonnvl.'</td>
-                        <td>'.$NSX.'</td>
-                        <td>'.$NHH.'</td>
-                    </tr>';
-				$dem ++;
-			}
-		}
-		else
-		{
-			echo 'Không có dữ liệu';
-		}
-		mysql_close($link);
-	}
+{
+    $link = $this->connect();
+    $ketqua = mysqli_query($link, $sql);
+    $i = mysqli_num_rows($ketqua);
+    
+    if ($i > 0) {
+        $dem = 1;
+        while ($row = mysqli_fetch_array($ketqua)) {
+            $anh = $row['anh'];
+            $manvl = $row['maNguyenVatLieu'];
+            $maLoNVL = $row['maLoNVL'];
+            $maNVL = $row['maNguyenVatLieu'];
+            $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+            $donViTinh = $row['donViTinh'];
+            $soLuongTonnvl = $row['soLuongTonnvl'];
+            $NSX = $row['NSX'];
+            $NHH = $row['NHH'];
+            
+            echo '
+                <tr>
+                    <td><img src="./uploads/'.$anh.'" width="100px" height="100px"></td>
+                    <td>'.$maLoNVL.'</td>
+                    <td>'.$maNVL.'</td>
+                    <td>'.$tenNguyenVatLieu.'</td>
+                    <td>'.$donViTinh.'</td>
+                    <td>'.$soLuongTonnvl.'</td>
+                    <td>'.$NSX.'</td>
+                    <td>'.$NHH.'</td>
+                </tr>';
+            $dem++;
+        }
+    } else {
+        echo 'Không có dữ liệu';
+    }
+
+    mysqli_close($link);
+}
+
 	
 	public function xuatTenTP($sql)
 	{
@@ -321,43 +323,43 @@ class nhanvienkho
 	}
 	
 	public function xuatChiTietTP($sql)
-	{
-		$link = $this -> connect();
-		$ketqua = mysql_query($sql, $link);
-		$i = mysql_num_rows($ketqua);
-		if ($i >0)
-		{
-			$dem =1;
-			while ($row=mysql_fetch_array($ketqua))
-			{
-				$anh=$row['anh'];
-				$maLoTP=$row['maLoTP'];
-				$maTP=$row['maThanhPham'];
-				$tenThanhPham = $row['tenThanhPham'];
-				$donViTinh = $row['donViTinh'];
-				$soLuongTon = $row['soLuongTon'];
-				$NSX = $row['NSX'];
-				$NHH = $row['NHH'];
-			echo '
-           			<tr>
-					    <td><img src="./uploads/'.$anh.'" width="100px" height="100px"></td>
-						<td>'.$maLoTP.'</td>
-						<td>'.$maTP.'</td>
-						<td>'.$tenThanhPham.'</td>
-                        <td>'.$donViTinh.'</td>
-                        <td>'.$soLuongTon.'</td>
-                        <td>'.$NSX.'</td>
-                        <td>'.$NHH.'</td>
-                    </tr>';
-				$dem ++;
-			}
-		}
-		else
-		{
-			echo 'Không có dữ liệu';
-		}
-		mysql_close($link);
-	}
+{
+    $link = $this->connect();
+    $ketqua = mysqli_query($link, $sql);
+    $i = mysqli_num_rows($ketqua);
+    
+    if ($i > 0) {
+        $dem = 1;
+        while ($row = mysqli_fetch_array($ketqua)) {
+            $anh = $row['anh'];
+            $maLoTP = $row['maLoTP'];
+            $maTP = $row['maThanhPham'];
+            $tenThanhPham = $row['tenThanhPham'];
+            $donViTinh = $row['donViTinh'];
+            $soLuongTon = $row['soLuongTon'];
+            $NSX = $row['NSX'];
+            $NHH = $row['NHH'];
+            
+            echo '
+                <tr>
+                    <td><img src="./uploads/'.$anh.'" width="100px" height="100px"></td>
+                    <td>'.$maLoTP.'</td>
+                    <td>'.$maTP.'</td>
+                    <td>'.$tenThanhPham.'</td>
+                    <td>'.$donViTinh.'</td>
+                    <td>'.$soLuongTon.'</td>
+                    <td>'.$NSX.'</td>
+                    <td>'.$NHH.'</td>
+                </tr>';
+            $dem++;
+        }
+    } else {
+        echo 'Không có dữ liệu';
+    }
+
+    mysqli_close($link);
+}
+
 	
 	public function xuatdspnnvl($sql)
 	{
@@ -1205,107 +1207,121 @@ class nhanvienkho
 	}
 
 // =========================================================================
-	public function xuatdsnvl($sql)
-	{
-		$link = $this -> connect();
-		$ketqua = mysql_query($sql, $link);
-		$i = mysql_num_rows($ketqua);
-		if ($i >0)
-		{
-			while ($row=mysql_fetch_array($ketqua))
-			{
-				$manvl = $row['maNguyenVatLieu'];
-				$tennvl = $row['tenNguyenVatLieu'];
-				$anh=$row['anh'];
-			echo '
-           			 <a href="info_materials.php?maNguyenVatLieu='.$manvl.'"><img src="./uploads/'.$anh.'" alt="">'.$tennvl.'</a>
-       			 ';
-			}
-		}
-		else
-		{
-			echo 'Không có dữ liệu';
-		}
-		mysql_close($link);
-	}
-	
-	public function xuatdstp($sql)
-	{
-		$link = $this -> connect();
-		$ketqua = mysql_query($sql, $link);
-		$i = mysql_num_rows($ketqua);
-		if ($i >0)
-		{
-			while ($row=mysql_fetch_array($ketqua))
-			{
-				$matp = $row['maThanhPham'];
-				$tentp = $row['tenThanhPham'];
-				$anh=$row['anh'];
-			echo '
-           			 <a href="info_tp.php?maThanhPham='.$matp.'"><img src="./uploads/'.$anh.'" alt="">'.$tentp.'</a>
-       			 ';
-			}
-		}
-		else
-		{
-			echo 'Không có dữ liệu';
-		}
-		mysql_close($link);
-	}
-
-	public function count_total_uncomplete_form()
-	{
-		$result = mysql_query("SELECT *
-		FROM bieumauxuat
-		WHERE trangThai = ''
-		UNION
-		SELECT *
-		FROM bieumaunhap
-		WHERE trangThai = '';
-		");
-		$i= mysql_num_rows($result);
-		return $i;
-	}
-	public function count_total_completed_form()
-	{
-		$result = mysql_query("SELECT *
-		FROM bieumauxuat
-		WHERE trangThai = 'Đã lập phiếu'
-		UNION
-		SELECT *
-		FROM bieumaunhap
-		WHERE trangThai = 'Đã lập phiếu';
-		");
-		$i= mysql_num_rows($result);
-		return $i;
-	}
-
-	public function count_materials()
-	{
-		$result = mysql_query("SELECT SUM(soLuongTonnvl) 
-		FROM nguyenvatlieu;
-		");
-		$row = mysql_fetch_row($result);
-		$total = $row[0];
-		return $total;
-	}
-	public function count_products()
-	{
-		$result = mysql_query("SELECT SUM(soLuongTon) 
-		FROM thanhpham;
-		");
-		$row = mysql_fetch_row($result);
-		$total = $row[0];
-		return $total;
-	}
-
-	public function DSBMN($sql)
+public function xuatdsnvl($sql)
 {
     $link = $this->connect();
-    $result = mysql_query($sql, $link);
+    $ketqua = mysqli_query($link, $sql);
+    $i = mysqli_num_rows($ketqua);
+    
+    if ($i > 0) {
+        while ($row = mysqli_fetch_array($ketqua)) {
+            $manvl = $row['maNguyenVatLieu'];
+            $tennvl = $row['tenNguyenVatLieu'];
+            $anh = $row['anh'];
+            
+            echo '
+                <a href="info_materials.php?maNguyenVatLieu='.$manvl.'"><img src="./uploads/'.$anh.'" alt="">'.$tennvl.'</a>
+            ';
+        }
+    } else {
+        echo 'Không có dữ liệu';
+    }
+
+    mysqli_close($link);
+}
+
+	
+	public function xuatdstp($sql)
+{
+    $link = $this->connect();
+    $ketqua = mysqli_query($link, $sql);
+    $i = mysqli_num_rows($ketqua);
+    
+    if ($i > 0) {
+        while ($row = mysqli_fetch_array($ketqua)) {
+            $matp = $row['maThanhPham'];
+            $tentp = $row['tenThanhPham'];
+            $anh = $row['anh'];
+            
+            echo '
+                <a href="info_tp.php?maThanhPham='.$matp.'"><img src="./uploads/'.$anh.'" alt="">'.$tentp.'</a>
+            ';
+        }
+    } else {
+        echo 'Không có dữ liệu';
+    }
+
+    mysqli_close($link);
+}
+
+
+	// ===============================DASHBOARD==========================================
+	public function count_total_uncomplete_form()
+	{
+		$conn = $this->connect();
+		$result_bieumauxuat = mysqli_query($conn, "SELECT *
+													FROM bieumauxuat
+													WHERE trangThai = ''
+													");
+		$result_bieumaunhap = mysqli_query($conn, "SELECT *
+													FROM bieumaunhap
+													WHERE trangThai = ''
+													");
+		$rows_bieumauxuat = mysqli_num_rows($result_bieumauxuat);
+		$rows_bieumaunhap = mysqli_num_rows($result_bieumaunhap);
+		$total_rows = $rows_bieumauxuat + $rows_bieumaunhap;
+		
+		return $total_rows;
+	}
+	
+	public function count_total_completed_form()
+{
+	$conn = $this->connect();
+    $result_bieumauxuat = mysqli_query($conn, "SELECT *
+                                                FROM bieumauxuat
+                                                WHERE trangThai = 'Đã lập phiếu'
+                                                ");
+    $result_bieumaunhap = mysqli_query($conn, "SELECT *
+                                                FROM bieumaunhap
+                                                WHERE trangThai = 'Đã lập phiếu'
+                                                ");
+    $rows_bieumauxuat = mysqli_num_rows($result_bieumauxuat);
+    $rows_bieumaunhap = mysqli_num_rows($result_bieumaunhap);
+    $total_rows = $rows_bieumauxuat + $rows_bieumaunhap;
+    
+    return $total_rows;
+}
+
+
+public function count_materials()
+{
+	$conn = $this->connect();
+    $result = mysqli_query($conn, "SELECT SUM(soLuongTonnvl) 
+                                    FROM nguyenvatlieu");
+    $row = mysqli_fetch_row($result);
+    $total = $row[0];
+    return $total;
+}
+
+public function count_products()
+{
+	$conn = $this->connect();
+    $result = mysqli_query($conn, "SELECT SUM(soLuongTon) 
+                                    FROM thanhpham");
+    $row = mysqli_fetch_row($result);
+    $total = $row[0];
+    return $total;
+}
+
+
+// =========================================================================
+public function DSBMN($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql);
     $count = 1; // Đưa biến count ra khỏi vòng lặp để đếm số thứ tự
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_array($result)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
             $maBMNhap = $row['maBMNhap'];
             $makho = $row['maKho'];
             $ngayNhap = $row['ngayNhap'];
@@ -1313,9 +1329,7 @@ class nhanvienkho
             $trangthai = $row['trangThai'];
 
             // Tạo đường dẫn tới trang phù hợp dựa trên giá trị của maKho
-            if (strpos($makho, 'KNVL') !== false) {
-                $url = 'info_bmn.php?idBMN=' . $maBMNhap;
-            } elseif (strpos($makho, 'KTP') !== false) {
+            if (strpos($makho, 'KNVL') !== false || strpos($makho, 'KTP') !== false) {
                 $url = 'info_bmn.php?idBMN=' . $maBMNhap;
             } else {
                 $url = '#'; // Đường dẫn mặc định nếu không phù hợp
@@ -1333,18 +1347,19 @@ class nhanvienkho
         }
     } else {
         echo 'Không có biểu mẫu xuất nào';
-    }  
+    }
 }
 
 
 
-	public function DSBMX($sql)
+
+public function DSBMX($sql)
 {
     $link = $this->connect();
-    $result = mysql_query($sql, $link);
+    $result = mysqli_query($link, $sql);
     $count = 1; // Đưa biến count ra khỏi vòng lặp để đếm số thứ tự
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_array($result)) {
+    if (mysqli_num_rows($result) > 0) {
+        while ($row = mysqli_fetch_array($result)) {
             $maBMXuat = $row['maBMXuat'];
             $makho = $row['maKho'];
             $ngayXuat = $row['ngayXuat'];
@@ -1352,9 +1367,7 @@ class nhanvienkho
             $trangthai = $row['trangThai'];
 
             // Tạo đường dẫn tới trang phù hợp dựa trên giá trị của maKho
-          
-                $url = 'info_bmx.php?idBMX=' . $maBMXuat;
-            
+            $url = 'info_bmx.php?idBMX=' . $maBMXuat;
 
             echo '<tr>
                     <td>'.$count++.'</td> <!-- Số thứ tự -->
@@ -1368,44 +1381,42 @@ class nhanvienkho
         }
     } else {
         echo 'Không có biểu mẫu xuất nào';
-    }  
+    }
 }
+
 
 public function DSSP($sql)
 {
-	$link = $this->connect();
-	$result =mysql_query($sql, $link);
-	$i = mysql_num_rows($result);
-	$count = 1;
-	if($i>0)
-	{
-		while($row=mysql_fetch_array($result)){
-			$tenSP = $row['tenSanPham'];
-			$soLuong = $row['soLuong'];
-			$donViTinh = $row['donViTinh'];
-			$nsx = $row['ngaySanXuat'];
-			$nhh = $row['ngayHetHan'];
-			echo '<tr>
-			<td>'.$count++.'</td> <!-- Số thứ tự -->
-			<td>'.$tenSP.'</td> <!-- Tên sản phẩm -->
-			<td>'.$donViTinh.'</td> <!-- Đơn vị tính -->
-			<td>'.$soLuong.'</td> <!-- Số lượng -->';
-			if(!empty($nsx))
-			{
-				echo' <td>'.$nsx.'</td> <!-- Ngày sản xuất -->
-				<td>'.$nhh.'</td> <!-- Hạn sử dụng -->
-			</tr>';
-			}
-			else
-			{
-				echo '<td>Chưa có</td> <!-- Ngày sản xuất -->
-				<td>Chưa có</td> <!-- Hạn sử dụng -->
-			</tr>';
-			}
-			
-		}
-	}
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql);
+    $i = mysqli_num_rows($result);
+    $count = 1;
+    if ($i > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+            $tenSP = $row['tenSanPham'];
+            $soLuong = $row['soLuong'];
+            $donViTinh = $row['donViTinh'];
+            $nsx = $row['ngaySanXuat'];
+            $nhh = $row['ngayHetHan'];
+            
+            echo '<tr>
+                    <td>'.$count++.'</td> <!-- Số thứ tự -->
+                    <td>'.$tenSP.'</td> <!-- Tên sản phẩm -->
+                    <td>'.$donViTinh.'</td> <!-- Đơn vị tính -->
+                    <td>'.$soLuong.'</td> <!-- Số lượng -->';
+            if (!empty($nsx)) {
+                echo ' <td>'.$nsx.'</td> <!-- Ngày sản xuất -->
+                    <td>'.$nhh.'</td> <!-- Hạn sử dụng -->
+                </tr>';
+            } else {
+                echo '<td>Chưa có</td> <!-- Ngày sản xuất -->
+                    <td>Chưa có</td> <!-- Hạn sử dụng -->
+                </tr>';
+            }
+        }
+    }
 }
+
 public function DSLNVL($sql)
     {
         $link = $this->connect();
@@ -1490,85 +1501,78 @@ public function DSLNVL($sql)
 	}
 
 	
- 	public function list_product($sql)
-    {
-        $link = $this->connect();
-        $result =mysql_query($sql, $link);
-        $i = mysql_num_rows($result);
-        $count = 1;
-        if($i>0)
-        {
-            while($row=mysql_fetch_array($result)){
-				$maThanhPham =$row['maThanhPham'];
-                $tenThanhPham = $row['tenThanhPham'];
-                $soLuongTon = $row['soLuongTon'];
+	public function list_product($sql)
+	{
+		$link = $this->connect();
+		$result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+		$i = mysqli_num_rows($result); // Sử dụng mysqli_num_rows thay vì mysql_num_rows
+		$count = 1;
+		if ($i > 0) {
+			while ($row = mysqli_fetch_array($result)) { // Sử dụng mysqli_fetch_array thay vì mysql_fetch_array
+				$maThanhPham = $row['maThanhPham'];
+				$tenThanhPham = $row['tenThanhPham'];
+				$soLuongTon = $row['soLuongTon'];
 				$donViTinh = $row['donViTinh'];
 				echo '<tr>
-				<td>'.$count++.'</td>
-				<td>'.$maThanhPham.'</td>
-				<td>'.$tenThanhPham.'</td>
-				<td>'.$donViTinh.'</td>
-				<td>'.$soLuongTon.'</td>
-				<td class="text-center"><input type="checkbox" name="selected_products[]" value="'.$maThanhPham.'"></td>
-			  </tr>';
-		
-                
-            }
-        }
-    }
+				<td>' . $count++ . '</td>
+				<td>' . $maThanhPham . '</td>
+				<td>' . $tenThanhPham . '</td>
+				<td>' . $donViTinh . '</td>
+				<td>' . $soLuongTon . '</td>
+				<td class="text-center"><input type="checkbox" name="selected_products[]" value="' . $maThanhPham . '"></td>
+				</tr>';
+			}
+		}
+	}
+	
 
 	public function list_material($sql)
-    {
-        $link = $this->connect();
-        $result =mysql_query($sql, $link);
-        $i = mysql_num_rows($result);
-        $count = 1;
-        if($i>0)
-        {
-            while($row=mysql_fetch_array($result)){
-				$maNguyenVatLieu =$row['maNguyenVatLieu'];
-                $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
-                $soLuongTonnvl = $row['soLuongTonnvl'];
-				$donViTinh = $row['donViTinh'];
-				echo '<tr>
-				<td>'.$count++.'</td>
-				<td>'.$maNguyenVatLieu.'</td>
-				<td>'.$tenNguyenVatLieu.'</td>
-				<td>'.$donViTinh.'</td>
-				<td>'.$soLuongTonnvl.'</td>
-				<td class="text-center"><input type="checkbox" name="selected_materials[]" value="'.$maNguyenVatLieu.'"></td>
-			  </tr>';
-		
-                
-            }
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+    $count = 1;
+    if ($result) {
+        while ($row = mysqli_fetch_array($result)) { // Sử dụng mysqli_fetch_array thay vì mysql_fetch_array
+            $maNguyenVatLieu = $row['maNguyenVatLieu'];
+            $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+            $soLuongTonnvl = $row['soLuongTonnvl'];
+            $donViTinh = $row['donViTinh'];
+            echo '<tr>
+            <td>'.$count++.'</td>
+            <td>'.$maNguyenVatLieu.'</td>
+            <td>'.$tenNguyenVatLieu.'</td>
+            <td>'.$donViTinh.'</td>
+            <td>'.$soLuongTonnvl.'</td>
+            <td class="text-center"><input type="checkbox" name="selected_materials[]" value="'.$maNguyenVatLieu.'"></td>
+          </tr>';
         }
     }
+}
+
 
 	public function list_propose($sql)
-    {
-        $link = $this->connect();
-        $result =mysql_query($sql, $link);
-        $i = mysql_num_rows($result);
-        $count = 1;
-        if($i>0)
-        {
-            while($row=mysql_fetch_array($result)){
-				$maDeXuat =$row['maDeXuat'];
-                $tenDeXuat = $row['tenDeXuat'];
-				$trangThai = $row['trangThai'];
-				$url = 'propose_info.php?idDX=' . $maDeXuat;
-				echo '<tr>
-				<td>'.$count++.'</td>
-				<td>'.$maDeXuat.'</td>
-				<td>'.$tenDeXuat.'</td>
-				<td>'.$trangThai.'</td>
-				<td><a href="'.$url.'" class="btn btn-info ml-auto mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
-			  </tr>';
-		
-                
-            }
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+    $i = mysqli_num_rows($result); // Sử dụng mysqli_num_rows thay vì mysql_num_rows
+    $count = 1;
+    if ($i > 0) {
+        while ($row = mysqli_fetch_array($result)) { // Sử dụng mysqli_fetch_array thay vì mysql_fetch_array
+            $maDeXuat = $row['maDeXuat'];
+            $tenDeXuat = $row['tenDeXuat'];
+            $trangThai = $row['trangThai'];
+            $url = 'propose_info.php?idDX=' . $maDeXuat;
+            echo '<tr>
+            <td>' . $count++ . '</td>
+            <td>' . $maDeXuat . '</td>
+            <td>' . $tenDeXuat . '</td>
+            <td>' . $trangThai . '</td>
+            <td><a href="' . $url . '" class="btn btn-info ml-auto mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
+            </tr>';
         }
     }
+}
+
 
 	
 	
@@ -1618,109 +1622,105 @@ public function bieuDo($sql)
 }
 
 public function list_propose_gd($sql)
-    {
-        $link = $this->connect();
-        $result =mysql_query($sql, $link);
-        $i = mysql_num_rows($result);
-        $count = 1;
-        if($i>0)
-        {
-            while($row=mysql_fetch_array($result)){
-				$maDeXuat =$row['maDeXuat'];
-                $tenDeXuat = $row['tenDeXuat'];
-				$trangThai = $row['trangThai'];
-				$url = 'accept_propose.php?idDX=' . $maDeXuat;
-				echo '<tr>
-				<td>'.$count++.'</td>
-				<td>'.$maDeXuat.'</td>
-				<td>'.$tenDeXuat.'</td>';
-				if($trangThai=="Chờ duyệt")
-				{
-					echo '<td class="badge badge-warning d-flex justify-content-center mt-3">'.$trangThai.'</td>';
-				}
-				else
-				{
-					echo '<td class="badge badge-primary d-flex justify-content-center mt-3">'.$trangThai.'</td>';
-				}
-				echo '<td><a href="'.$url.'" class="btn btn-info ml-auto mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
-			  </tr>';
-		
-                
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+    $i = mysqli_num_rows($result); // Sử dụng mysqli_num_rows thay vì mysql_num_rows
+    $count = 1;
+    if ($i > 0) {
+        while ($row = mysqli_fetch_array($result)) { // Sử dụng mysqli_fetch_array thay vì mysql_fetch_array
+            $maDeXuat = $row['maDeXuat'];
+            $tenDeXuat = $row['tenDeXuat'];
+            $trangThai = $row['trangThai'];
+            $url = 'accept_propose.php?idDX=' . $maDeXuat;
+            echo '<tr>
+            <td>' . $count++ . '</td>
+            <td>' . $maDeXuat . '</td>
+            <td>' . $tenDeXuat . '</td>';
+            if ($trangThai == "Chờ duyệt") {
+                echo '<td class="badge badge-warning d-flex justify-content-center mt-3">' . $trangThai . '</td>';
+            } else {
+                echo '<td class="badge badge-primary d-flex justify-content-center mt-3">' . $trangThai . '</td>';
             }
+            echo '<td><a href="' . $url . '" class="btn btn-info ml-auto mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
+            </tr>';
         }
     }
+}
 
 
-	public function accept_propose($sql)
-	{
-		$link = $this->connect();
-		$result = mysql_query($sql,$link);
-		$i = mysql_num_rows($result);
-		$count =1;
-		if($i>0)
-		{
-			while($row=mysql_fetch_array($result))
-			{
-				$maNguyenVatLieu = $row['maNguyenVatLieu'];
-				$tenNguyenVatLieu = $row['tenNguyenVatLieu'];
-				$soLuongTrongKho =$row['soLuongTonnvl'];
-				$soLuongNhapThem = $row['soLuong'];
-				echo '<tr>
-				<td>'.$count++.'</td>
-				<td>'.$maNguyenVatLieu.'</td>
-				<td>'.$tenNguyenVatLieu.'</td>
-				<td>'.$soLuongTrongKho.'</td>
-				<td><strong>'.$soLuongNhapThem.'</strong></td>
-			  </tr>';
 
-			}
-		}
-	}
+public function accept_propose($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+    $i = mysqli_num_rows($result); // Sử dụng mysqli_num_rows thay vì mysql_num_rows
+    $count = 1;
+    if ($i > 0) {
+        while ($row = mysqli_fetch_array($result)) { // Sử dụng mysqli_fetch_array thay vì mysql_fetch_array
+            $maNguyenVatLieu = $row['maNguyenVatLieu'];
+            $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+            $soLuongTrongKho = $row['soLuongTonnvl'];
+            $soLuongNhapThem = $row['soLuong'];
+            echo '<tr>
+            <td>' . $count++ . '</td>
+            <td>' . $maNguyenVatLieu . '</td>
+            <td>' . $tenNguyenVatLieu . '</td>
+            <td>' . $soLuongTrongKho . '</td>
+            <td><strong>' . $soLuongNhapThem . '</strong></td>
+            </tr>';
+        }
+    }
+}
+
 
 	// =============================QUAN-LY-KHO==============================================
 	
 	public function CTDX($sql)
-	{
-		$link = $this->connect();
-		$result = mysql_query($sql, $link);
-		$count = 1;
-		echo'<table class="table table-bordered table-hover">
-    	<thead>
-
-		<tr>
-			<th class="text-center">STT</th>
-			<th class="text-center">Mã nguyên vật liệu</th>
-			<th class="text-center">Tên nguyên vật liệu</th>
-			<th class="text-center">Đơn vị tính</th>
-			<th class="text-center">Số lượng nhập thêm</th>
-		</tr>
-			</thead>
-		<tbody>';
-		if (mysql_num_rows($result) > 0) {
-			while ($row = mysql_fetch_array($result)) {
-				$maDeXuat = $row['maDeXuat'];
-				$maNguyenVatLieu = $row['maNguyenVatLieu'];
-				$tenNguyenVatLieu = $row['tenNguyenVatLieu'];
-				$donViTinh = $row['donViTinh'];
-				$soLuong = $row['soLuong'];
-				echo '<tr>
-						<td>'.$count++.'</td> <!-- Số thứ tự -->
-						<td>'.$maNguyenVatLieu.'</td> <!-- Đơn vị tính -->
-						<td>'.$tenNguyenVatLieu.'</td> 
-						<td>'.$donViTinh.'</td> 
-						<td>'.$soLuong.'</td> 
-
-					</tr>';
-			}
-		} 
-		echo'</tbody>
-		</table>'; 
-	}
-
-	public function DPXNVL($sql)
 {
     $link = $this->connect();
-    $result = mysql_query($sql, $link);
+    $result = mysqli_query($link, $sql); // Thay thế mysql_query bằng mysqli_query
+
+    $count = 1;
+    echo '<table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">STT</th>
+                <th class="text-center">Mã nguyên vật liệu</th>
+                <th class="text-center">Tên nguyên vật liệu</th>
+                <th class="text-center">Đơn vị tính</th>
+                <th class="text-center">Số lượng nhập thêm</th>
+            </tr>
+        </thead>
+        <tbody>';
+
+    if (mysqli_num_rows($result) > 0) { // Thay thế mysql_num_rows bằng mysqli_num_rows
+        while ($row = mysqli_fetch_array($result)) { // Thay thế mysql_fetch_array bằng mysqli_fetch_array
+            $maDeXuat = $row['maDeXuat'];
+            $maNguyenVatLieu = $row['maNguyenVatLieu'];
+            $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+            $donViTinh = $row['donViTinh'];
+            $soLuong = $row['soLuong'];
+            echo '<tr>
+                    <td>'.$count++.'</td> <!-- Số thứ tự -->
+                    <td>'.$maNguyenVatLieu.'</td> <!-- Đơn vị tính -->
+                    <td>'.$tenNguyenVatLieu.'</td> 
+                    <td>'.$donViTinh.'</td> 
+                    <td>'.$soLuong.'</td> 
+
+                </tr>';
+        }
+    } 
+    echo'</tbody>
+        </table>'; 
+}
+
+
+public function DPXNVL($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql); // Thay thế mysql_query bằng mysqli_query
+
     $count = 1;
     echo '<table class="table table-bordered table-hover">
         <thead>
@@ -1733,8 +1733,9 @@ public function list_propose_gd($sql)
             </tr>
         </thead>
         <tbody>';
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_array($result)) {
+
+    if (mysqli_num_rows($result) > 0) { // Thay thế mysql_num_rows bằng mysqli_num_rows
+        while ($row = mysqli_fetch_array($result)) { // Thay thế mysql_fetch_array bằng mysqli_fetch_array
             $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
             $soLuong = $row['soLuong'];
             $tenKho = $row['tenKho'];
@@ -1742,11 +1743,11 @@ public function list_propose_gd($sql)
 
             // Query để lấy danh sách các mã lô tương ứng với mã nguyên vật liệu
             $query_maLo = "SELECT maLoNVL FROM longuyenvatlieu WHERE maNguyenVatLieu = '$maNguyenVatLieu'";
-            $result_maLo = mysql_query($query_maLo, $link);
+            $result_maLo = mysqli_query($link, $query_maLo); // Thay thế mysql_query bằng mysqli_query
 
             // Tạo dropdown list
             $maLo_options = '<select name="maLoNVL[]">';
-            while ($row_maLo = mysql_fetch_array($result_maLo)) {
+            while ($row_maLo = mysqli_fetch_array($result_maLo)) { // Thay thế mysql_fetch_array bằng mysqli_fetch_array
                 $maLo_options .= '<option value="' . $row_maLo['maLoNVL'] . '">' . $row_maLo['maLoNVL'] . '</option>';
             }
             $maLo_options .= '</select>';
@@ -1764,10 +1765,12 @@ public function list_propose_gd($sql)
         </table>'; 
 }
 
+
 public function DPNNVL($sql)
 {
     $link = $this->connect();
-    $result = mysql_query($sql, $link);
+    $result = mysqli_query($link, $sql); // Thay thế mysql_query bằng mysqli_query
+    
     $count = 1;
     echo '<table class="table table-bordered table-hover">
         <thead>
@@ -1779,8 +1782,9 @@ public function DPNNVL($sql)
             </tr>
         </thead>
         <tbody>';
-    if (mysql_num_rows($result) > 0) {
-        while ($row = mysql_fetch_array($result)) {
+        
+    if (mysqli_num_rows($result) > 0) { // Thay thế mysql_num_rows bằng mysqli_num_rows
+        while ($row = mysqli_fetch_array($result)) { // Thay thế mysql_fetch_array bằng mysqli_fetch_array
             $maNguyenVatLieu = $row['maNguyenVatLieu'];
             $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
             $soLuong = $row['soLuong'];
@@ -1795,9 +1799,11 @@ public function DPNNVL($sql)
                 </tr>';
         }
     } 
+    
     echo '</tbody>
         </table>'; 
 }
+
 
 // Hàm ánh xạ mã nguyên vật liệu sang tên kho tương ứng
 private function mapMaNguyenVatLieuToTenKho($maNguyenVatLieu) {
@@ -1834,25 +1840,29 @@ private function mapMaNguyenVatLieuToTenKho($maNguyenVatLieu) {
 
 	// ============BOTCHAT============
 	public function countPNNVL() {
-		$result = mysql_query("SELECT * FROM phieunnvl", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieunnvl");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countPXNVL() {
-		$result = mysql_query("SELECT * FROM phieuxnvl", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuxnvl");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countPNTP() {
-		$result = mysql_query("SELECT * FROM phieuntp", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuntp");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countPXTP() {
-		$result = mysql_query("SELECT * FROM phieuxtp", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuxtp");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countDonhang() {
 		$result = mysql_query("SELECT * FROM donhang", $this->connect());
 		$i = mysql_num_rows($result);
