@@ -13,11 +13,6 @@ if (isset($_REQUEST['idBMX'])) {
         where maBMXuat = '$idBMX' limit 1"); ?></p>
         <p class="text-center"><b>Ngày xuất:</b> <?php echo $p->pickColumn("select ngayXuat from bieumauxuat
         where maBMXuat = '$idBMX' limit 1"); ?></p>
-        <p class="text-center"><b>Kho xuất:</b> <?php echo $p->pickColumn("SELECT kho.tenKho
-            FROM bieumauxuat
-            INNER JOIN kho ON bieumauxuat.maKho = kho.maKho
-            WHERE bieumauxuat.maBMXuat = '$idBMX'"); ?>
-        </p>
         <h2 style="text-align: center; font-size: 1.8em;"><b>Danh sách hàng hóa:</b></h2>
     </div>
 
@@ -35,12 +30,12 @@ if (isset($_REQUEST['idBMX'])) {
             </thead>
             <tbody>
             <?php
-                    $maKho = $p->pickColumn("select maKho from bieumauxuat where maBMXuat = '$idBMX'");
-                    if(strpos($maKho,"KNVL") !== false)
+                    $maKho = $p->pickColumn("select loaiXuat from bieumauxuat where maBMXuat = '$idBMX'");
+                    if(strpos($maKho,"Nguyên vật liệu") !== false)
                     {
                                  $p->DSLNVL("SELECT
                                     nv.tenNguyenVatLieu,
-                                    lgl.soLuong,
+                                    dx.soLuong,
                                     nv.donViTinh,
                                     lgl.NSX,
                                     lgl.NHH
@@ -48,6 +43,7 @@ if (isset($_REQUEST['idBMX'])) {
                                     bieumauxuat bmx
                                     JOIN longuyenvatlieu lgl ON bmx.maBMXuat = lgl.maBMXuat
                                     JOIN nguyenvatlieu nv ON lgl.maNguyenVatLieu = nv.maNguyenVatLieu
+                                    JOIN dexuat dx ON lgl.maNguyenVatLieu = dx.maNVL 
                                 WHERE
                                     bmx.maBMXuat = '$idBMX'"); 
                     }
@@ -79,16 +75,13 @@ if (isset($_REQUEST['idBMX'])) {
 </div>
 
 <?php
-$tenKho = $p->pickColumn("SELECT kho.tenKho
-                    FROM bieumauxuat
-                    INNER JOIN kho ON bieumauxuat.maKho = kho.maKho
-                    WHERE bieumauxuat.maBMXuat = '$idBMX'");
+$tenKho = $p->pickColumn("SELECT loaiXuat from bieumauxuat where maBMXuat = '$idBMX'");
 $trangThai = $p->pickColumn("SELECT trangThai FROM bieumauxuat WHERE maBMXuat = '$idBMX'");
 
 // Kiểm tra điều kiện và xác định link chuyển hướng
-if (strpos($tenKho, 'Kho Nguyên Vật Liệu') !== false) {
+if (strpos($tenKho, 'Nguyên vật liệu') !== false) {
     $redirectLink = 'create_pxnvl.php?idBMX=' . $idBMX;
-} elseif (strpos($tenKho, 'Kho Thành Phẩm') !== false) {
+} else {
     $redirectLink = 'create_pxtp.php?idBMX=' . $idBMX;
 }
 

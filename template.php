@@ -76,10 +76,22 @@ var_dump($admin_role);
         
                                 <?php 
                                     if($views){
+                                        // =================== Dashboard ===================
                                         if($views=="dashboard"){
                                             include ('views/dashborad_view.php');
-                                        }if($views=="dashboard_gd"){
-                                            include ('views/giamdoc_view/dashborad_gd_view.php');
+                                        }elseif($views=="list_tp"){
+                                            include ("views/list_tp_view.php");
+                                        }elseif($views=="info_tp"){
+                                            include ("views/info_tp_view.php");
+                                        }elseif($views=="list_nvl"){
+                                            include ("views/list_nvl_view.php");
+                                        }elseif($views=="info_materials"){
+                                            include ("views/info_materials_view.php");
+                                        }elseif($views=="kho"){
+                                            include ("views/kho_view.php");
+                                        }elseif($views=="info_kho"){
+                                            include ("views/info_kho_view.php");
+                                        // =================== Nhanvienkho ===================
                                         }elseif($views=="list_bmx"){
                                             include ("views/nhanvienkho_view/list_bmx_view.php");
                                         }elseif($views=="info_bmx"){
@@ -96,18 +108,9 @@ var_dump($admin_role);
                                             include ("views/nhanvienkho_view/create_pnnvl_view.php");
                                         }elseif($views=="create_pntp"){
                                             include ("views/nhanvienkho_view/create_pntp_view.php");
-                                        }elseif($views=="list_tp"){
-                                            include ("views/list_tp_view.php");
-                                        }elseif($views=="info_tp"){
-                                            include ("views/info_tp_view.php");
-                                        }elseif($views=="list_nvl"){
-                                            include ("views/list_nvl_view.php");
-                                        }elseif($views=="info_materials"){
-                                            include ("views/info_materials_view.php");
-                                        }elseif($views=="kho"){
-                                            include ("views/kho_view.php");
-                                        }elseif($views=="info_kho"){
-                                            include ("views/info_kho_view.php");
+                                        
+                                        // =================== Phongkehoach ===================
+
                                         }elseif($views=="propose_importMaterials"){
                                             include ("views/phongkehoach_view/propose_importMaterials_view.php");
                                         }elseif($views=="propose_manufacture"){
@@ -120,10 +123,26 @@ var_dump($admin_role);
                                             include ("views/phongkehoach_view/propose_list_view.php");
                                         }elseif($views=="propose_info"){
                                             include ("views/phongkehoach_view/propose_info_view.php");
+
+                                          // =================== Giamdoc ===================
+
                                         }elseif($views=="propose_list_gd"){
                                             include ("views/giamdoc_view/propose_list_gd_view.php");
+                                        }if($views=="dashboard_gd"){
+                                            include ('views/giamdoc_view/dashborad_gd_view.php');
                                         }elseif($views=="accept_propose"){
                                             include ("views/giamdoc_view/accept_propose_view.php");
+
+                                        // =================== Quanlykho ===================
+
+                                        }elseif($views=="dpx"){
+                                            include ("views/quanlykho_view/dpx_view.php");
+                                        }elseif($views=="dp_xuatnvl"){
+                                            include ("views/quanlykho_view/dp_xuatnvl_view.php");
+                                        }elseif($views=="dpn"){
+                                            include ("views/quanlykho_view/dpn_view.php");
+                                        }elseif($views=="dp_nhapnvl"){
+                                            include ("views/quanlykho_view/dp_nhapnvl_view.php");
                                         }
                                     }
                                 ?>

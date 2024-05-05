@@ -125,8 +125,8 @@ if (isset($_REQUEST['idBMN'])) {
                   $rowCounted = $p->countRow("select * from longuyenvatlieu");
                   $maLoNVL = "LNVL" . str_pad($rowCounted + 1, 2, "0", STR_PAD_LEFT);
                   $maNVL =$p->pickColumn("select maNguyenVatLieu from nguyenvatlieu where tenNguyenVatLieu = '$tenSP'");
-                    if($p->InsertUpdate("INSERT INTO longuyenvatlieu (maLoNVL,maNguyenVatLieu,maBMNhap,maPNNVL,soLuong,NSX,NHH) 
-                    VALUES ('$maLoNVL','$maNVL','$idBMN','$maPhieuNNVL','$soLuong','$NSX','$NHH')")==1)
+                    if($p->InsertUpdate("INSERT INTO longuyenvatlieu (maLoNVL,maNguyenVatLieu,maBMNhap,maPNNVL,soLuong,NSX,NHH,maKho) 
+                    VALUES ('$maLoNVL','$maNVL','$idBMN','$maPhieuNNVL','$soLuong','$NSX','$NHH','$maKho')")==1)
                     {
                       if($NSX < $NHH)
                       {
@@ -135,7 +135,7 @@ if (isset($_REQUEST['idBMN'])) {
                         if($p->InsertUpdate("UPDATE nguyenvatlieu SET soLuongTonnvl = $sltMoi WHERE tenNguyenVatLieu = '$tenSP'")== 1)
                         {
                           echo '<script>alert("Lập phiếu thành công")</script>';
-                          echo '<script> window.location="../NHANVIENKHO/TrangChuNVK.php" </script>';
+                          echo '<script> window.location="../d2warehouse/list_bmn.php" </script>';
                         }
                         else
                         {

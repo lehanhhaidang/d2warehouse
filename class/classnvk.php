@@ -1352,13 +1352,9 @@ class nhanvienkho
             $trangthai = $row['trangThai'];
 
             // Tạo đường dẫn tới trang phù hợp dựa trên giá trị của maKho
-            if (strpos($makho, 'KNVL') !== false) {
+          
                 $url = 'info_bmx.php?idBMX=' . $maBMXuat;
-            } elseif (strpos($makho, 'KTP') !== false) {
-                $url = 'info_bmx.php?idBMX=' . $maBMXuat;
-            } else {
-                $url = '#'; // Đường dẫn mặc định nếu không phù hợp
-            }
+            
 
             echo '<tr>
                     <td>'.$count++.'</td> <!-- Số thứ tự -->
@@ -1680,6 +1676,162 @@ public function list_propose_gd($sql)
 			}
 		}
 	}
+
+	// =============================QUAN-LY-KHO==============================================
+	
+	public function CTDX($sql)
+	{
+		$link = $this->connect();
+		$result = mysql_query($sql, $link);
+		$count = 1;
+		echo'<table class="table table-bordered table-hover">
+    	<thead>
+
+		<tr>
+			<th class="text-center">STT</th>
+			<th class="text-center">Mã nguyên vật liệu</th>
+			<th class="text-center">Tên nguyên vật liệu</th>
+			<th class="text-center">Đơn vị tính</th>
+			<th class="text-center">Số lượng nhập thêm</th>
+		</tr>
+			</thead>
+		<tbody>';
+		if (mysql_num_rows($result) > 0) {
+			while ($row = mysql_fetch_array($result)) {
+				$maDeXuat = $row['maDeXuat'];
+				$maNguyenVatLieu = $row['maNguyenVatLieu'];
+				$tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+				$donViTinh = $row['donViTinh'];
+				$soLuong = $row['soLuong'];
+				echo '<tr>
+						<td>'.$count++.'</td> <!-- Số thứ tự -->
+						<td>'.$maNguyenVatLieu.'</td> <!-- Đơn vị tính -->
+						<td>'.$tenNguyenVatLieu.'</td> 
+						<td>'.$donViTinh.'</td> 
+						<td>'.$soLuong.'</td> 
+
+					</tr>';
+			}
+		} 
+		echo'</tbody>
+		</table>'; 
+	}
+
+	public function DPXNVL($sql)
+{
+    $link = $this->connect();
+    $result = mysql_query($sql, $link);
+    $count = 1;
+    echo '<table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">STT</th>
+                <th class="text-center">Tên nguyên vật liệu</th>
+                <th class="text-center">Số lượng</th>
+                <th class="text-center">Tự động xuất từ kho</th>
+                <th class="text-center">Mã lô</th>
+            </tr>
+        </thead>
+        <tbody>';
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+            $soLuong = $row['soLuong'];
+            $tenKho = $row['tenKho'];
+            $maNguyenVatLieu = $row['maNguyenVatLieu'];
+
+            // Query để lấy danh sách các mã lô tương ứng với mã nguyên vật liệu
+            $query_maLo = "SELECT maLoNVL FROM longuyenvatlieu WHERE maNguyenVatLieu = '$maNguyenVatLieu'";
+            $result_maLo = mysql_query($query_maLo, $link);
+
+            // Tạo dropdown list
+            $maLo_options = '<select name="maLoNVL[]">';
+            while ($row_maLo = mysql_fetch_array($result_maLo)) {
+                $maLo_options .= '<option value="' . $row_maLo['maLoNVL'] . '">' . $row_maLo['maLoNVL'] . '</option>';
+            }
+            $maLo_options .= '</select>';
+
+            echo '<tr>
+                    <td>'.$count++.'</td> <!-- Số thứ tự -->
+                    <td>'.$tenNguyenVatLieu.'</td> 
+                    <td>'.$soLuong.'</td>
+                    <td>'.$tenKho.'</td>
+                    <td>'.$maLo_options.'</td> <!-- Thay đổi thành dropdown list -->
+                </tr>';
+        }
+    } 
+    echo '</tbody>
+        </table>'; 
+}
+
+public function DPNNVL($sql)
+{
+    $link = $this->connect();
+    $result = mysql_query($sql, $link);
+    $count = 1;
+    echo '<table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">STT</th>
+                <th class="text-center">Tên nguyên vật liệu</th>
+                <th class="text-center">Số lượng</th>
+                <th class="text-center">Tự động nhập vào kho</th>
+            </tr>
+        </thead>
+        <tbody>';
+    if (mysql_num_rows($result) > 0) {
+        while ($row = mysql_fetch_array($result)) {
+            $maNguyenVatLieu = $row['maNguyenVatLieu'];
+            $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+            $soLuong = $row['soLuong'];
+            $maKho = $this->mapMaNguyenVatLieuToTenKho($maNguyenVatLieu); // Sử dụng hàm ánh xạ
+            
+            echo '<tr>
+                    <td>'.$count++.'</td> <!-- Số thứ tự -->
+                    <td>'.$tenNguyenVatLieu.'</td> 
+                    <td>'.$soLuong.'</td>
+                    <td>'.$maKho.'</td>
+					<input type="hidden" name="maKho[]" value="'.$maKho.'"> <!-- Thêm input ẩn để lưu trữ mã kho -->
+                </tr>';
+        }
+    } 
+    echo '</tbody>
+        </table>'; 
+}
+
+// Hàm ánh xạ mã nguyên vật liệu sang tên kho tương ứng
+private function mapMaNguyenVatLieuToTenKho($maNguyenVatLieu) {
+    $map = array(
+        'NVL01' => 'KNVL01',
+        'NVL02' => 'KNVL01',
+        'NVL03' => 'KNVL02',
+        'NVL04' => 'KNVL02',
+        'NVL05' => 'KNVL03',
+        'NVL06' => 'KNVL03',
+        'NVL07' => 'KNVL04',
+        'NVL08' => 'KNVL04',
+        'NVL09' => 'KNVL05',
+        'NVL10' => 'KNVL05',
+        'NVL11' => 'KNVL06',
+        'NVL12' => 'KNVL06'
+        // Thêm các ánh xạ khác ở đây cho các mã nguyên vật liệu khác
+    );
+
+    // Nếu không tìm thấy ánh xạ, trả về tên mặc định hoặc có thể trả về mã nguyên vật liệu
+    return isset($map[$maNguyenVatLieu]) ? $map[$maNguyenVatLieu] : 'Kho mặc định';
+}
+
+
+
+
+
+
+
+
+
+
+
+
 	// ============BOTCHAT============
 	public function countPNNVL() {
 		$result = mysql_query("SELECT * FROM phieunnvl", $this->connect());
