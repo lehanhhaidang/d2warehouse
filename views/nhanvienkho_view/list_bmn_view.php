@@ -7,7 +7,6 @@
             <tr>
                 <th>Stt</th>
                 <th>Mã biểu mẫu</th>
-                <th>Mã kho</th>
                 <th>Ngày nhập</th>
                 <th>Loại nhập</th>
                 <th>Trạng thái</th>

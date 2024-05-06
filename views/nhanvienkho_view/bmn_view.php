@@ -14,9 +14,9 @@ if (isset($_REQUEST['idBMN'])) {
         <p class="text-center"><b>Ngày nhập:</b> <?php echo $p->pickColumn("select ngayNhap from bieumaunhap
         where maBMNhap = '$idBMN' limit 1"); ?></p>
         <p class="text-center"><b>Kho nhập:</b> <?php echo $p->pickColumn("SELECT kho.tenKho
-            FROM bieumaunhap
-            INNER JOIN kho ON bieumaunhap.maKho = kho.maKho
-            WHERE bieumaunhap.maBMNhap = '$idBMN'"); ?>
+            FROM chitietbieumaunhap
+            INNER JOIN kho ON chitietbieumaunhap.maKho = kho.maKho
+            WHERE chitietbieumaunhap.maBMNhap = '$idBMN'"); ?>
         </p>
         <h2 style="text-align: center; font-size: 1.8em;"><b>Danh sách hàng hóa:</b></h2>
     </div>
@@ -44,9 +44,9 @@ if (isset($_REQUEST['idBMN'])) {
 
 <?php
 $tenKho = $p->pickColumn("SELECT kho.tenKho
-                    FROM bieumaunhap
-                    INNER JOIN kho ON bieumaunhap.maKho = kho.maKho
-                    WHERE bieumaunhap.maBMNhap = '$idBMN'");
+                    FROM chitietbieumaunhap
+                    INNER JOIN kho ON chitietbieumaunhap.maKho = kho.maKho
+                    WHERE chitietbieumaunhap.maBMNhap = '$idBMN'");
 $trangThai = $p->pickColumn("SELECT trangThai FROM bieumaunhap WHERE maBMNhap = '$idBMN'");
 
 // Kiểm tra điều kiện và xác định link chuyển hướng
