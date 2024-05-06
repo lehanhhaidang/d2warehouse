@@ -1,4 +1,4 @@
-<select id="selectOption" class="form-select form-control">
+<select id="selectOption" class="form-select form-control-sm">
     <option selected >Chọn loại đề xuất</option>
     <option value="dexuat">Nhập nguyên vật liệu</option>
     <option value="ntp">Nhập thành phẩm</option>
@@ -9,7 +9,7 @@
     $link = $p->connect();
     $result = mysqli_query($link, "SELECT * FROM dexuat WHERE tenDeXuat ='Đề xuất nhập nguyên vật liệu' AND trangThai ='Đã duyệt' GROUP BY maDeXuat");
     $count = 1; // Đưa biến count ra khỏi vòng lặp để đếm số thứ tự
-    echo '<table class="table table-bordered table-hover">
+    echo '<table class="tbldexuat table table-border table-hover">
             <thead>
                 <tr>
                     <th>Stt</th>
@@ -45,7 +45,7 @@
     $link = $p->connect();
     $result = mysqli_query($link, "SELECT * FROM donhang");
     $count = 1; // Đưa biến count ra khỏi vòng lặp để đếm số thứ tự
-    echo '<table class="table table-bordered table-hover">
+    echo '<table class=" tbldexuat table table-border table-hover">
             <thead>
                 <tr>
                     <th>Stt</th>

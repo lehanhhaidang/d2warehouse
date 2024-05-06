@@ -12,7 +12,7 @@ if (isset($_REQUEST['idDX'])) {
 </p>
 
     <div class="listpropose">
-        <table class="table table-border table-info mx-auto text-center table-hover">
+        <table class="table table-border mx-auto text-center table-hover">
             <thead>
                 <tr>
                     <th class="text-center">STT</th>

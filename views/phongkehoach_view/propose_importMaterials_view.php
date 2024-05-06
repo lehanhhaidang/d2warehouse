@@ -1,7 +1,7 @@
 <form action="create_dxnnvl.php" method="post">
     <h1 align="center">DANH SÁCH NGUYÊN VẬT LIỆU</h1>
     <div class="donhang">
-        <table class="table table-border table-hover table-success">
+        <table class="table table-border table-hover">
             <thead>
                 <tr>
                     <th>Stt</th>

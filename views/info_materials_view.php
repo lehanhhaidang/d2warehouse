@@ -1,7 +1,8 @@
 <div class="warehouse">
-        <div class="listproduct">
         <h1 class="text-center">CHI TIẾT NGUYÊN VẬT LIỆU</h1>
-            <table class="table table-border table-success">
+        <div class="listproduct">
+        
+            <table class="table table-border table-hover">
                 <thead>
                     <tr>
                         <th>Ảnh</th>

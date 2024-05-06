@@ -7,7 +7,7 @@
 			
 			?>
         <div class="listproduct">
-            <table class="table table-border table-success">
+            <table class="table table-border table-hover">
                 <thead>
                     <tr>
 						<th>Ảnh</th>

@@ -9,16 +9,17 @@ if (isset($_REQUEST['idBMN'])) {
                  INNER JOIN kho k ON bn.maKho = k.maKho
                  INNER JOIN nhanvienkho nk ON k.maNVKho = nk.maNhanVien
                  WHERE bn.maBMNhap = '$idBMN'"); ?>">
-      <h2 class="title" style="text-align:center;">Lập phiếu nhập nguyên vật liệu</h2>
+      <h2 class="title text-success" style="text-align:center;">Lập phiếu nhập nguyên vật liệu</h2>
       <div class="body">
         <?php
         $rowCounted = $p->countRow("select * from phieunnvl");
         $maPhieuNNVL = "PNNVL" . str_pad($rowCounted + 1, 2, "0", STR_PAD_LEFT);
         ?>
+        <div class=formnnvl>
         <h4 class="codeForm">Mã phiếu:<?php echo $maPhieuNNVL ?></h4>
         <div class="input-container col-md-5">
           <label class="labelInput" for="">Tên người giao</label>
-          <input class="input form-control" name="tennguoigiao" value="<?php echo $p->pickColumn("select tenNguoiGiao from bieumaunhap
+          <input class="input form-control " name="tennguoigiao" value="<?php echo $p->pickColumn("select tenNguoiGiao from bieumaunhap
             where maBMNhap = '$idBMN' limit 1"); ?>" readonly >
         </div>
         <div class="input-container col-md-5">
@@ -44,10 +45,11 @@ if (isset($_REQUEST['idBMN'])) {
           <label class="labelInput" for="">Ngày lập phiếu</label>
           <input type="date" name="ngaylap" class="input form-control" required />
         </div>
+      </div>
         <br>
         <br>
         <div class="table" id="table">
-          <table class="table table-bordered">
+          <table class=" tblnnvl table table-border">
             <tr>
               <th class="custom-cell">STT</th>
               <th class="custom-cell">Tên</th>
@@ -86,9 +88,9 @@ if (isset($_REQUEST['idBMN'])) {
 
           </table>
         </div>
-        <div class="btn">
-          <input type="submit" class="buttonCancel" name="button" id="button" value="Quay lại" onclick="history.back()">
-          <input type="submit" class="buttonCreate" name="button" id="button" value="Lập phiếu">
+        <div class="text-center">
+          <input type="submit" class="buttonCancel btn btn-warning" name="button" id="button" value="Quay lại" onclick="history.back()">
+          <input type="submit" class="buttonCreate btn btn-success" name="button" id="button" value="Lập phiếu">
 
         </div>
       </div>

@@ -7587,6 +7587,8 @@ table tbody .border-bottom-info td {
     text-transform: uppercase;
     width: 235px;
     padding: 10px;
+    margin-left: 5px;
+    margin-top:10px;
 }
 
 @media only screen and (max-width: 992px) {
@@ -21491,11 +21493,10 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
 .finishedproduct-list {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    /* Chia thành 2 cột bằng nhau */
+    /* Chia thành 6 cột bằng nhau */
     gap: 10px;
     /* Khoảng cách giữa các thẻ a */
     text-align: center;
-    margin-left: 40px;
 }
 
 .materials-list a,
@@ -21515,9 +21516,10 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
 
 .materials-list a img,
 .finishedproduct-list a img {
-    width: 170px;
+    width: 185px;
     height: 190px;
-    padding-bottom: 15px;
+    box-shadow: 5px 8px 8px 3px #888888;
+    margin-right:5px;
 }
 
 .kho {
@@ -21525,7 +21527,6 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
     flex-wrap: wrap;
     justify-content: center;
 }
-
 .kho-sub {
     width: 500px;
     border-radius: 20px;
@@ -21578,6 +21579,27 @@ a {
 .bieumau tr th,
 .propose-list tr th,
 .propose-list-gd tr th,
-.listpropose tr th{
+.listpropose tr th,
+.tbldexuat tr th,
+.tblnnvl tr th{
     background-color: #007888;
+    color: white;
+    text-align: center;
+}
+.listproduct,
+.bieumau,
+.table-sm,
+.listpropose,
+.donhang,
+.tbldexuat{
+    background-color: #DDDDDD;
+    text-align: center;
+}
+.formnnvl{
+    display: block;
+    justify-content: center;
+    margin-left:350px;
+}
+#dangnhap{
+    background-color: red;
 }

@@ -1,19 +1,21 @@
+<h1 class="text-center">CHI TIẾT ĐỀ XUẤT</h1>
 <?php 
 if (isset($_REQUEST['idDX'])) {
     $idDX = $_REQUEST['idDX'];   
 }
-
 $p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl.maNguyenVatlieu where madexuat='$idDX' ");
 ?>
 <form action="" method="post">
-<button style="margin-right:50px;" type="button" class="btn btn-success" onclick="window.history.back()">Trở lại</button>
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Điều phối</button>
+<div class="text-center">
+    <button style="margin-right:50px;" type="button" class="btn btn-warning" onclick="window.history.back()">Trở lại</button>
+    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Điều phối</button>
+</div>
     <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
             <!-- Modal content-->
                 <div class="modal-content" style="width:800px; margin-right:200px;"> 
                     <div class="modal-header">
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">ĐIỀU PHỐI XUẤT </h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -35,7 +37,7 @@ $p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl
 
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-success" name="button" value="Xác nhận">Xác nhận</button>
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button>
                     </div>
 
             </div>

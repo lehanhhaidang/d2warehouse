@@ -22,7 +22,7 @@ if (isset($_REQUEST['idBMN'])) {
     </div>
 
     <div class="listproduct">
-        <table class="table table-border table-success table-hover">
+        <table class="table table-border table-hover">
             <thead>
                 <tr>
                     <th>STT</th>

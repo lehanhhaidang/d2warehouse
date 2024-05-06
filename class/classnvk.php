@@ -1577,49 +1577,92 @@ public function DSLNVL($sql)
 	
 	
 	// =========================================================================
-	public function bieuDoNguyenVatLieu($sql)
+	/*public function bieuDoNguyenVatLieu($sql)
 {
     $link = $this->connect();
-    $ketqua = mysql_query($sql, $link);
+    $ketqua = mysqli_query($sql, $link);
     $labels = array();
     $data = array();
-    $i = mysql_num_rows($ketqua);
+    $i = mysqli_num_rows($ketqua);
     if ($i > 0) {
-        while ($row = mysql_fetch_array($ketqua)) {
+        while ($row = mysqli_fetch_array($ketqua)) {
             $labels[] = $row['tenNguyenVatLieu'];
             $data[] = $row['soLuongTonnvl'];
         }
 
-        mysql_close($link);
+        mysqli_close($link);
     } else {
         echo 'Lỗi thực thi truy vấn.';
     }
 
     return array('labels' => $labels, 'data' => $data);
-}
-public function bieuDo($sql)
+}*/
+public function bieuDoNguyenVatLieu($sql)
 {
     $link = $this->connect();
-    $ketqua = mysql_query($sql, $link);
+    $ketqua = mysqli_query($link, $sql);
+
+    if (!$ketqua) {
+        echo 'Lỗi thực thi truy vấn: ' . mysqli_error($link);
+        return;  // Exit if there's an error
+    }
+
     $labels = array();
     $data = array();
-    $i = mysql_num_rows($ketqua);
+    while ($row = mysqli_fetch_array($ketqua)) {
+        $labels[] = $row['tenNguyenVatLieu'];
+        $data[] = (int) $row['soLuongTonnvl']; // Ensure numerical data for chart
+    }
+
+    mysqli_close($link);
+
+    return array('labels' => $labels, 'data' => $data);
+}
+
+
+/*public function bieuDo($sql)
+{
+    $link = $this->connect();
+    $ketqua = mysqli_query($sql, $link);
+    $labels = array();
+    $data = array();
+    $i = mysqli_num_rows($ketqua);
 	if ($i >0) {
-     while ($row = mysql_fetch_array($ketqua)) {
+     while ($row = mysqli_fetch_array($ketqua)) {
             $labels[] =$row['tenThanhPham'];
             $data[] = $row['soLuongTon'];
         }
 
-        mysql_close($link);
+        mysqli_close($link);
 		
     } else {
         echo 'Lỗi thực thi truy vấn.';
     }
-	var_dump($labels);
-	var_dump($data);
     return array('labels' => $labels, 'data' => $data);
 
+}*/
+public function bieuDo($sql)
+{
+    $link = $this->connect();
+    $ketqua = mysqli_query($link, $sql);
+
+    if (!$ketqua) {
+        echo 'Lỗi thực thi truy vấn: ' . mysqli_error($link);
+        return;  // Exit if there's an error
+    }
+
+    $labels = array();
+    $data = array();	
+    while ($row = mysqli_fetch_array($ketqua)) {
+        $labels[] = $row['tenThanhPham'];
+        $data[] = (int) $row['soLuongTon']; // Ensure numerical data for chart
+    }
+
+    mysqli_close($link);
+
+    return array('labels' => $labels, 'data' => $data);
 }
+
 
 public function list_propose_gd($sql)
 {
@@ -1642,7 +1685,7 @@ public function list_propose_gd($sql)
             } else {
                 echo '<td class="badge badge-primary d-flex justify-content-center mt-3">' . $trangThai . '</td>';
             }
-            echo '<td><a href="' . $url . '" class="btn btn-info ml-auto mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
+            echo '<td><a href="' . $url . '" class="btn btn-info">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
             </tr>';
         }
     }
@@ -1682,7 +1725,7 @@ public function accept_propose($sql)
     $result = mysqli_query($link, $sql); // Thay thế mysql_query bằng mysqli_query
 
     $count = 1;
-    echo '<table class="table table-bordered table-hover">
+    echo '<table class=" tbldexuat table table-border table-hover">
         <thead>
             <tr>
                 <th class="text-center">STT</th>
@@ -1722,7 +1765,7 @@ public function DPXNVL($sql)
     $result = mysqli_query($link, $sql); // Thay thế mysql_query bằng mysqli_query
 
     $count = 1;
-    echo '<table class="table table-bordered table-hover">
+    echo '<table class="table table-border table-hover">
         <thead>
             <tr>
                 <th class="text-center">STT</th>
@@ -1772,7 +1815,7 @@ public function DPNNVL($sql)
     $result = mysqli_query($link, $sql); // Thay thế mysql_query bằng mysqli_query
     
     $count = 1;
-    echo '<table class="table table-bordered table-hover">
+    echo '<table class="tbldexuat table table-border table-hover">
         <thead>
             <tr>
                 <th class="text-center">STT</th>
