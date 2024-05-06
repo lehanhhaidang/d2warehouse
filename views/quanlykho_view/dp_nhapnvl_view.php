@@ -1,11 +1,9 @@
-<<<<<<< HEAD
+
 <h1 class="text-center">CHI TIẾT ĐỀ XUẤT</h1>
 <?php 
-=======
-<?php
 
 session_start();
->>>>>>> b735788cc6c69a88e029efd46404031e4c656ed7
+
 if (isset($_REQUEST['idDX'])) {
     $idDX = $_REQUEST['idDX'];   
 }

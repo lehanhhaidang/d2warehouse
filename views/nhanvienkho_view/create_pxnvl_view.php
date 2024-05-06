@@ -29,14 +29,14 @@ if (isset($_REQUEST['idBMX'])) {
         </div>
         <div class="input-container col-md-5">
           <label class="labelInput" for="">Kho xuất</label>
-          <input class="input form-control" name="khonhap" value="<?php echo $p->pickColumn("SELECT kho.tenKho
-                            FROM bieumauxuat
-                            INNER JOIN kho ON bieumauxuat.maKho = kho.maKho
-                            WHERE bieumauxuat.maBMXuat = '$idBMX'"); ?>" readonly />
+          <input class="input form-control" name="khonhap" value="<?php echo $p->pickColumn("SELECT kho.tenkho
+                            from longuyenvatlieu lgl
+                            inner join kho on lgl.maKho = kho.maKho
+                            WHERE lgl.maBMXuat = '$idBMX'"); ?>" readonly />
         </div>
         <div class="input-container col-md-5">
           <label class="labelInput" for="">Người lập phiếu</label>
-          <input class="input form-control" name="nguoilap" value="<?php echo $p->pickColumn("SELECT nk.tenNVKho FROM bieumauxuat bn 
+          <input class="input form-control" name="nguoilap" value="<?php echo $p->pickColumn("SELECT nk.tenNVKho FROM longuyenvatlieu bn
                  INNER JOIN kho k ON bn.maKho = k.maKho
                  INNER JOIN nhanvienkho nk ON k.maNVKho = nk.maNhanVien
                  WHERE bn.maBMXuat = '$idBMX' "); ?>" readonly />
@@ -111,7 +111,7 @@ if (isset($_REQUEST['idBMX'])) {
             $ngayLap = $_REQUEST['ngaylap'];
             $maNV = $_REQUEST['maNV'];
             $ngayHienTai = date("Y-m-d");
-            $maKho = $p->pickColumn("select maKho from bieumauxuat where maBMXuat = '$idBMX'");
+            $maKho = $p->pickColumn("select maKho from longuyenvatlieu where maBMXuat = '$idBMX'");
             $lapPhieu = $p->InsertUpdate("INSERT INTO phieuxnvl(maPXNVL,maKho,maNVKho,tenNguoiNhan,ngayxuat,ngayLap) 
                 VALUES('$maPhieuXNVL','$maKho','$maNV','$tenNguoiNhan','$ngayxuat','$ngayLap')");
 

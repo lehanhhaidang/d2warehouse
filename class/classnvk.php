@@ -1328,7 +1328,7 @@ public function DSBMN($sql)
             $trangthai = $row['trangThai'];
 
             // Tạo đường dẫn tới trang phù hợp dựa trên giá trị của maKho
-            if (strpos($loaiNhap, 'Nguyên vật liệu') !== false || strpos($makho, 'Thành phẩm') !== false) {
+            if (strpos($loaiNhap, 'Nguyên vật liệu') !== false || strpos($loaiNhap, 'Thành phẩm') !== false) {
                 $url = 'info_bmn.php?idBMN=' . $maBMNhap;
             } else {
                 $url = '#'; // Đường dẫn mặc định nếu không phù hợp
@@ -1359,7 +1359,6 @@ public function DSBMX($sql)
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
             $maBMXuat = $row['maBMXuat'];
-            $makho = $row['maKho'];
             $ngayXuat = $row['ngayXuat'];
             $loaiXuat = $row['loaiXuat'];
             $trangthai = $row['trangThai'];
@@ -1370,7 +1369,6 @@ public function DSBMX($sql)
             echo '<tr>
                     <td>'.$count++.'</td> <!-- Số thứ tự -->
                     <td>'.$maBMXuat.'</td> 
-                    <td>'.$makho.'</td> <!-- Đơn vị tính -->
                     <td>'.$ngayXuat.'</td> 
                     <td>'.$loaiXuat.'</td> 
                     <td>'.$trangthai.'</td> 
@@ -1416,20 +1414,19 @@ public function DSSP($sql)
 }
 
 public function DSLNVL($sql)
-    {
-        $link = $this->connect();
-        $result =mysql_query($sql, $link);
-        $i = mysql_num_rows($result);
-        $count = 1;
-        if($i>0)
-        {
-            while($row=mysql_fetch_array($result)){
-                $tenSP = $row['tenNguyenVatLieu'];
-                $soLuong = $row['soLuong'];
-                $donViTinh = $row['donViTinh'];
-                $nsx = $row['NSX'];
-                $nhh = $row['NHH'];
-                echo '<tr>
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql);
+    $i = mysqli_num_rows($result);
+    $count = 1;
+    if ($i > 0) {
+        while ($row = mysqli_fetch_array($result)) {
+            $tenSP = $row['tenNguyenVatLieu'];
+            $soLuong = $row['soLuong'];
+            $donViTinh = $row['donViTinh'];
+            $nsx = $row['NSX'];
+            $nhh = $row['NHH'];
+            echo '<tr>
                 <td>'.$count++.'</td> <!-- Số thứ tự -->
                 <td>'.$tenSP.'</td> <!-- Tên sản phẩm -->
                 <td>'.$donViTinh.'</td> <!-- Đơn vị tính -->
@@ -1437,10 +1434,10 @@ public function DSLNVL($sql)
                 <td>'.$nsx.'</td> <!-- Ngày sản xuất -->
                 <td>'.$nhh.'</td> <!-- Hạn sử dụng -->
                 </tr>';
-                
-            }
         }
     }
+}
+
 
     public function DSTP($sql)
     {
