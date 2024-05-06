@@ -5,7 +5,7 @@ if (isset($_REQUEST['idBMN'])) {
 ?>
 
 <form method="post" enctype="multipart/form-data" name="form1" id="form1">
-      <input type="hidden" name="maNV" value="<?php echo $p->pickColumn("SELECT nk.maNhanVien FROM bieumaunhap bn 
+      <input type="hidden" name="maNV" value="<?php echo $p->pickColumn("SELECT nk.maNhanVien FROM chitietbieumaunhap bn 
                  INNER JOIN kho k ON bn.maKho = k.maKho
                  INNER JOIN nhanvienkho nk ON k.maNVKho = nk.maNhanVien
                  WHERE bn.maBMNhap = '$idBMN'"); ?>">
@@ -30,13 +30,13 @@ if (isset($_REQUEST['idBMN'])) {
         <div class="input-container col-md-5">
           <label class="labelInput" for="">Kho nhập</label>
           <input class="input form-control" name="khonhap" value="<?php echo $p->pickColumn("SELECT kho.tenKho
-                            FROM bieumaunhap
-                            INNER JOIN kho ON bieumaunhap.maKho = kho.maKho
-                            WHERE bieumaunhap.maBMNhap = '$idBMN'"); ?>" readonly required/>
+                            FROM chitietbieumaunhap
+                            INNER JOIN kho ON chitietbieumaunhap.maKho = kho.maKho
+                            WHERE chitietbieumaunhap.maBMNhap = '$idBMN'"); ?>" readonly required/>
         </div>
         <div class="input-container col-md-5">
           <label class="labelInput" for="">Người lập phiếu</label>
-          <input class="input form-control" name="nguoilap" value="<?php echo $p->pickColumn("SELECT nk.tenNVKho FROM bieumaunhap bn 
+          <input class="input form-control" name="nguoilap" value="<?php echo $p->pickColumn("SELECT nk.tenNVKho FROM chitietbieumaunhap bn 
                  INNER JOIN kho k ON bn.maKho = k.maKho
                  INNER JOIN nhanvienkho nk ON k.maNVKho = nk.maNhanVien
                  WHERE bn.maBMNhap = '$idBMN' "); ?>" readonly />
@@ -104,7 +104,7 @@ if (isset($_REQUEST['idBMN'])) {
             $ngayLap = $_REQUEST['ngaylap'];
             $maNV = $_REQUEST['maNV'];
             $ngayHienTai = date("Y-m-d");
-            $maKho = $p->pickColumn("select maKho from bieumaunhap where maBMNhap = '$idBMN'");
+            $maKho = $p->pickColumn("select maKho from chitietbieumaunhap where maBMNhap = '$idBMN'");
             $lapPhieu = $p->InsertUpdate("INSERT INTO phieunnvl(maPNNVL,maKho,maNVKho,tenNguoiGiao,ngayNhap,ngayLap) 
                 VALUES('$maPhieuNNVL','$maKho','$maNV','$tenNguoiGiao','$ngayNhap','$ngayLap')");
 

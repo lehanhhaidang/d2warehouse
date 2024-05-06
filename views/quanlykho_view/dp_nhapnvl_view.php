@@ -1,5 +1,11 @@
+<<<<<<< HEAD
 <h1 class="text-center">CHI TIẾT ĐỀ XUẤT</h1>
 <?php 
+=======
+<?php
+
+session_start();
+>>>>>>> b735788cc6c69a88e029efd46404031e4c656ed7
 if (isset($_REQUEST['idDX'])) {
     $idDX = $_REQUEST['idDX'];   
 }
@@ -27,6 +33,8 @@ $p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl
                 WHERE madexuat='$idDX'");
 
                 ?>
+
+
                 <label for="input">Tên người nhận: </label>
                 <input type="name" class="name input form-control" name="tennguoigiao" placeholder="Nhập tên người giao" required>
                 <label for="date"></label>
@@ -38,15 +46,7 @@ $p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl
                         <button type="button" class="btn btn-warning" data-dismiss="modal">Close</button> 
                     </div>
 
-            </div>
-            <?php
-            $maNVL = $p->pickColumn("select maNVL from dexuat where maDeXuat = '$idDX'");
-            
-            $donViTinh = $p->pickColumn("select donViTinh from nguyenvatlieu where maNguyenVatLieu = '$maNVL'");
-            var_dump($donViTinh);
-            ?>
-
-        
+            </div>     
     </div>
   </div>
   </form>
@@ -55,28 +55,34 @@ if(isset($_POST['button'])) {
     switch($_POST['button']) {
         case 'Xác nhận':
             {
-                $rowCounted = $p->countRow("select * from bieumaunhap");
+                // Đếm số lượng biểu mẫu hiện có và tạo mã mới cho biểu mẫu
+                $rowCounted = $p->countRow("SELECT * FROM bieumaunhap");
                 $maBMNhap = "BMN" . str_pad($rowCounted + 1, 2, "0", STR_PAD_LEFT);
+    
+                // Lấy dữ liệu từ biểu mẫu gửi đi
                 $tenNguoiGiao = $_POST['tennguoigiao'];
                 $ngayNhap = $_POST['date'];
                 $idDX = $_REQUEST['idDX'];
-                $maNVL = $p->pickColumn("select maNVL from dexuat where maDeXuat = '$idDX'");
-                $tenNguyenVatLieu = $p->pickColumn("select tenNguyenVatLieu from nguyenvatlieu where maNguyenVatLieu = '$maNVL'");
-                $donViTinh = $p->pickColumn("select donViTinh from nguyenvatlieu where maNguyenVatLieu = '$maNVL'");
-                $soLuong = $p->pickColumn("select soLuong from dexuat where maNVL = '$maNVL'");
-                
-                // Lấy các giá trị mã kho từ input ẩn
-                $maKhoList = $_POST['maKho'];
-                foreach ($maKhoList as $maKho) {
-                    $insert = $p->InsertUpdate("INSERT INTO bieumaunhap (maBMNhap, maKho, maDeXuat, ngayNhap, loaiNhap, tenNguoiGiao, trangThai) VALUES ('$maBMNhap', '$maKho', '$idDX', '$ngayNhap', 'Nguyên vật liệu', '$tenNguoiGiao', 'Chưa lập phiếu')");
-                    $insert2 = $p->InsertUpdate("INSERT INTO chitietbieumaunhap(maBMNhap,tenSanPham,donViTinh,soLuong) VALUES ('$maBMNhap','$tenNguyenVatLieu','$donViTinh','$soLuong')");
+    
+                // Thêm biểu mẫu mới vào bảng bieumaunhap
+                $p->InsertUpdate("INSERT INTO bieumaunhap (maBMNhap, maDeXuat, ngayNhap, loaiNhap, tenNguoiGiao, trangThai) VALUES ('$maBMNhap', '$idDX', '$ngayNhap', 'Nguyên vật liệu', '$tenNguoiGiao', 'Chưa lập phiếu')");
+                $maNVL = $_SESSION['maNVL'];
+    
+                // Kết hợp $maKho và $manvl thành một mảng đa chiều
+                $combinedArray = array_combine($_POST['maKho'], $maNVL);
+                // Vòng lặp để chèn dữ liệu vào bảng chitietbieumaunhap
+                foreach ($combinedArray as $maKho => $manvl) {
+                    $tenNguyenVatLieu = $p->pickColumn("SELECT tenNguyenVatLieu FROM nguyenvatlieu WHERE maNguyenVatLieu = '{$manvl['maNguyenVatLieu']}'");
+                    $donViTinh = $p->pickColumn("SELECT donViTinh FROM nguyenvatlieu WHERE maNguyenVatLieu = '{$manvl['maNguyenVatLieu']}'");
+                    $soLuong = $p->pickColumn("SELECT soLuong FROM dexuat WHERE maNVL = '{$manvl['maNguyenVatLieu']}'");
+                    $p->InsertUpdate("INSERT INTO chitietbieumaunhap (maBMNhap, maKho, tenSanPham, donViTinh, soLuong) VALUES ('$maBMNhap', '$maKho', '$tenNguyenVatLieu', '$donViTinh', '$soLuong')");
                 }
-                
                 break;
             }   
     }
 }
-
 ?>
+
+
 
   

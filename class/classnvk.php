@@ -1323,13 +1323,12 @@ public function DSBMN($sql)
     if (mysqli_num_rows($result) > 0) {
         while ($row = mysqli_fetch_array($result)) {
             $maBMNhap = $row['maBMNhap'];
-            $makho = $row['maKho'];
             $ngayNhap = $row['ngayNhap'];
             $loaiNhap = $row['loaiNhap'];
             $trangthai = $row['trangThai'];
 
             // Tạo đường dẫn tới trang phù hợp dựa trên giá trị của maKho
-            if (strpos($makho, 'KNVL') !== false || strpos($makho, 'KTP') !== false) {
+            if (strpos($loaiNhap, 'Nguyên vật liệu') !== false || strpos($makho, 'Thành phẩm') !== false) {
                 $url = 'info_bmn.php?idBMN=' . $maBMNhap;
             } else {
                 $url = '#'; // Đường dẫn mặc định nếu không phù hợp
@@ -1338,7 +1337,6 @@ public function DSBMN($sql)
             echo '<tr>
                     <td>'.$count++.'</td> <!-- Số thứ tự -->
                     <td>'.$maBMNhap.'</td> 
-                    <td>'.$makho.'</td> <!-- Đơn vị tính -->
                     <td>'.$ngayNhap.'</td> 
                     <td>'.$loaiNhap.'</td> 
                     <td class="">'.$trangthai.'</td> 
@@ -1832,6 +1830,10 @@ public function DPNNVL($sql)
             $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
             $soLuong = $row['soLuong'];
             $maKho = $this->mapMaNguyenVatLieuToTenKho($maNguyenVatLieu); // Sử dụng hàm ánh xạ
+			$maNVL[] = array(
+				'maNguyenVatLieu'
+
+			=> $maNguyenVatLieu);
             
             echo '<tr>
                     <td>'.$count++.'</td> <!-- Số thứ tự -->
@@ -1845,6 +1847,7 @@ public function DPNNVL($sql)
     
     echo '</tbody>
         </table>'; 
+		$_SESSION['maNVL'] = $maNVL;
 }
 
 
