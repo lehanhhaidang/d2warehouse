@@ -51,8 +51,7 @@
             </td>
             <td>
                 <button type="submit" name="submit" class="btn btn-primary" value="Trả lời">Trả lời</button>
-                <button type="button" name="delete" class="btn btn-danger" 
-                onclick="delete_question(this.value)" value="<?php echo $id ?>">Xóa</button>
+                <button type="submit" name="submit" class="btn btn-danger"  value="Xóa">Xóa</button>
             </td>
             </tr>
         </form>
@@ -99,6 +98,17 @@
                         $res2 = mysqli_query($conn, $query2);
                         echo "<script>setTimeout(\"location.href='chatbot_manage.php';\", 100)</script>";
                     }
+                }
+                break;
+            }
+            case "Xóa":
+            {
+                $id = $_POST['id'];
+                $query = "update chats set status = 1 where id = $id";
+                $res = mysqli_query($conn, $query);
+                if($res==1)
+                {
+                    echo "<script>setTimeout(\"location.href='chatbot_manage.php';\", 100)</script>";
                 }
                 break;
             }
