@@ -61,6 +61,8 @@ var_dump($admin_role);
                         include_once ("includes/sidenav_nvkk.php");
                     }elseif ($admin_role == 'giamdoc') {
                         include_once ("includes/sidenav_gd.php");
+                    }elseif ($admin_role == 'Admin') {
+                        include_once ("includes/sidenav_admin.php");
                     }
 
                 ?>
@@ -143,6 +145,18 @@ var_dump($admin_role);
                                             include ("views/quanlykho_view/dpn_view.php");
                                         }elseif($views=="dp_nhapnvl"){
                                             include ("views/quanlykho_view/dp_nhapnvl_view.php");
+                                        }
+                                        // =================== Admin ===================
+                                        elseif($views=="account"){
+                                            include ("views/admin_view/account_view.php");
+                                        }elseif($views=="warehouse"){
+                                            include ("views/admin_view/warehouse_view.php");
+                                        }elseif($views=="materials"){
+                                            include ("views/admin_view/materials_view.php");
+                                        }elseif($views=="products"){
+                                            include ("views/admin_view/products_view.php");
+                                        }elseif($views=="chatbot_manage"){
+                                            include ("views/admin_view/chatbot_manage_view.php");
                                         }
                                     }
                                 ?>

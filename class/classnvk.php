@@ -1871,15 +1871,213 @@ private function mapMaNguyenVatLieuToTenKho($maNguyenVatLieu) {
 }
 
 
+	// ==========================Admin===============================================
+
+	public function list_user($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql);
+    $count = 1;
+    if(mysqli_num_rows($result) > 0)
+    {
+        echo '<table class="tbluser table table-border table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">STT</th>
+                <th class="text-center">Tên người dùng</th>
+                <th class="text-center">Email</th>
+                <th class="text-center">Số điện thoại</th>
+                <th class="text-center">Địa chỉ</th>
+                <th class="text-center">Chức vụ</th>
+                <th class="text-center">Trạng thái</th>
+                <th class="text-center">Ngày tạo</th>
+            </tr>
+        </thead>
+        <tbody>';
+        while($row = mysqli_fetch_array($result))
+        {
+            $id = $row['id_acc'];
+            $tenNV = $row['hoten'];
+			// Ánh xạ cho chức vụ
+			$role_names = array(
+				"nhanvienkho" => "Nhân viên kho",
+				"quanlykho" => "Quản lý kho",
+				"nhanvienkiemke" => "Nhân viên kiểm kê",
+				"giamdoc" => "Giám đốc",
+				"nvpkehoach" => "Nhân viên kế hoạch",
+				"Admin" => "Quản trị viên"
+				// Thêm các vai trò khác nếu cần
+			);
+
+			// Ánh xạ cho trạng thái
+			$status_names = array(
+				"hoatdong" => "Hoạt động",
+				"khonghoatdong" => "Không hoạt động"
+				// Thêm các trạng thái khác nếu cần
+			);
+            $chucVu = isset($role_names[$row['role']]) ? $role_names[$row['role']] : 'Unknown';
+            $diaChi = $row['diachi'];
+            $soDienThoai = $row['dienthoai'];
+            $email = $row['email'];
+            $trangThai = isset($status_names[$row['trangthai']]) ? $status_names[$row['trangthai']] : 'Unknown';
+            $ngayTao = $row['ngaytao'];
+
+            echo '<tr>
+                    <td>'.$count++.'</td>
+                    <td><a href="?id='.$id.'">'.$tenNV.'</a></td>
+                    <td><a href="?id='.$id.'">'.$email.'</td>
+                    <td><a href="?id='.$id.'">'.$soDienThoai.'</td>
+                    <td><a href="?id='.$id.'">'.$diaChi.'</td>
+                    <td><a href="?id='.$id.'">'.$chucVu.'</td>
+                    <td><a href="?id='.$id.'">'.$trangThai.'</td>
+                    <td><a href="?id='.$id.'">'.$ngayTao.'</td>
+                </tr>';
+        }
+    }
+    echo '</tbody>
+    </table>';
 
 
 
+}
 
 
+public function list_materials($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+    $count = 1;
+    if ($result) {
+		echo '<table class="tbluser table table-border table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">STT</th>
+				<th class="text-center">Ảnh mô tả</th>
+                <th class="text-center">Tên nguyên vật liệu</th>
+                <th class="text-center">Đơn vị tính</th>
+            </tr>
+        </thead>
+        <tbody>';
+        while ($row = mysqli_fetch_array($result)) { // Sử dụng mysqli_fetch_array thay vì mysql_fetch_array
+            $maNguyenVatLieu = $row['maNguyenVatLieu'];
+            $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+            $donViTinh = $row['donViTinh'];
+            echo '<tr>
+            <td>'.$count++.'</td>
+			<td><a href="?id='.$maNguyenVatLieu.'"><img src="uploads/'.$row['anh'].'" alt="Ảnh mô tả" style="width: 50px; height: 50px;"></td>
+            <td><a href="?id='.$maNguyenVatLieu.'">'.$tenNguyenVatLieu.'</td>
+            <td><a href="?id='.$maNguyenVatLieu.'">'.$donViTinh.'</td>
+          </tr>';
+        }
+    }
+	echo '</tbody>
+    </table>';
+	
+}
+public function list_products($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+    $count = 1;
+    if ($result) {
+		echo '<table class="tbluser table table-border table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">STT</th>
+				<th class="text-center">Ảnh mô tả</th>
+                <th class="text-center">Tên nguyên vật liệu</th>
+                <th class="text-center">Đơn vị tính</th>
+            </tr>
+        </thead>
+        <tbody>';
+        while ($row = mysqli_fetch_array($result)) { // Sử dụng mysqli_fetch_array thay vì mysql_fetch_array
+            $maThanhPham= $row['maThanhPham'];
+            $tenThanhPham= $row['tenThanhPham'];
+            $donViTinh = $row['donViTinh'];
+            echo '<tr>
+            <td>'.$count++.'</td>
+			<td><a href="?id='.$maThanhPham.'"><img src="uploads/'.$row['anh'].'" alt="Ảnh mô tả" style="width: 50px; height: 50px;"></td>
+            <td><a href="?id='.$maThanhPham.'">'.$tenThanhPham.'</td>
+            <td><a href="?id='.$maThanhPham.'">'.$donViTinh.'</td>
+          </tr>';
+        }
+    }
+	echo '</tbody>
+    </table>';
+	
+}
 
 
+public function uphinh($name,$folder,$tmp_name)
+	{
+		if($name !='' && $folder !='' && $tmp_name!='')
+		{
+			$newname = $folder."/".$name;
+			if(move_uploaded_file($tmp_name,$newname))
+			{
+
+				return 1;
+				
+			}
+			else
+			{
+
+				return 0;
+				
+			}
+		}
+		else
+		{
+
+			return 0;
+			
+		}
+	}
 
 
+	public function list_warehouse($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql); // Sử dụng MySQLi thay vì MySQL
+    $count = 1;
+    if ($result) {
+		echo '<table class="tbluser table table-border table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">STT</th>
+				<th class="text-center">Tên kho</th></th>
+                <th class="text-center">Nhân viên phụ trách</th>
+                <th class="text-center">Địa chỉ kho</th>
+				<th class="text-center">Sức chứa(&#13221;)</th>
+				<th class="text-center">Tình trạng</th>
+				
+            </tr>
+        </thead>
+        <tbody>';
+        while ($row = mysqli_fetch_array($result)) { // Sử dụng mysqli_fetch_array thay vì mysql_fetch_array
+            $maKho = $row['maKho'];
+			$tenKho = $row['tenKho'];
+			$nhanvien = $row['tenNVKho'];
+			$diachi = $row['diaChiKho'];
+			$dungLuong = $row['dungLuongKhoToiDa'];
+			$tinhTrang = $row['tinhTrangKho'];
+            echo '<tr>
+            <td>'.$count++.'</td>
+            <td><a href="?id='.$maKho.'">'.$tenKho.'</td>
+			<td><a href="?id='.$maKho.'">'.$nhanvien.'</td>
+			<td><a href="?id='.$maKho.'">'.$diachi.'</td>
+			<td><a href="?id='.$maKho.'">'.$dungLuong.'</td>
+			<td><a href="?id='.$maKho.'">'.$tinhTrang.'</td>
+
+			
+            
+          </tr>';
+        }
+    }
+	echo '</tbody>
+    </table>';
+	
+}
 
 	// ============BOTCHAT============
 	public function countPNNVL() {
@@ -1907,103 +2105,118 @@ private function mapMaNguyenVatLieuToTenKho($maNguyenVatLieu) {
 	}
 	
 	public function countDonhang() {
-		$result = mysql_query("SELECT * FROM donhang", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM donhang");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countNVL(){
-		$result= mysql_query("SELECT * FROM nguyenvatlieu", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM nguyenvatlieu");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countNVLton(){
-		$result= mysql_query("SELECT SUM(SoLuongTonnvl) AS total FROM nguyenvatlieu", $this->connect());
-		$row = mysql_fetch_row($result);
+		$result = mysqli_query($this->connect(), "SELECT SUM(SoLuongTonnvl) AS total FROM nguyenvatlieu");
+		$row = mysqli_fetch_row($result);
 		$total = $row[0];
 		return $total;
 	}
 	
 	public function countTP(){
-		$result= mysql_query("SELECT * FROM thanhpham", $this->connect());
-		$i = mysql_num_rows($result);
-		return $i;
-	}
-	public function countTPton(){
-		$result= mysql_query("SELECT SUM(soLuongTon) AS total FROM thanhpham", $this->connect());
-		$row = mysql_fetch_row($result);
-		$total = $row[0];
-		return $total;
-	}
-	public function countKho(){
-		$result= mysql_query("SELECT * FROM kho", $this->connect());
-		$i = mysql_num_rows($result);
-		return $i;
-	}
-	public function countKhonvl(){
-		$result= mysql_query("SELECT * FROM kho WHERE maKho LIKE 'KNVL%'", $this->connect());
-		$i = mysql_num_rows($result);
-		return $i;
-	}
-	public function countKhotp(){
-		$result= mysql_query("SELECT * FROM kho WHERE maKho LIKE 'KTP%'", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM thanhpham");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
 	
-	//giám đốc
-	//nvl
+	public function countTPton(){
+		$result = mysqli_query($this->connect(), "SELECT SUM(soLuongTon) AS total FROM thanhpham");
+		$row = mysqli_fetch_row($result);
+		$total = $row[0];
+		return $total;
+	}
+	
+	public function countKho(){
+		$result = mysqli_query($this->connect(), "SELECT * FROM kho");
+		$i = mysqli_num_rows($result);
+		return $i;
+	}
+	
+	public function countKhonvl(){
+		$result = mysqli_query($this->connect(), "SELECT * FROM kho WHERE maKho LIKE 'KNVL%'");
+		$i = mysqli_num_rows($result);
+		return $i;
+	}
+	
+	public function countKhotp(){
+		$result = mysqli_query($this->connect(), "SELECT * FROM kho WHERE maKho LIKE 'KTP%'");
+		$i = mysqli_num_rows($result);
+		return $i;
+	}
+	
+	// Giám đốc
+	// NVL
 	public function countphieuDuyet(){
-		$result= mysql_query("SELECT * FROM phieuycxnvl WHERE tinhTrang LIKE 'Duyệt%'", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuycxnvl WHERE tinhTrang LIKE 'Duyệt%'");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countphieuTC(){
-		$result= mysql_query("SELECT * FROM phieuycxnvl WHERE tinhTrang LIKE 'Từ chối%'", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuycxnvl WHERE tinhTrang LIKE 'Từ chối%'");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countphieuCD(){
-		$result= mysql_query("SELECT * FROM phieuycxnvl WHERE tinhTrang LIKE 'Chưa Duyệt%'", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuycxnvl WHERE tinhTrang LIKE 'Chưa Duyệt%'");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
-	//tp
+	
+	// TP
 	public function countphieuDuyetTP(){
-		$result= mysql_query("SELECT * FROM phieuycntp WHERE tinhTrang LIKE 'Duyệt%'", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuycntp WHERE tinhTrang LIKE 'Duyệt%'");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countphieuTCTP(){
-		$result= mysql_query("SELECT * FROM phieuycntp WHERE tinhTrang LIKE 'Từ chối%'", $this->connect());
-		$i = mysql_num_rows($result);
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuycntp WHERE tinhTrang LIKE 'Từ chối%'");
+		$i = mysqli_num_rows($result);
 		return $i;
 	}
+	
 	public function countphieuCDTP(){
-	$result= mysql_query("SELECT * FROM phieuycntp WHERE tinhTrang LIKE 'Chưa Duyệt%'", $this->connect());
-	$i = mysql_num_rows($result);
-	return $i;
-}
-public function countKHSX(){
-	$result= mysql_query("SELECT * FROM kehoachsx", $this->connect());
-	$i = mysql_num_rows($result);
-	return $i;
-}
-public function countBBKK(){
-	$result= mysql_query("SELECT * FROM bienbankiemke", $this->connect());
-	$i = mysql_num_rows($result);
-	return $i;
-}
-public function countYCNTP() {
-	$result = mysql_query("SELECT * FROM phieuycntp", $this->connect());
-	$i = mysql_num_rows($result);
-	return $i;
-}
-public function countYCXNVL() {
-	$result = mysql_query("SELECT * FROM phieuycxnvl", $this->connect());
-	$i = mysql_num_rows($result);
-	return $i;
-}
-
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuycntp WHERE tinhTrang LIKE 'Chưa Duyệt%'");
+		$i = mysqli_num_rows($result);
+		return $i;
+	}
+	
+	public function countKHSX(){
+		$result = mysqli_query($this->connect(), "SELECT * FROM kehoachsx");
+		$i = mysqli_num_rows($result);
+		return $i;
+	}
+	
+	public function countBBKK(){
+		$result = mysqli_query($this->connect(), "SELECT * FROM bienbankiemke");
+		$i = mysqli_num_rows($result);
+		return $i;
+	}
+	
+	public function countYCNTP() {
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuycntp");
+		$i = mysqli_num_rows($result);
+		return $i;
+	}
+	
+	public function countYCXNVL() {
+		$result = mysqli_query($this->connect(), "SELECT * FROM phieuycxnvl");
+		$i = mysqli_num_rows($result);
+		return $i;
+	}
+	
 
 
 }
