@@ -57,7 +57,7 @@
                        <li class="chat" style="margin-top: 8px;">
                     <i class="ti-comment" style="color: white; font-size: large;" onclick="toggleChatbox()"></i>                        
                         <span id="ref">
-                            <div class="chatbox">
+                            <div class="chatbox" id="chatbox">
                                 <div class="chatbox__header">
                                     <h1>Chat support!</h1>
                                 </div>
@@ -81,23 +81,23 @@
                                         <?php if ($action == 'text') { ?>
                                             <div class="content-chat-me">
                                                 <p><?php echo $user; ?></p>
+                                            </div>
                                                 <span class="time-right"><?php echo $date; ?></span>
-                                                </div>
-                                                <div class="content-chat">
-                                                <p><?php echo $chatbot; ?></p>
+                                            <div class="content-chat">
+                                                <p><?php echo $chatbot; ?></p>    
+                                            </div>
                                                 <span class="time-left"><?php echo $date; ?></span>
-                                                </div>
                                             
                                         <?php } else { ?>
                                 
                                             <div class="content-chat-me">
-                                                <p><?php echo $user; ?></p>
+                                                <p><?php echo $user; ?></p>                        
+                                            </div>
                                                 <span class="time-right"><?php echo $date; ?></span>
-                                                </div>
-                                                <div class="content-chat">
+                                            <div class="content-chat">
                                                 <p><?php echo eval($chatbot); ?></p>
+                                             </div>
                                                 <span class="time-left"><?php echo $date; ?></span>
-                                                </div>
                                         <?php } ?>
                                     <?php } ?>
                                 </div>
@@ -189,6 +189,13 @@
     overflow-y: auto;
     z-index: 9999;
     transition: all 0.3s ease;
+    animation: slideInOut 1s ease-in-out forwards; 
+}
+.show-chatbox
+{
+    opacity: 0; 
+    display: none; 
+    animation: fadeInOut 0.6s ease-in-out; 
 }
 
 .chatbox__header {
@@ -276,11 +283,7 @@
     width: 70%;
     min-height: 5vh;
 }
-.show-chatbox {
-    display: block;
-    /* Thêm hiệu ứng transition */
-    transition: all 0.3s ease;
-}
+
 
 .btn-send {
     width: 20%;
@@ -293,6 +296,18 @@
 
 .text-message:focus {
     outline: none;
+}
+.time-right
+{
+    float: right;
+    color: #aaa;
+    margin-left: 430px;
+    margin-top: 5px;
+}
+.time-left
+{
+    float: left;
+    color: #999;
 }
 
 
@@ -352,24 +367,15 @@ function delete_message() {
 
 
 
+
 // Hàm để ẩn hoặc hiển thị khung chat khi bấm vào biểu tượng robot
-function toggleChatbox() {
-    const chatbox = document.querySelector(".chatbox");
-    const isChatboxVisible = chatbox.classList.contains("show-chatbox");
-    if (isChatboxVisible) {
-        chatbox.classList.remove("show-chatbox");
-    } else {
-        chatbox.classList.add("show-chatbox");
-    }
-}
-// Hàm để ẩn hoặc hiển thị khung chat khi bấm vào biểu tượng robot
-function toggleChatbox() {
-    const chatbox = document.querySelector(".chatbox");
-    const isChatboxVisible = chatbox.style.display === "block";
-    if (isChatboxVisible) {
-        chatbox.style.display = "none";
-    } else {
-        chatbox.style.display = "block";
-    }
-}
+function toggleChatbox() { 
+        const element = document .getElementById('chatbox'); 
+        element.classList.toggle('visible'); 
+        if(element.style.display == 'none') {
+            element.style.display = 'block';
+        } else {
+            element.style.display = 'none';
+        }
+    } 
 </script>
