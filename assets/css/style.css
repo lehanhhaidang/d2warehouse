@@ -7588,7 +7588,7 @@ table tbody .border-bottom-info td {
     width: 235px;
     padding: 10px;
     margin-left: 5px;
-    margin-top:10px;
+    margin-top: 10px;
 }
 
 @media only screen and (max-width: 992px) {
@@ -16492,6 +16492,7 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
 /* =======================================
       Authentication-page css start
  ========================================= */
+
 .common-img-bg {
     background: linear-gradient(45deg, #4099ff, #73b4ff);
     height: 100%;
@@ -16521,7 +16522,6 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
     border-radius: 30px;
     position: relative;
     display: block;
-
 }
 
 .login-card h1 {
@@ -21513,13 +21513,12 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
     height: 250px;
 }
 
-
 .materials-list a img,
 .finishedproduct-list a img {
     width: 185px;
     height: 190px;
     box-shadow: 5px 8px 8px 3px #888888;
-    margin-right:5px;
+    margin-right: 5px;
 }
 
 .kho {
@@ -21527,6 +21526,7 @@ table.footable-paging-center>tfoot>tr.footable-paging>td {
     flex-wrap: wrap;
     justify-content: center;
 }
+
 .kho-sub {
     width: 500px;
     border-radius: 20px;
@@ -21551,29 +21551,39 @@ a .kho-sub {
 a {
     text-decoration: none;
 }
+
+
 /*hover*/
-.finishedproduct-list :hover img{
+
+.finishedproduct-list :hover img {
     transform: scale(1.2);
 }
-.materials-list :hover img{
+
+.materials-list :hover img {
     transform: scale(1.2);
 }
+
+
 /*footer*/
-.footer{
-    margin-left:-52px;
+
+.footer {
+    margin-left: -52px;
     height: 40px;
 }
-.footer p{
+
+.footer p {
     padding-top: 7px;
 }
+
+
 /*table nvl*/
 
-.propose-list{
+.propose-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-
 }
+
 .donhang tr th,
 .listproduct tr th,
 .bieumau tr th,
@@ -21581,25 +21591,28 @@ a {
 .propose-list-gd tr th,
 .listpropose tr th,
 .tbldexuat tr th,
-.tblnnvl tr th{
+.tblnnvl tr th {
     background-color: #007888;
     color: white;
     text-align: center;
 }
+
 .listproduct,
 .bieumau,
 .table-sm,
 .listpropose,
 .donhang,
-.tbldexuat{
+.tbldexuat {
     background-color: #DDDDDD;
     text-align: center;
 }
-.formnnvl{
+
+.formnnvl {
     display: block;
     justify-content: center;
-    margin-left:350px;
+    margin-left: 350px;
 }
-#dangnhap{
+
+#dangnhap {
     background-color: red;
 }

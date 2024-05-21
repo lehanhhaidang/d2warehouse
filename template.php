@@ -158,6 +158,10 @@ var_dump($admin_role);
                                         }elseif($views=="chatbot_manage"){
                                             include ("views/admin_view/chatbot_manage_view.php");
                                         }
+                                        // ====================Chat app====================
+                                        elseif($views=="chatapp"){
+                                            include ("views/chatapp_view.php");
+                                        }
                                     }
                                 ?>
                                 <?php include_once ("includes/footer.php") ?>

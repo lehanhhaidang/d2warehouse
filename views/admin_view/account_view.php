@@ -1,9 +1,14 @@
+
 <?php 
+session_start();
 if(isset($_REQUEST['id']))
 {
     $id = $_REQUEST['id'];
 }
+
+
 ?>
+
 <form action="" method="post">
 <div class="button">
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm tài khoản</button>

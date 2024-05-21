@@ -24,6 +24,7 @@
 
         <!-- Container-fluid starts -->
         <div class="container">
+           
             <div class="row">
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
@@ -75,17 +76,6 @@
                                 </div>
                                 <hr/>
 
-                                <p class="text-dark h5">saifulislamsapon@gmail.com</p>
-                                <p class="text-dark">Password: 1234</p>
-                                <div class="row">
-                                    <div class="col-md-10">
-                                        <p class="text-inverse text-left m-b-0">Thank you and enjoy our website.</p>
-                                        <p class="text-inverse text-left"><b>Your Authentication Team</b></p>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <img src="assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
-                                    </div>
-                                </div>
 
                             </div>
                         </form>
