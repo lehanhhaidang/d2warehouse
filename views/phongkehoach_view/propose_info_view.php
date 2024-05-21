@@ -9,8 +9,8 @@ if (isset($_REQUEST['idDX'])) {
 
 <div class="warehouse">
     <div class="warehouse-information">
-        <p><b>Tên người giao:</b> <?php echo $p->pickColumn("select tenNguoiGiao from bieumaunhap
-        where maBMNhap = '$idBMN' limit 1"); ?></p>
+        <p><b>Tên đề xuất:</b> <?php echo $p->pickColumn("select tenDeXuat from dexuat
+        where maDeXuat = '$idDX' limit 1"); ?></p>
         <p><b>Ngày nhập:</b> <?php echo $p->pickColumn("select ngayNhap from bieumaunhap
         where maBMNhap = '$idBMN' limit 1"); ?></p>
         <p><b>Kho nhập:</b> <?php echo $p->pickColumn("SELECT kho.tenKho

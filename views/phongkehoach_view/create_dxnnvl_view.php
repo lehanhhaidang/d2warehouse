@@ -75,6 +75,7 @@ if(isset($_POST['gui'])) {
 
       if($soLuong>0)
       {
+          
           if($result_insert = mysqli_query($link, "INSERT INTO dexuat (maDeXuat, tenDeXuat, maNVL, soLuong, trangThai)
           VALUES ('$next_maDeXuat', '$tenDeXuat', '$maNguyenVatLieu', '$soLuong', 'Chờ duyệt')")) {
               echo '<script>';
