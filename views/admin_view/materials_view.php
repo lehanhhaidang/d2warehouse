@@ -82,18 +82,18 @@ if(isset($_REQUEST['id']))
                 $dvt = $_REQUEST['dvt'];
                 $rowCounted = $p->countRow("SELECT * FROM nguyenvatlieu");
                 $maNVL = "NVL" . str_pad($rowCounted + 1, 2, "0", STR_PAD_LEFT);
-                // Insert vào cơ sở dữ liệu
-                $name = $_FILES['hinh_dai_dien']['name']; 
-                $query = "INSERT INTO nguyenvatlieu (maNguyenVatLieu, tenNguyenVatLieu, donViTinh, anh) VALUES ('$maNVL', '$ten_nvl', '$dvt', '$name')"; 
-                        if ($p->InsertUpdate($query) == 1) {
-                            echo '<script>';
-                            echo 'window.onload = function() { $("#successModal").modal("show"); };';
-                            echo '</script>';
-                        } else {
-                            echo "Thêm không thành công";
-                            echo $name;
-                        }
-            
+                
+                $hinhdaidien_name = $_FILES['hinh_dai_dien']['name'];
+                
+                $query = "INSERT INTO nguyenvatlieu (maNguyenVatLieu,tenNguyenVatLieu,donViTinh,anh) VALUES ('$maNVL','$ten_nvl','$dvt','$hinhdaidien_name')";
+        
+                if (mysqli_query($p->connect(), $query)) {
+                    move_uploaded_file($_FILES['hinh_dai_dien']['tmp_name'], 'uploads/' . $hinhdaidien_name);
+                    echo '<script>';
+                    echo 'window.onload = function() { $("#successModal").modal("show"); };';
+                    echo '</script>';
+                    echo $hinhdaidien_path;
+                }
                 break;
             }
             

@@ -5,7 +5,7 @@ if(isset($_REQUEST['id']))
 }
 ?>
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
 <div class="button">
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm thành phẩm</button>
 </div>
@@ -52,7 +52,7 @@ if(isset($_REQUEST['id']))
                         <input type="text" class="form-control" id="dvt" name="dvt">
                     </div>
                     <div class="form-group">
-                        <label for="hinh_dai_dien">Tải lên hình đại diện:</label>
+                        <label for="lbl_hinh_dai_dien">Tải lên hình đại diện:</label>
                         <input type="file" class="form-control-file" id="hinh_dai_dien" name="hinh_dai_dien">
                     </div>
                 </div>
@@ -81,12 +81,14 @@ if(isset($_REQUEST['id']))
                 $ten_tp = $_REQUEST['ten_tp'];
                 $dvt = $_REQUEST['dvt'];
                 $rowCounted = $p->countRow("SELECT * FROM thanhpham");
-                $maNVL = "TP" . str_pad($rowCounted + 1, 2, "0", STR_PAD_LEFT);
+                $maTP = "TP" . str_pad($rowCounted + 1, 2, "0", STR_PAD_LEFT);
                 
-                $hinhdaidien_name = $_FILES['hinhdaidien']['name'];
-                $query = "INSERT INTO thanhpham (maThanhPham,tenThanhPham,donViTinh,anh) VALUES ('$maNVL','$ten_nvl','$dvt','$hinhdaidien_name')";
+                $hinhdaidien_name = $_FILES['hinh_dai_dien']['name'];
+                
+                $query = "INSERT INTO thanhpham (maThanhPham,tenThanhPham,donViTinh,anh) VALUES ('$maTP','$ten_tp','$dvt','$hinhdaidien_name')";
         
                 if (mysqli_query($p->connect(), $query)) {
+                    move_uploaded_file($_FILES['hinh_dai_dien']['tmp_name'], 'uploads/' . $hinhdaidien_name);
                     echo '<script>';
                     echo 'window.onload = function() { $("#successModal").modal("show"); };';
                     echo '</script>';

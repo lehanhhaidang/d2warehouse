@@ -9,7 +9,9 @@
         $log_msg = $obj->admin_login($_POST);
     }
     session_start();
-    if(isset($_SESSION['admin_id'])){
+    if(isset($_SESSION['admin_id']) && $_SESSION['role']== "giamdoc"){
+        header("location:dashboard_gd.php");
+    }elseif(isset($_SESSION['admin_id']) && $_SESSION['role']== "nhanvienkho"){
         header("location:dashboard.php");
     }
 ?>
