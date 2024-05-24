@@ -13,7 +13,11 @@ $p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl
 <form action="" method="post">
 <div class="text-center">
     <button style="margin-right:50px;" type="button" class="btn btn-success" onclick="window.history.back()">Trở lại</button>
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Điều phối</button>
+    <?php
+    if($p->pickColumn("SELECT trangThai FROM dexuat WHERE maDeXuat = '$idDX'") == "Đã duyệt") {
+        echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Điều phối</button>';
+    }
+    ?>
 </div>
     <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -74,6 +78,10 @@ if(isset($_POST['button'])) {
                     $donViTinh = $p->pickColumn("SELECT donViTinh FROM nguyenvatlieu WHERE maNguyenVatLieu = '{$manvl['maNguyenVatLieu']}'");
                     $soLuong = $p->pickColumn("SELECT soLuong FROM dexuat WHERE maNVL = '{$manvl['maNguyenVatLieu']}'");
                     $p->InsertUpdate("INSERT INTO chitietbieumaunhap (maBMNhap, maKho, tenSanPham, donViTinh, soLuong) VALUES ('$maBMNhap', '$maKho', '$tenNguyenVatLieu', '$donViTinh', '$soLuong')");
+                    $p->InsertUpdate("UPDATE dexuat set trangThai = 'Đã điều phối' where maDeXuat = '$idDX'");
+                    echo '<script>';
+                    echo 'window.onload = function() { $("#successModal").modal("show"); };';
+                    echo '</script>';
                 }
                 break;
             }   
@@ -83,4 +91,21 @@ if(isset($_POST['button'])) {
 
 
 
-  
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Thành công!
+      </div>
+      <div class="modal-footer">
+        <a href="dpn.php" class="btn btn-primary">Xác nhận</a>
+      </div>
+    </div>
+  </div>
+</div>

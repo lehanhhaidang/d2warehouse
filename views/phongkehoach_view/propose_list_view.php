@@ -1,10 +1,10 @@
-<h1 algin="center"class="text-center">DANH SÁCH BIỂU MẪU NHẬP</h1>
+<h1 algin="center"class="text-center">DANH ĐỀ XUẤT</h1>
 <div class="propose-list">
-<table class="table-sm table-border table-hover table-success">
+<table class="table table-bordered table-hover">
         <thead>
             <tr>
                 <th>STT</th>
-                <th>Mã đề xuât</th>
+                <th>Mã đề xuất</th>
                 <th>Tên đề xuất</th>
                 <th>Trạng thái</th>
                 <th>Action</th>

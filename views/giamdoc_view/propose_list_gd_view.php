@@ -1,6 +1,6 @@
 <h1 algin="center" class="text-center">DANH SÁCH ĐỀ XUẤT</h1>
 <div class="propose-list-gd">
-<table class="table-sm table-border table-hover mx-auto">
+<table class="table table-bordered table-hover mx-auto">
         <thead>
             <tr>
                 <th>STT</th>

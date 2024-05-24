@@ -68,7 +68,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-5 col-xs-12 forgot-phone text-right">
-                                        <a href="admin_password_recover.php" class="text-right f-w-600 text-inverse"> Quên mật khẩu?</a>
+                                        <a href="password_recover.php" class="text-right f-w-600 text-inverse"> Quên mật khẩu?</a>
                                     </div>  
                                 </div>
                                 <div class="row m-t-30">

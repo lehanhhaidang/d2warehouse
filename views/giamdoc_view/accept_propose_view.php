@@ -7,12 +7,14 @@ if (isset($_REQUEST['idDX'])) {
 <form action="" method="post">
 <h1 class="text-center text-primary">THÔNG TIN ĐỀ XUẤT</h1>
 <h2 class="text-center">Mã đề xuất: <?php echo $idDX ?></h2>
-<h5 >Ghi chú: </h5> <p>Dựa vào thông tin trong kho, phòng kế hoạch đề xuất kế hoạch nhập kho vào ngày $đoạn này select ngày
-    với danh sách nguyên vật liệu cần thiết như sau:
+
+<p><strong>Mô tả:</strong>
+Dựa vào thông tin trong kho, phòng kế hoạch đề xuất kế hoạch nhập kho với danh sách nguyên vật liệu cần thiết như sau:
+</p>
 </p>
 
     <div class="listpropose">
-        <table class="table table-border mx-auto text-center table-hover">
+        <table class="table table-bordered mx-auto text-center table-hover">
             <thead>
                 <tr>
                     <th class="text-center">STT</th>
@@ -44,6 +46,9 @@ if (isset($_REQUEST['idDX'])) {
                 $link= $p->connect();
                 $sql = "UPDATE dexuat set trangThai ='Đã duyệt' where maDeXuat ='$idDX'";
                 mysqli_query($link,$sql);
+                echo '<script>';
+                echo 'window.onload = function() { $("#successModal").modal("show"); };';
+                echo '</script>';
 
             
                 break;
@@ -53,7 +58,28 @@ if (isset($_REQUEST['idDX'])) {
                 $link= $p->connect();
                 $sql = "UPDATE dexuat set trangThai ='Đã từ chối' where maDeXuat ='$idDX'";
                 mysqli_query($link,$sql);
+                echo '<script>';
+                echo 'window.onload = function() { $("#successModal").modal("show"); };';
+                echo '</script>';
                 break;
             }
     }
 ?>
+<div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Thành công!
+      </div>
+      <div class="modal-footer">
+        <a href="propose_list_gd.php" class="btn btn-primary">Xác nhận</a>
+      </div>
+    </div>
+  </div>
+</div>

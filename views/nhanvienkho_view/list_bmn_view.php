@@ -1,6 +1,6 @@
 <h1 algin="center" class="text-center">DANH SÁCH BIỂU MẪU NHẬP</h1>
 <div class="bieumau">
-<table class="table table-border table-hover">
+<table class="table table-bordered table-hover">
         <thead>
 
        

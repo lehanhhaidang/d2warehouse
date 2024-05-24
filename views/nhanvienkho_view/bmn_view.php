@@ -22,7 +22,7 @@ if (isset($_REQUEST['idBMN'])) {
     </div>
 
     <div class="listproduct">
-        <table class="table table-border table-hover">
+        <table class="table table-bordered table-hover">
             <thead>
                 <tr>
                     <th>STT</th>
@@ -64,7 +64,7 @@ if (strpos($tenKho, 'Kho Nguyên Vật Liệu') !== false) {
     <div style="text-align: center; margin-top: 20px;">
         <!-- Nút trở lại luôn chuyển hướng về trang trước -->
         <button style="margin-right:50px;" type="button" class="btn btn-success" onclick="window.history.back()">Trở lại</button>
-        <?php if (isset($redirectLink)): ?>
+        <?php if (isset($redirectLink)&&$p->pickColumn("SELECT trangThai FROM bieumaunhap WHERE maBMNhap = '$idBMN'") != "Đã lập phiếu"): ?>
             <!-- Nút submit sẽ chuyển hướng tùy thuộc vào điều kiện -->
             <button class="btn btn-primary" type="submit" formaction="<?php echo $redirectLink; ?>">Lập phiếu</button>
         <?php endif; ?>

@@ -8,7 +8,11 @@ $p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl
 <form action="" method="post">
 <div class="text-center">
     <button style="margin-right:50px;" type="button" class="btn btn-warning" onclick="window.history.back()">Trở lại</button>
-    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Điều phối</button>
+    <?php
+    if($p->pickColumn("SELECT trangThai FROM dexuat WHERE maDeXuat = '$idDX'") == "Đã duyệt") {
+        echo '<button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Điều phối</button>';
+    }
+    ?>
 </div>
     <div class="modal fade" id="myModal" role="dialog">
             <div class="modal-dialog">
@@ -55,20 +59,23 @@ $p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl
                     $maBMX = "BMX" . str_pad($rowCounted + 1, 2, "0", STR_PAD_LEFT);
                     $tenNguoiNhan = $_REQUEST['tennguoinhan'];
                     $ngayXuat = $_REQUEST['date'];
-                    $insert = $p->InsertUpdate("INSERT INTO bieumauxuat (maBMXuat, ngayXuat,loaiXuat,tenNguoiNhan,trangThai) VALUES ('$maBMX', '$ngayXuat','Nguyên vật liệu','$tenNguoiNhan','Chưa lập phiếu')");
+                    $insert = $p->InsertUpdate("INSERT INTO bieumauxuat (maBMXuat,maDeXuat, ngayXuat,loaiXuat,tenNguoiNhan,trangThai) VALUES ('$maBMX','$idDX', '$ngayXuat','Nguyên vật liệu','$tenNguoiNhan','Chưa lập phiếu')");
                     if($insert)
                     {      
                         // Thêm mã bản mẫu xuất mới vào các mã lô đã chọn
                         if(isset($_POST['maLoNVL'])) {
                             $maLoNVLs = $_POST['maLoNVL'];
-                            var_dump($_POST['maLoNVL']);
                             foreach($maLoNVLs as $maLoNVL) {
                                 $updateBMX = "UPDATE longuyenvatlieu SET maBMXuat = '$maBMX' WHERE maLoNVL = '$maLoNVL'";
                                 $p->InsertUpdate($updateBMX);
+                                $p->InsertUpdate("UPDATE dexuat set trangThai = 'Đã điều phối' where maDeXuat = '$idDX'");
+
 
                             }
                         }
-                        echo '<script>alert("Lập phiếu thành công")</script>';
+                        echo '<script>';
+                        echo 'window.onload = function() { $("#successModal").modal("show"); };';
+                        echo '</script>';
     
                     }
                     else
@@ -81,4 +88,21 @@ $p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl
     }
     
 ?>
-  
+  <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Thành công!
+      </div>
+      <div class="modal-footer">
+        <a href="dpx.php" class="btn btn-primary">Xác nhận</a>
+      </div>
+    </div>
+  </div>
+</div>

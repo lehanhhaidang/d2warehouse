@@ -15,7 +15,7 @@ if (isset($_REQUEST['idBMN'])) {
         $rowCounted = $p->countRow("select * from phieunnvl");
         $maPhieuNNVL = "PNNVL" . str_pad($rowCounted + 1, 2, "0", STR_PAD_LEFT);
         ?>
-        <div class=formnnvl>
+
         <h4 class="codeForm">Mã phiếu:<?php echo $maPhieuNNVL ?></h4>
         <div class="input-container col-md-5">
           <label class="labelInput" for="">Tên người giao</label>
@@ -45,11 +45,11 @@ if (isset($_REQUEST['idBMN'])) {
           <label class="labelInput" for="">Ngày lập phiếu</label>
           <input type="date" name="ngaylap" class="input form-control" required />
         </div>
-      </div>
+
         <br>
         <br>
         <div class="table" id="table">
-          <table class=" tblnnvl table table-border">
+          <table class=" tblnnvl table table-bordered table-hover">
             <tr>
               <th class="custom-cell">STT</th>
               <th class="custom-cell">Tên</th>
@@ -88,9 +88,9 @@ if (isset($_REQUEST['idBMN'])) {
 
           </table>
         </div>
-        <div class="text-center">
-          <input type="submit" class="buttonCancel btn btn-warning" name="button" id="button" value="Quay lại" onclick="history.back()">
-          <input type="submit" class="buttonCreate btn btn-success" name="button" id="button" value="Lập phiếu">
+        <div class="btn justify-content-center d-block">
+          <input type="submit" style="margin-right:50px;" class="buttonCancel btn btn-danger" name="button" id="button" value="Quay lại" onclick="history.back()">
+          <input type="submit" class="buttonCreate btn btn-primary" name="button" id="button" value="Lập phiếu">
 
         </div>
       </div>
@@ -136,8 +136,9 @@ if (isset($_REQUEST['idBMN'])) {
                         $p->InsertUpdate("Update bieumaunhap set trangThai = 'Đã lập phiếu' where maBMNhap = '$idBMN' ");
                         if($p->InsertUpdate("UPDATE nguyenvatlieu SET soLuongTonnvl = $sltMoi WHERE tenNguyenVatLieu = '$tenSP'")== 1)
                         {
-                          echo '<script>alert("Lập phiếu thành công")</script>';
-                          echo '<script> window.location="../d2warehouse/list_bmn.php" </script>';
+                          echo '<script>';
+                          echo 'window.onload = function() { $("#successModal").modal("show"); };';
+                          echo '</script>';
                         }
                         else
                         {
@@ -176,3 +177,21 @@ if (isset($_REQUEST['idBMN'])) {
       ?>
 
   </form>
+  <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Thành công!
+      </div>
+      <div class="modal-footer">
+        <a href="list_bmn.php" class="btn btn-primary">Xác nhận</a>
+      </div>
+    </div>
+  </div>
+</div>

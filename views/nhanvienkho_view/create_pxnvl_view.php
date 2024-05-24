@@ -48,7 +48,8 @@ if (isset($_REQUEST['idBMX'])) {
         <br>
         <br>
         <div class="table" id="table">
-          <table class="table table-bordered">
+          <table class="table table-bordered table-hover">
+            <thead>
             <tr>
               <th class="custom-cell">STT</th>
               <th class="custom-cell">Tên</th>
@@ -57,6 +58,7 @@ if (isset($_REQUEST['idBMX'])) {
               <th class="custom-cell">NSX</th>
               <th class="custom-cell">NHH</th>
             </tr>
+            </thead>
             <?php
             $link = $p->connect();
             $sql = "SELECT
@@ -95,9 +97,9 @@ if (isset($_REQUEST['idBMX'])) {
 
           </table>
         </div>
-        <div class="btn">
-          <input type="submit" class="buttonCancel" name="button" id="button" value="Quay lại" onclick="history.back()">
-          <input type="submit" class="buttonCreate" name="button" id="button" value="Lập phiếu">
+        <div class="btn justify-content-center d-block">
+          <input type="submit" style="margin-right:50px;" class="buttonCancel btn btn-danger" name="button" id="button" value="Quay lại" onclick="history.back()">
+          <input type="submit" class="buttonCreate btn btn-primary" name="button" id="button" value="Lập phiếu">
 
         </div>
       </div>
@@ -148,8 +150,9 @@ if (isset($_REQUEST['idBMX'])) {
                       {
                         $p->InsertUpdate("Update bieumauxuat set trangThai = 'Đã lập phiếu' where maBMXuat = '$idBMX' ");
                         $p->InsertUpdate("UPDATE longuyenvatlieu set maPXNVL = '$maPhieuXNVL' where maBMXuat = '$idBMX'");
-                        echo '<script>alert("Lập phiếu thành công")</script>';
-                        echo '<script> window.location="../NHANVIENKHO/TrangChuNVK.php" </script>';
+                        echo '<script>';
+                        echo 'window.onload = function() { $("#successModal").modal("show"); };';
+                        echo '</script>';
                       }
                       else
                       {
@@ -179,3 +182,22 @@ if (isset($_REQUEST['idBMX'])) {
   </main>
 
   </form>
+
+  <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="successModalLabel">Thông báo</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Thành công!
+      </div>
+      <div class="modal-footer">
+        <a href="list_bmx.php" class="btn btn-primary">Xác nhận</a>
+      </div>
+    </div>
+  </div>
+</div>

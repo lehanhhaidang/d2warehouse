@@ -1560,9 +1560,14 @@ public function DSLNVL($sql)
             echo '<tr>
             <td>' . $count++ . '</td>
             <td>' . $maDeXuat . '</td>
-            <td>' . $tenDeXuat . '</td>
-            <td>' . $trangThai . '</td>
-            <td><a href="' . $url . '" class="btn btn-info ml-auto mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
+            <td>' . $tenDeXuat . '</td>';
+            if ($trangThai == "Chờ duyệt") {
+                echo '<td class="badge badge-warning d-flex justify-content-center mt-3">' . $trangThai . '</td>';
+            } else {
+                echo '<td class="badge badge-primary d-flex justify-content-center mt-3">' . $trangThai . '</td>';
+            }
+            echo '<td><a href="' . $url . '" class="btn btn-info ml-auto justify-content-center mr-auto">Xem chi tiết</a></td> <!-- Nút Xem chi tiết -->
+			
             </tr>';
         }
     }
