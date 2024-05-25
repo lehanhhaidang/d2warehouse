@@ -4,7 +4,7 @@ class Chat{
     private $host  = 'localhost';
     private $user  = 'root';
     private $password   = "";
-    private $database  = "chatapp";      
+    private $database  = "d2warehouse";      
     private $chatTable = 'chat';
 	private $chatUsersTable = 'chat_users';
 	private $chatLoginDetailsTable = 'chat_login_details';
