@@ -82,7 +82,9 @@ include("includes/head.php")
                                             // =================== Dashboard and General Views ===================
                                             if ($views == "dashboard") {
                                                 include('views/dashborad_view.php');
-                                            } elseif ($views == "list_tp") {
+                                            } elseif ($views =="chatapp"){
+                                                include("views/chatapp_view.php");
+                                            }elseif ($views == "list_tp") {
                                                 include("views/list_tp_view.php");
                                             } elseif ($views == "info_tp") {
                                                 include("views/info_tp_view.php");

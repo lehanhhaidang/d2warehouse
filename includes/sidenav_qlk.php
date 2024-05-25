@@ -97,6 +97,13 @@
 
                                     </ul>
                                 </li>
+                                <li class="pcoded-hasmenu">
+                                    <a href="chatapp.php">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Trò chuyện</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
 
                               
                                 <!-- <li class="pcoded-hasmenu">
