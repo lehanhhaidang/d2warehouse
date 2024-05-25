@@ -5,7 +5,7 @@ if(isset($_REQUEST['id']))
 }
 ?>
 
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
 <div class="button">
     <button type="button" class="btn btn-info" data-toggle="modal" data-target="#myModal">Thêm nguyên vật liệu</button>
 </div>
@@ -92,7 +92,6 @@ if(isset($_REQUEST['id']))
                     echo '<script>';
                     echo 'window.onload = function() { $("#successModal").modal("show"); };';
                     echo '</script>';
-                    echo $hinhdaidien_path;
                 }
                 break;
             }
