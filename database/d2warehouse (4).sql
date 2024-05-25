@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 21, 2024 at 10:06 PM
+-- Generation Time: May 25, 2024 at 05:29 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
@@ -86,7 +86,10 @@ INSERT INTO `bieumaunhap` (`maBMNhap`, `maDeXuat`, `tenNguoiGiao`, `ngayNhap`, `
 ('BMN01', 'DX02', 'Lê Hạnh Hải Đăng', '2024-05-06', 'Nguyên vật liệu', 'Đã lập phiếu'),
 ('BMN02', 'DX14', 'Lê Hạnh Hải Đăng', '2024-05-06', 'Nguyên vật liệu', 'Đã lập phiếu'),
 ('BMN03', 'DX15', 'Lê Hạnh Hải Đăng', '2024-05-06', 'Nguyên vật liệu', 'Đã lập phiếu'),
-('BMN04', 'DX16', 'Lê Hạnh Hải Đăng', '2024-05-06', 'Nguyên vật liệu', 'Đã lập phiếu');
+('BMN04', 'DX16', 'Lê Hạnh Hải Đăng', '2024-05-06', 'Nguyên vật liệu', 'Đã lập phiếu'),
+('BMN05', 'DX02', 'Lê Hạnh Hải Đăng', '2024-05-24', 'Nguyên vật liệu', 'Chưa lập phiếu'),
+('BMN06', 'DX03', 'Lê Hạnh Hải Đăng', '2024-05-24', 'Nguyên vật liệu', 'Đã lập phiếu'),
+('BMN07', 'DX06', 'Lê Hạnh Hải Đăng', '2024-05-24', 'Nguyên vật liệu', 'Chưa lập phiếu');
 
 -- --------------------------------------------------------
 
@@ -112,7 +115,11 @@ CREATE TABLE `bieumauxuat` (
 
 INSERT INTO `bieumauxuat` (`maBMXuat`, `maDeXuat`, `maKho`, `ngayXuat`, `loaiXuat`, `tenNguoiNhan`, `trangThai`) VALUES
 ('BMX01', NULL, NULL, '2024-05-06', 'Nguyên vật liệu', 'hải đăng', 'Đã lập phiếu'),
-('BMX02', NULL, NULL, '2024-05-21', 'Nguyên vật liệu', 'hải đăng', 'Chưa lập phiếu');
+('BMX02', NULL, NULL, '2024-05-21', 'Nguyên vật liệu', 'hải đăng', 'Chưa lập phiếu'),
+('BMX03', NULL, NULL, '2024-05-23', 'Nguyên vật liệu', 'Tiến Huỳnh', 'Chưa lập phiếu'),
+('BMX04', NULL, NULL, '2024-05-24', 'Nguyên vật liệu', '121212', 'Đã lập phiếu'),
+('BMX05', NULL, NULL, '2024-05-24', 'Nguyên vật liệu', '123', 'Chưa lập phiếu'),
+('BMX06', 'DX05', NULL, '2024-05-24', 'Nguyên vật liệu', 'hải đăng', 'Đã lập phiếu');
 
 -- --------------------------------------------------------
 
@@ -203,7 +210,12 @@ INSERT INTO `chitietbieumaunhap` (`maBMNhap`, `maKho`, `tenSanPham`, `donViTinh`
 ('BMN04', 'KNVL03', 'Màu thực vật', 'Chai', 10000, NULL, NULL),
 ('BMN04', 'KNVL04', 'Trứng gà', 'Vỉ', 200, NULL, NULL),
 ('BMN04', 'KNVL05', 'Ớt bột', 'Gói', 300, NULL, NULL),
-('BMN04', 'KNVL06', 'Mứt dâu', 'Hủ', 1000, NULL, NULL);
+('BMN04', 'KNVL06', 'Mứt dâu', 'Hủ', 1000, NULL, NULL),
+('BMN05', 'KNVL01', 'Đường', 'Gói', 1000, NULL, NULL),
+('BMN05', 'KNVL05', 'Ớt bột', 'Gói', 300, NULL, NULL),
+('BMN05', 'KNVL06', 'Bơ đậu phộng', 'Hủ', 150, NULL, NULL),
+('BMN06', 'KNVL01', 'Sữa tươi', 'Gói', 200, NULL, NULL),
+('BMN07', 'KNVL02', 'Muối', 'Gói', 100, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -276,25 +288,25 @@ CREATE TABLE `dexuat` (
 --
 
 INSERT INTO `dexuat` (`maDeXuat`, `tenDeXuat`, `maNVL`, `soLuong`, `trangThai`) VALUES
-('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL01', 200, 'Đã duyệt'),
-('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 1000, 'Đã duyệt'),
-('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL07', 200, 'Đã duyệt'),
-('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL08', 200, 'Đã duyệt'),
-('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 500, 'Đã duyệt'),
-('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL05', 300, 'Đã duyệt'),
-('DX02', 'Đề xuất nhập nguyên vật liệu', 'NVL02', 100, 'Đã duyệt'),
-('DX02', 'Đề xuất nhập nguyên vật liệu', 'NVL10', 300, 'Đã duyệt'),
-('DX02', 'Đề xuất nhập nguyên vật liệu', 'NVL11', 150, 'Đã duyệt'),
-('DX03', 'Đề xuất nhập nguyên vật liệu', 'NVL01', 1111, 'Đã duyệt'),
-('DX04', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL01', 100, 'Đã duyệt'),
-('DX04', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 500, 'Đã duyệt'),
-('DX04', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL07', 100, 'Đã duyệt'),
-('DX04', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL08', 100, 'Đã duyệt'),
-('DX05', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL01', 10, 'Đã duyệt'),
-('DX05', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 50, 'Đã duyệt'),
-('DX05', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL07', 10, 'Đã duyệt'),
-('DX05', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL08', 10, 'Đã duyệt'),
-('DX06', 'Đề xuất nhập nguyên vật liệu', 'NVL04', 100, 'Đã duyệt'),
+('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL01', 200, 'Đã điều phối'),
+('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 1000, 'Đã điều phối'),
+('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL07', 200, 'Đã điều phối'),
+('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL08', 200, 'Đã điều phối'),
+('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 500, 'Đã điều phối'),
+('DX01', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL05', 300, 'Đã điều phối'),
+('DX02', 'Đề xuất nhập nguyên vật liệu', 'NVL02', 100, 'Đã điều phối'),
+('DX02', 'Đề xuất nhập nguyên vật liệu', 'NVL10', 300, 'Đã điều phối'),
+('DX02', 'Đề xuất nhập nguyên vật liệu', 'NVL11', 150, 'Đã điều phối'),
+('DX03', 'Đề xuất nhập nguyên vật liệu', 'NVL01', 1111, 'Đã điều phối'),
+('DX04', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL01', 100, 'Đã điều phối'),
+('DX04', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 500, 'Đã điều phối'),
+('DX04', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL07', 100, 'Đã điều phối'),
+('DX04', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL08', 100, 'Đã điều phối'),
+('DX05', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL01', 10, 'Đã điều phối'),
+('DX05', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 50, 'Đã điều phối'),
+('DX05', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL07', 10, 'Đã điều phối'),
+('DX05', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL08', 10, 'Đã điều phối'),
+('DX06', 'Đề xuất nhập nguyên vật liệu', 'NVL04', 100, 'Đã điều phối'),
 ('DX07', 'Đề xuất nhập nguyên vật liệu', 'NVL12', 1000, 'Đã duyệt'),
 ('DX08', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 500, 'Đã duyệt'),
 ('DX08', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL05', 300, 'Đã duyệt'),
@@ -350,7 +362,12 @@ INSERT INTO `dexuat` (`maDeXuat`, `tenDeXuat`, `maNVL`, `soLuong`, `trangThai`) 
 ('DX24', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL07', 123, 'Đã duyệt'),
 ('DX24', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL08', 123, 'Đã duyệt'),
 ('DX24', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 246, 'Đã duyệt'),
-('DX24', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL04', 123, 'Đã duyệt');
+('DX24', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL04', 123, 'Đã duyệt'),
+('DX25', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL07', 20, 'Đã duyệt'),
+('DX25', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL08', 20, 'Đã duyệt'),
+('DX25', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL02', 100, 'Đã duyệt'),
+('DX25', 'Đề xuất xuất nguyên vật liệu cho sản xuất', 'NVL04', 50, 'Đã duyệt'),
+('DX26', 'Đề xuất nhập nguyên vật liệu', 'NVL01', 1234, 'Chờ duyệt');
 
 -- --------------------------------------------------------
 
@@ -515,30 +532,32 @@ CREATE TABLE `longuyenvatlieu` (
 --
 
 INSERT INTO `longuyenvatlieu` (`maLoNVL`, `maNguyenVatLieu`, `maBMNhap`, `maPNNVL`, `maPXNVL`, `soLuong`, `NSX`, `NHH`, `maKho`, `maBMXuat`, `maPhieuYCXNVL`, `maKeHoachSX`, `ghiChu`) VALUES
-('LNVL01', 'NVL02', 'BMN01', 'PNNVL18', 'PXNVL03', 1000, '2024-05-17', '2024-06-05', 'KNVL01', 'BMX01', NULL, NULL, NULL),
+('LNVL01', 'NVL02', 'BMN01', 'PNNVL18', 'PXNVL07', 1000, '2024-05-17', '2024-06-05', 'KNVL01', 'BMX06', NULL, NULL, NULL),
 ('LNVL02', 'NVL10', 'BMN01', 'PNNVL18', NULL, 300, '2024-05-07', '2024-06-07', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL03', 'NVL11', 'BMN01', 'PNNVL18', NULL, 150, '2024-05-06', '2024-06-09', 'KNVL01', NULL, NULL, NULL, NULL),
-('LNVL04', 'NVL02', 'BMN01', 'PNNVL19', NULL, 1000, '2024-05-28', '2024-06-07', 'KNVL01', 'BMX02', NULL, NULL, NULL),
+('LNVL04', 'NVL02', 'BMN01', 'PNNVL19', NULL, 1000, '2024-05-28', '2024-06-07', 'KNVL01', 'BMX03', NULL, NULL, NULL),
 ('LNVL05', 'NVL10', 'BMN01', 'PNNVL19', NULL, 300, '2024-05-14', '2024-06-06', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL06', 'NVL11', 'BMN01', 'PNNVL19', NULL, 150, '2024-05-07', '2024-06-06', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL07', 'NVL02', 'BMN02', 'PNNVL20', NULL, 1000, '2024-05-06', '2024-05-28', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL08', 'NVL04', 'BMN02', 'PNNVL20', NULL, 100, '2024-05-06', '2024-05-27', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL09', 'NVL06', 'BMN02', 'PNNVL20', NULL, 10000, '2024-05-06', '2024-05-28', 'KNVL01', NULL, NULL, NULL, NULL),
-('LNVL10', 'NVL08', 'BMN02', 'PNNVL20', 'PXNVL03', 200, '2024-05-06', '2024-05-28', 'KNVL01', 'BMX02', NULL, NULL, NULL),
+('LNVL10', 'NVL08', 'BMN02', 'PNNVL20', 'PXNVL07', 200, '2024-05-06', '2024-05-28', 'KNVL01', 'BMX06', NULL, NULL, NULL),
 ('LNVL11', 'NVL10', 'BMN02', 'PNNVL20', NULL, 300, '2024-05-06', '2024-05-28', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL12', 'NVL12', 'BMN02', 'PNNVL20', NULL, 1000, '2024-05-06', '2024-05-28', 'KNVL01', NULL, NULL, NULL, NULL),
-('LNVL13', 'NVL01', 'BMN03', 'PNNVL21', 'PXNVL03', 200, '2024-05-06', '2024-05-30', 'KNVL01', 'BMX01', NULL, NULL, NULL),
+('LNVL13', 'NVL01', 'BMN03', 'PNNVL21', 'PXNVL07', 200, '2024-05-06', '2024-05-30', 'KNVL01', 'BMX06', NULL, NULL, NULL),
 ('LNVL14', 'NVL03', 'BMN03', 'PNNVL21', NULL, 5000, '2024-05-06', '2024-05-30', 'KNVL01', NULL, NULL, NULL, NULL),
-('LNVL15', 'NVL05', 'BMN03', 'PNNVL21', 'PXNVL03', 300, '2024-05-06', '2024-05-30', 'KNVL01', 'BMX01', NULL, NULL, NULL),
-('LNVL16', 'NVL07', 'BMN03', 'PNNVL21', 'PXNVL03', 200, '2024-05-06', '2024-05-30', 'KNVL01', 'BMX02', NULL, NULL, NULL),
+('LNVL15', 'NVL05', 'BMN03', 'PNNVL21', 'PXNVL04', 300, '2024-05-06', '2024-05-30', 'KNVL01', 'BMX04', NULL, NULL, NULL),
+('LNVL16', 'NVL07', 'BMN03', 'PNNVL21', 'PXNVL07', 200, '2024-05-06', '2024-05-30', 'KNVL01', 'BMX06', NULL, NULL, NULL),
 ('LNVL17', 'NVL09', 'BMN03', 'PNNVL21', NULL, 10000, '2024-05-06', '2024-05-30', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL18', 'NVL11', 'BMN03', 'PNNVL21', NULL, 150, '2024-05-06', '2024-05-30', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL19', 'NVL02', 'BMN04', 'PNNVL22', NULL, 1000, '2024-05-06', '2024-05-30', 'KNVL01', NULL, NULL, NULL, NULL),
-('LNVL20', 'NVL04', 'BMN04', 'PNNVL22', NULL, 100, '2024-05-06', '2024-05-30', 'KNVL01', 'BMX02', NULL, NULL, NULL),
+('LNVL20', 'NVL04', 'BMN04', 'PNNVL22', NULL, 100, '2024-05-06', '2024-05-30', 'KNVL01', 'BMX03', NULL, NULL, NULL),
 ('LNVL21', 'NVL06', 'BMN04', 'PNNVL22', NULL, 10000, '2024-05-06', '2024-05-30', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL22', 'NVL08', 'BMN04', 'PNNVL22', NULL, 200, '2024-05-06', '2024-05-30', 'KNVL01', NULL, NULL, NULL, NULL),
 ('LNVL23', 'NVL10', 'BMN04', 'PNNVL22', NULL, 300, '2024-05-06', '2024-05-30', 'KNVL01', NULL, NULL, NULL, NULL),
-('LNVL24', 'NVL12', 'BMN04', 'PNNVL22', NULL, 1000, '2024-05-06', '2024-05-30', 'KNVL01', NULL, NULL, NULL, NULL);
+('LNVL24', 'NVL12', 'BMN04', 'PNNVL22', NULL, 1000, '2024-05-06', '2024-05-30', 'KNVL01', NULL, NULL, NULL, NULL),
+('LNVL25', 'NVL01', 'BMN06', 'PNNVL23', NULL, 200, '2024-05-25', '2024-06-05', 'KNVL01', NULL, NULL, NULL, NULL),
+('LNVL26', 'NVL01', 'BMN06', 'PNNVL24', NULL, 200, '2024-05-25', '2024-06-09', 'KNVL01', NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -599,18 +618,19 @@ CREATE TABLE `nguyenvatlieu` (
 --
 
 INSERT INTO `nguyenvatlieu` (`maNguyenVatLieu`, `tenNguyenVatLieu`, `donViTinh`, `soLuongTonnvl`, `anh`, `soLuongDonMua`, `status`) VALUES
-('NVL01', 'Sữa tươi', 'Gói', 20800, 'suatuoi.jpg', 0, 1),
-('NVL02', 'Đường', 'Gói', 23000, 'duong.jpg', 0, 1),
+('NVL01', 'Sữa tươi', 'Gói', 21000, 'suatuoi.jpg', 0, 1),
+('NVL02', 'Đường', 'Gói', 22000, 'duong.jpg', 0, 1),
 ('NVL03', 'Siro Dâu', 'Chai', 25000, 'sirodau.jpg', 0, 1),
 ('NVL04', 'Muối', 'Gói', 20200, 'duong.jpg', 0, 1),
-('NVL05', 'Chất tạo ngọt', 'Gói', 19700, 'chattaongot.jpg', 0, 1),
+('NVL05', 'Chất tạo ngọt', 'Gói', 19400, 'chattaongot.jpg', 0, 1),
 ('NVL06', 'Màu thực vật', 'Chai', 40000, 'mauthucvat.jpg', 0, 1),
-('NVL07', 'Bột ', 'Gói', 19800, 'bot.jpg', 0, 1),
-('NVL08', 'Trứng gà', 'Vỉ', 20000, 'trungga.jpg', 0, 1),
+('NVL07', 'Bột ', 'Gói', 19600, 'bot.jpg', 0, 1),
+('NVL08', 'Trứng gà', 'Vỉ', 19800, 'trungga.jpg', 0, 1),
 ('NVL09', 'Chocolate', 'Hộp', 30000, 'chocolate.jpg', 0, 1),
 ('NVL10', 'Ớt bột', 'Gói', 21500, 'otbot.jpg', 0, 1),
 ('NVL11', 'Bơ đậu phộng', 'Hủ', 20600, 'bodauphong.jpg', 0, 1),
-('NVL12', 'Mứt dâu', 'Hủ', 23000, 'mutdau.jpg', 0, 1);
+('NVL12', 'Mứt dâu', 'Hủ', 23000, 'mutdau.jpg', 0, 1),
+('NVL13', '1231', '23123', NULL, '', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -675,6 +695,7 @@ INSERT INTO `nhanvienkiemke` (`maNVKK`, `maKho`, `tenNVKK`, `soDienThoai`, `eMai
 
 CREATE TABLE `phieunnvl` (
   `maPNNVL` char(10) character set utf8 collate utf8_unicode_ci NOT NULL,
+  `maDeXuat` varchar(10) character set utf8 collate utf8_unicode_ci default NULL,
   `maKho` char(10) character set utf8 collate utf8_unicode_ci default NULL,
   `maNVKho` char(10) character set utf8 collate utf8_unicode_ci NOT NULL,
   `tenNguoiGiao` text character set utf8 collate utf8_unicode_ci NOT NULL,
@@ -689,29 +710,31 @@ CREATE TABLE `phieunnvl` (
 -- Dumping data for table `phieunnvl`
 --
 
-INSERT INTO `phieunnvl` (`maPNNVL`, `maKho`, `maNVKho`, `tenNguoiGiao`, `ngayNhap`, `ngayLap`) VALUES
-('PNNVL01', 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
-('PNNVL02', 'KNVL02', 'NVK01', 'Bùi Thục Đoan', '2024-01-01', '2024-05-05'),
-('PNNVL03', 'KNVL03', 'NVK01', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
-('PNNVL04', 'KNVL04', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
-('PNNVL05', 'KNVL05', 'NVK02', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
-('PNNVL06', 'KNVL06', 'NVK02', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
-('PNNVL07', 'KNVL01', 'NVK01', 'ABC', '2024-01-01', '2024-05-05'),
-('PNNVL08', 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
-('PNNVL09', 'KNVL02', 'NVK01', 'Bùi Thục Đoan', '2024-01-01', '2024-05-05'),
-('PNNVL10', 'KNVL03', 'NVK01', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
-('PNNVL11', 'KNVL04', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
-('PNNVL12', 'KNVL05', 'NVK02', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
-('PNNVL13', 'KNVL06', 'NVK02', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
-('PNNVL14', 'KNVL06', 'NVK02', 'dddd', '2024-05-05', '2024-05-05'),
-('PNNVL15', 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
-('PNNVL16', 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
-('PNNVL17', 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
-('PNNVL18', 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-06'),
-('PNNVL19', 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-07'),
-('PNNVL20', 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-06'),
-('PNNVL21', 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-06'),
-('PNNVL22', 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-06');
+INSERT INTO `phieunnvl` (`maPNNVL`, `maDeXuat`, `maKho`, `maNVKho`, `tenNguoiGiao`, `ngayNhap`, `ngayLap`) VALUES
+('PNNVL01', NULL, 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
+('PNNVL02', NULL, 'KNVL02', 'NVK01', 'Bùi Thục Đoan', '2024-01-01', '2024-05-05'),
+('PNNVL03', NULL, 'KNVL03', 'NVK01', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
+('PNNVL04', NULL, 'KNVL04', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
+('PNNVL05', NULL, 'KNVL05', 'NVK02', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
+('PNNVL06', NULL, 'KNVL06', 'NVK02', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
+('PNNVL07', NULL, 'KNVL01', 'NVK01', 'ABC', '2024-01-01', '2024-05-05'),
+('PNNVL08', NULL, 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
+('PNNVL09', NULL, 'KNVL02', 'NVK01', 'Bùi Thục Đoan', '2024-01-01', '2024-05-05'),
+('PNNVL10', NULL, 'KNVL03', 'NVK01', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
+('PNNVL11', NULL, 'KNVL04', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
+('PNNVL12', NULL, 'KNVL05', 'NVK02', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
+('PNNVL13', NULL, 'KNVL06', 'NVK02', 'Lê Hải Đăng', '2024-01-01', '2024-05-05'),
+('PNNVL14', NULL, 'KNVL06', 'NVK02', 'dddd', '2024-05-05', '2024-05-05'),
+('PNNVL15', NULL, 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
+('PNNVL16', NULL, 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
+('PNNVL17', NULL, 'KNVL01', 'NVK01', 'Lê Anh Nuôi', '2024-01-01', '2024-05-05'),
+('PNNVL18', NULL, 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-06'),
+('PNNVL19', NULL, 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-07'),
+('PNNVL20', NULL, 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-06'),
+('PNNVL21', NULL, 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-06'),
+('PNNVL22', NULL, 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-06', '2024-05-06'),
+('PNNVL23', NULL, 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-24', '2024-05-25'),
+('PNNVL24', NULL, 'KNVL01', 'NVK01', 'Lê Hạnh Hải Đăng', '2024-05-24', '2024-05-25');
 
 -- --------------------------------------------------------
 
@@ -763,7 +786,11 @@ CREATE TABLE `phieuxnvl` (
 INSERT INTO `phieuxnvl` (`maPXNVL`, `maKho`, `maNVKho`, `tenNguoiNhan`, `ngayXuat`, `ngayLap`) VALUES
 ('PXNVL01', 'KNVL01', 'NVK01', 'Đinh Hữu Khang', '2023-09-30', '2024-04-14'),
 ('PXNVL02', '', '', 'hải đăng', '2024-05-06', '2024-05-06'),
-('PXNVL03', 'KNVL01', '', 'hải đăng', '2024-05-06', '2024-05-06');
+('PXNVL03', 'KNVL01', '', 'hải đăng', '2024-05-06', '2024-05-06'),
+('PXNVL04', 'KNVL01', '', '121212', '2024-05-24', '2024-05-25'),
+('PXNVL05', '', '', 'hải đăng', '2024-05-21', '2024-05-25'),
+('PXNVL06', '', '', 'hải đăng', '2024-05-21', '2024-05-25'),
+('PXNVL07', 'KNVL01', '', 'hải đăng', '2024-05-24', '2024-05-25');
 
 -- --------------------------------------------------------
 
@@ -909,7 +936,10 @@ INSERT INTO `thanhpham` (`maThanhPham`, `tenThanhPham`, `donViTinh`, `soLuongTon
 ('TP09', 'Kẹo dẻo', 'Gói', 600, 'keodeo.jpg', 1),
 ('TP10', 'Kẹo Chocolate', 'Hộp', 1220, 'keochocolate.jpg', 1),
 ('TP11', 'Bánh mì tươi', 'Gói', 100, 'banhmituoi.jpg', 1),
-('TP12', 'Xúc xích', 'Gói', 100, 'xucxich.jpg', 1);
+('TP12', 'Xúc xích', 'Gói', 100, 'xucxich.jpg', 1),
+('TP13', '', '111', 0, 'LC-jpeg-6278-1657847779_1200x0.jpg', 1),
+('TP14', '11111', '111', 0, 'fpt-long-chau-2-8164.jpeg', 1),
+('TP15', '12122', '121212', 0, '1288181.jpg', 1);
 
 --
 -- Constraints for dumped tables

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 25, 2024 at 11:45 AM
+-- Generation Time: May 25, 2024 at 06:18 PM
 -- Server version: 5.0.51
 -- PHP Version: 5.2.6
 
@@ -33,12 +33,26 @@ CREATE TABLE `chat` (
   `timestamp` timestamp NOT NULL default CURRENT_TIMESTAMP,
   `status` int(1) NOT NULL,
   PRIMARY KEY  (`chatid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `chat`
 --
 
+INSERT INTO `chat` (`chatid`, `sender_userid`, `reciever_userid`, `message`, `timestamp`, `status`) VALUES
+(1, 5, 4, 'xin chao giam doc', '2024-05-25 14:08:33', 1),
+(2, 5, 4, 'sdasd', '2024-05-25 14:09:48', 1),
+(3, 5, 4, 'ád', '2024-05-25 14:09:50', 1),
+(4, 5, 1, 'xin chào', '2024-05-25 15:18:09', 0),
+(5, 1, 5, 'chào admin', '2024-05-25 15:18:27', 0),
+(6, 1, 5, 'anh có khỏe không', '2024-05-25 15:18:32', 0),
+(7, 5, 1, 'xin chào', '2024-05-25 15:19:37', 0),
+(8, 5, 4, '1213121', '2024-05-25 15:27:23', 1),
+(9, 5, 4, '12111111111111111111111', '2024-05-25 15:27:26', 1),
+(10, 5, 2, 'xin chào quản lý', '2024-05-25 15:28:15', 1),
+(11, 5, 1, 'chào bạn, tôi khỏe', '2024-05-25 16:33:11', 1),
+(12, 5, 1, 'hehe', '2024-05-25 16:33:54', 1),
+(13, 1, 5, 'haha', '2024-05-25 16:33:59', 1);
 
 -- --------------------------------------------------------
 
@@ -84,7 +98,7 @@ CREATE TABLE `chat_users` (
 
 INSERT INTO `chat_users` (`userid`, `username`, `email`, `password`, `avatar`, `current_session`, `online`) VALUES
 (1, 'Hải Đăng', 'nvk1@gmail.com', '12345', 'user1.jpg', 5, 0),
-(2, 'Quản lý kho 1', 'qlk1@gmail.com', '12345', 'user2.jpg', 1, 0),
+(2, 'Quản lý kho 1', 'qlk1@gmail.com', '12345', 'user2.jpg', 5, 0),
 (3, 'NVP Kế hoạch 1', 'nvpkh1@gmail.com', '12345', 'user3.jpg', 1, 0),
-(4, 'Giám đốc 1', 'gd1@gmail.com', '12345', 'user4.jpg', 1, 0),
+(4, 'Giám đốc 1', 'gd1@gmail.com', '12345', 'user4.jpg', 5, 0),
 (5, 'Admin', 'admin@gmail.com', '12345', 'user5.jpg', 1, 0);

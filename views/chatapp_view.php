@@ -627,7 +627,7 @@ if(isset($_SESSION['user_mail'])) {
 }
 #frame_app .content {
   float: right;
-  width: 60%;
+  width: 100vh;
   height: 100%;
   overflow: hidden;
   position: relative;
@@ -697,6 +697,7 @@ if(isset($_SESSION['user_mail'])) {
   margin: 15px 15px 5px 15px;
   width: calc(100% - 25px);
   font-size: 0.9em;
+
 }
 #frame_app .content .messages ul li:nth-last-child(1) {
   margin-bottom: 20px;
@@ -707,6 +708,7 @@ if(isset($_SESSION['user_mail'])) {
 #frame_app .content .messages ul li.sent p {
   background: #435f7a;
   color: #f5f5f5;
+
 }
 #frame_app .content .messages ul li.replies img {
   margin: 6px 0 0 8px;
@@ -716,6 +718,7 @@ if(isset($_SESSION['user_mail'])) {
 #frame_app .content .messages ul li.replies p {
   background: #f5f5f5;
   float: right;
+ 
 }
 #frame_app .content .messages ul li img {
   width: 22px;
