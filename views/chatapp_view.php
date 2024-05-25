@@ -2,7 +2,6 @@
 
 if(isset($_SESSION['user_mail'])) {
     $mail = $_SESSION['user_mail'];
-    echo $mail;
     include('Chat.php');
     $chat = new Chat();
     $id = $chat->getUseridByMail($mail);
