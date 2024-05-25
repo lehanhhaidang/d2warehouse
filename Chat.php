@@ -162,10 +162,10 @@ class Chat{
 		foreach($userChat as $chat){
 			$user_name = '';
 			if($chat["sender_userid"] == $to_user_id) {
-				$conversation .= '<li class="chat-bubble replies">';
+				$conversation .= '<li class="chat-bubble sent">';
 				$conversation .= '<img width="22px" height="22px" src="assets/images/userpics/'.$toUserAvatar.'" alt="" />';
 			} else {
-				$conversation .= '<li class="chat-bubble sent">';
+				$conversation .= '<li class="chat-bubble replies">';
 				$conversation .= '<img width="22px" height="22px" src="assets/images/userpics/'.$fromUserAvatar.'" alt="" />';
 			}			
 			$conversation .= '<p>'.$chat["message"].'</p>';			

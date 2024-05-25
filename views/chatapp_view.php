@@ -710,13 +710,17 @@ if(isset($_SESSION['user_mail'])) {
 }
 #frame_app .content .messages ul li.replies img {
   margin: 6px 0 0 8px;
+  float: right;
+  margin-right: 120px;
 }
 #frame_app .content .messages ul li.replies p {
   background: #f5f5f5;
+  float: right;
 }
 #frame_app .content .messages ul li img {
   width: 22px;
   border-radius: 50%;
+  float: left;
 }
 #frame_app .content .messages ul li p {
   display: inline-block;
@@ -844,5 +848,5 @@ ol, ul {
     white-space: nowrap;
     text-align: center;
     border-radius: 10px;
-
+}
 </style>
