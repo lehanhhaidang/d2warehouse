@@ -194,7 +194,18 @@ if(isset($_REQUEST['id']))
        
                             $query = "INSERT INTO `taikhoan`( `hoten`, `email`, `matkhau`, `dienthoai`, `diachi`, `role`, `hinhdaidien`) 
                               VALUES ('$ho_ten','$email','$mat_khau','$so_dien_thoai','$dia_chi','$vai_tro','$name')";
-							if($p->InsertUpdate($query)==1)
+                            $query2 = "INSERT INTO `d2warehouse`.`chat_users` (
+                                `username` ,
+                                `email` ,
+                                `avatar` ,
+                                `current_session` ,
+                                `online`
+                                )
+                                VALUES (
+                                '$ho_ten', '$email', '$name', '0', '0'
+                                )
+                                ";
+							if($p->InsertUpdate($query)==1&&$p->InsertUpdate($query2)==1)
 							{
 								echo '<script>';
                                 echo 'window.onload = function() { $("#successModal").modal("show"); };';
