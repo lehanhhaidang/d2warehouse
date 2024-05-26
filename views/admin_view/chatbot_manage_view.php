@@ -14,7 +14,7 @@
         $servername = "localhost";
         $username = "root";
         $password ="";
-        $dbname ="chatbot_d2warehouse";
+        $dbname ="d2warehouse";
         
         $conn = new mysqli($servername,$username,$password,$dbname);
                 if(!$conn)
