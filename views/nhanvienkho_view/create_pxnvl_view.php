@@ -3,13 +3,14 @@ if (isset($_REQUEST['idBMX'])) {
     $idBMX = $_REQUEST['idBMX'];
   }
   
+if(isset($_SESSION['user_mail'])) {
+    $mail = $_SESSION['user_mail'];
+  }
 ?>
 
+
 <form method="post" enctype="multipart/form-data" name="form1" id="form1">
-      <input type="hidden" name="maNV" value="<?php echo $p->pickColumn("SELECT nk.maNhanVien FROM bieumauxuat bn 
-                 INNER JOIN kho k ON bn.maKho = k.maKho
-                 INNER JOIN nhanvienkho nk ON k.maNVKho = nk.maNhanVien
-                 WHERE bn.maBMXuat = '$idBMX'"); ?>">
+      <input type="hidden" name="maNV" value="<?php echo $p->pickColumn("SELECT ho_ten from taikhoan where email = '$mail'"); ?>">
       <h2 class="title" style ="text-align:center;"> Lập phiếu xuất nguyên vật liệu</h2>
       <div class="body">
         <?php
@@ -36,10 +37,7 @@ if (isset($_REQUEST['idBMX'])) {
         </div>
         <div class="input-container col-md-5">
           <label class="labelInput" for="">Người lập phiếu</label>
-          <input class="input form-control" name="nguoilap" value="<?php echo $p->pickColumn("SELECT nk.tenNVKho FROM longuyenvatlieu bn
-                 INNER JOIN kho k ON bn.maKho = k.maKho
-                 INNER JOIN nhanvienkho nk ON k.maNVKho = nk.maNhanVien
-                 WHERE bn.maBMXuat = '$idBMX' "); ?>" readonly />
+          <input class="input form-control" name="nguoilap" value="<?php echo $p->pickColumn("SELECT hoten from taikhoan where email = '$mail'"); ?>" readonly />
         </div>
         <div class="input-container col-md-5">
           <label class="labelInput" for="">Ngày lập phiếu</label>
