@@ -113,12 +113,11 @@ if (isset($_REQUEST['idBMX'])) {
             $ngayLap = $_REQUEST['ngaylap'];
             $maNV = $_REQUEST['maNV'];
             $ngayHienTai = date("Y-m-d");
-
             $maKho = $p->pickColumn("select maKho from longuyenvatlieu where maBMXuat = '$idBMX'");
-            $lapPhieu = $p->InsertUpdate("INSERT INTO phieuxnvl(maPXNVL,maKho,maNVKho,tenNguoiNhan,ngayxuat,ngayLap) 
-                VALUES('$maPhieuXNVL','$maKho','$maNV','$tenNguoiNhan','$ngayxuat','$ngayLap')");
+            $lapPhieu = $p->InsertUpdate("INSERT INTO phieuxnvl(maPXNVL,maKho,tenNguoiNhan,ngayxuat,ngayLap) 
+                VALUES('$maPhieuXNVL','$maKho','$tenNguoiNhan','$ngayxuat','$ngayLap')");
 
-            if ($lapPhieu == 1 && $ngayLap == $ngayHienTai) {
+            if ($lapPhieu == 1&&$ngayLap==$ngayHienTai) {
               $count = 0;
               $link = $p->connect();
               $sql = "SELECT
