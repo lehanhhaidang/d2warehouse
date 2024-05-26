@@ -161,14 +161,14 @@ if (isset($_REQUEST['idBMX'])) {
               else
               {
                 echo '<script>alert("Lập phiếu thất bại")</script>';
-                echo '<script> window.location="../NHANVIENKHO/LapPhieuXuatTP.php?idBMX='.$idBMX.'"</script>';
+                echo '<script> window.location="../d2warehouse/create_pxtp.php?idBMX='.$idBMX.'"</script>';
               } 
           }
           else
           {
             echo '<script>alert("Ngày lập phiếu phải là ngày hiện tại")</script>';
             $p->InsertUpdate("DELETE FROM phieuxtp where maPXTP = '$maPhieuXTP'");
-            echo '<script> window.location="../NHANVIENKHO/LapPhieuXuatTP.php?idBMX='.$idBMX.'"</script>';
+            echo '<script> window.location="../d2warehouse/create_pxtp.php?idBMX='.$idBMX.'"</script>';
           }
           break;
       }

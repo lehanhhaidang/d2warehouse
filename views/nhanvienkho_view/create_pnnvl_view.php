@@ -150,7 +150,7 @@ if (isset($_REQUEST['idBMN'])) {
                         echo  '<script>alert("Ngày sản xuất phải nhỏ hơn ngày hết hạn")</script>';
                         $p-> InsertUpdate("DELETE FROM phieunnvl where maPNNVL = '$maPhieuNNVL'");
                        $p->InsertUpdate("DELETE FROM longuyenvatlieu where maLoNVL = '$maLoNVL'");
-                       echo '<script> window.location="../NHANVIENKHO/LapPhieuNhapNVL.php?idBMN='.$idBMN.'"</script>';
+                       echo '<script> window.location="../d2warehouse/create_pnnvl.php?idBMN='.$idBMN.'"</script>';
 
                       }
 
@@ -165,7 +165,7 @@ if (isset($_REQUEST['idBMN'])) {
           {
             echo '<script>alert("Ngày lập phiếu phải là ngày hiện tại")</script>';
             $p-> InsertUpdate("DELETE FROM phieunnvl where maPNNVL = '$maPhieuNNVL'");
-            echo '<script> window.location="../NHANVIENKHO/LapPhieuNhapNVL.php?idBMN='.$idBMN.'"</script>';
+            echo '<script> window.location="../d2warehouse/create_pnnvl.php?idBMN='.$idBMN.'"</script>';
           }
 
           break;

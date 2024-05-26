@@ -113,6 +113,8 @@ if (isset($_REQUEST['idBMX'])) {
             $ngayLap = $_REQUEST['ngaylap'];
             $maNV = $_REQUEST['maNV'];
             $ngayHienTai = date("Y-m-d");
+            echo $ngayHienTai;
+            die;
             $maKho = $p->pickColumn("select maKho from longuyenvatlieu where maBMXuat = '$idBMX'");
             $lapPhieu = $p->InsertUpdate("INSERT INTO phieuxnvl(maPXNVL,maKho,maNVKho,tenNguoiNhan,ngayxuat,ngayLap) 
                 VALUES('$maPhieuXNVL','$maKho','$maNV','$tenNguoiNhan','$ngayxuat','$ngayLap')");
@@ -163,14 +165,14 @@ if (isset($_REQUEST['idBMX'])) {
               else
               {
                 echo '<script>alert("Lập phiếu thất bại")</script>';
-                echo '<script> window.location="../NHANVIENKHO/LapPhieuXuatTP.php?idBMX='.$idBMX.'"</script>';
+                echo '<script> window.location="../d2warehouse/create_pxnvl.php?idBMX='.$idBMX.'"</script>';
               } 
           }
           else
           {
             echo '<script>alert("Ngày lập phiếu phải là ngày hiện tại")</script>';
             $p->InsertUpdate("DELETE FROM phieuxnvl where maPXNVL = '$maPhieuXNVL'");
-            echo '<script> window.location="../NHANVIENKHO/LapPhieuXuatNVL.php?idBMX='.$idBMX.'"</script>';
+            echo '<script> window.location="../d2warehouse/create_pxnvl.php?idBMX='.$idBMX.'"</script>';
           }
           break;
       }
