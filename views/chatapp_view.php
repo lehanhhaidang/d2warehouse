@@ -80,7 +80,7 @@ if(isset($_SESSION['user_mail'])) {
             
 						$userDetails = $chat->getUserDetails($currentSession);
 						foreach ($userDetails as $user) {										
-							echo '<img src="../assets/images/userpics/'.$user['avatar'].'" alt="" style="width:50px; height:50px;" />';
+							echo '<img src="assets/images/userpics/'.$user['avatar'].'" alt="" style="width:50px; height:50px;" />';
 								echo '<p>'.$user['username'].'</p>';
 								echo '<div class="social-media">';
 									echo '<i class="fa fa-facebook" aria-hidden="true"></i>';
