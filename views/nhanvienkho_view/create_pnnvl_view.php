@@ -109,7 +109,7 @@ if (isset($_REQUEST['idBMN'])) {
                 VALUES('$maPhieuNNVL','$maKho','$maNV','$tenNguoiGiao','$ngayNhap','$ngayLap')");
 
                 
-            if ($lapPhieu == 1) {
+            if ($lapPhieu == 1&&$ngayLap==$ngayHienTai) {
               $count = 0;
               $link = $p->connect();
               $sql = "SELECT * FROM chitietbieumaunhap WHERE maBMNhap = '$idBMN'";
