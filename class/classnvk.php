@@ -1926,6 +1926,7 @@ private function mapMaNguyenVatLieuToTenKho($maNguyenVatLieu) {
         <thead>
             <tr>
                 <th class="text-center">STT</th>
+				<th  class="text-center">Ảnh</th>
                 <th class="text-center">Tên người dùng</th>
                 <th class="text-center">Email</th>
                 <th class="text-center">Số điện thoại</th>
@@ -1959,6 +1960,7 @@ private function mapMaNguyenVatLieuToTenKho($maNguyenVatLieu) {
 			);
             $chucVu = isset($role_names[$row['role']]) ? $role_names[$row['role']] : 'Unknown';
             $diaChi = $row['diachi'];
+			$anh = $row['hinhdaidien'];
             $soDienThoai = $row['dienthoai'];
             $email = $row['email'];
             $trangThai = isset($status_names[$row['trangthai']]) ? $status_names[$row['trangthai']] : 'Unknown';
@@ -1966,6 +1968,7 @@ private function mapMaNguyenVatLieuToTenKho($maNguyenVatLieu) {
 
             echo '<tr>
                     <td>'.$count++.'</td>
+					<td><a href="?id='.$id.'"><img src="uploads/'.$anh.'" alt="Ảnh đại diện" style="width: 80px; height: 80px;"></td>
                     <td><a href="?id='.$id.'">'.$tenNV.'</a></td>
                     <td><a href="?id='.$id.'">'.$email.'</td>
                     <td><a href="?id='.$id.'">'.$soDienThoai.'</td>

@@ -18,6 +18,7 @@ if(isset($_REQUEST['id']))
 <table class="table table-bordered">
     <thead>
         <tr>
+            <th class="text-center">Ảnh</th>
             <th class="text-center">Tên người dùng</th>
             <th class="text-center">Email</th>
             <th class="text-center">Số điện thoại</th>
@@ -29,6 +30,8 @@ if(isset($_REQUEST['id']))
     </thead>
         <tbody>
             <input type="hidden" name="idchon" id="idchon" value="<?php echo $id ?>"></td>
+            <td><input name="hinhdaidien" type="file" id="hinhdaidien" class="input form-control" value="<?php echo $p->pickColumn("select hinhdaidien from taikhoan where id_acc= '$id' limit 1 ");?>"></td>
+
             <td><input name="txtten" type="text" id="txtten" class="input form-control" value="<?php echo $p->pickColumn("select hoten from taikhoan where id_acc= '$id' limit 1 ");?>"></td>
             <td><input name="txtemail" type="text" id="txtemail" class="input form-control" value="<?php echo $p->pickColumn("select email from taikhoan where id_acc= '$id' limit 1 ");?>"></td>
             <td><input name="txtsdt" type="text" id="txtsdt" class="input form-control" value="<?php echo $p->pickColumn("select dienthoai from taikhoan where id_acc= '$id' limit 1 ");?>"></td>
@@ -205,7 +208,9 @@ if(isset($_REQUEST['id']))
                                 '$ho_ten', '$email', '$name', '0', '0'
                                 )
                                 ";
-							if($p->InsertUpdate($query)==1&&$p->InsertUpdate($query2)==1)
+							if($p->pickColumn("SELECT * FROM taikhoan WHERE email = '$email'") == null){
+
+                                if($p->InsertUpdate($query)==1&&$p->InsertUpdate($query2)==1)
 							{
 								echo '<script>';
                                 echo 'window.onload = function() { $("#successModal").modal("show"); };';
@@ -215,6 +220,12 @@ if(isset($_REQUEST['id']))
 							{
 								echo "Them khong thanh cong";
 							}
+                            }else{
+
+                                echo '<script>';
+                                echo 'alert("Email đã tồn tại, vui lòng nhập email khác!")';
+                                echo '</script>';
+                            }
 				
 
 
@@ -251,11 +262,12 @@ if(isset($_REQUEST['id']))
                         $diachi = $_REQUEST['txtdiachi'];
                         $chucvu = $_REQUEST['txtchucvu'];
                         $trangthai = $_REQUEST['txttrangthai'];
+                        $anh = $_REQUEST['hinhdaidien'];
 
                         $layid = $_REQUEST['idchon'];
                         if($layid >0)
                         {
-                            if($p->InsertUpdate("UPDATE taikhoan SET hoten = '$ten', email = '$email', dienthoai = '$sdt', diachi = '$diachi', role = '$chucvu', trangthai = '$trangthai' WHERE id_acc = '$layid'")==1)
+                            if($p->InsertUpdate("UPDATE taikhoan SET hoten = '$ten', email = '$email', dienthoai = '$sdt', diachi = '$diachi', hinhdaidien = '$anh',role = '$chucvu', trangthai = '$trangthai' WHERE id_acc = '$layid'")==1)
                             {
                                 echo '<script>';
                                 echo 'window.onload = function() { $("#successModal").modal("show"); };';

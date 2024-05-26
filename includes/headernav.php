@@ -156,7 +156,11 @@
                            
                            <li class="user-profile header-notification">
                                <a href="#!">
-                                   <img src="assets/images/avatar-2.jpg" class="img-radius" alt="User-Profile-Image">
+                               <?php 
+                                            $avatar = $p->pickColumn("select hinhdaidien from taikhoan where email = '$admin_email'");
+                                        
+                                   echo '<img src="uploads/'.$avatar.'" style="width:45px; height:45px;"class="rounded-circle" alt="User-Profile-Image">';
+                                   ?>
                                    <span> <?php echo $admin_email ?> </span>
                                    <i class="ti-angle-down"></i>
                                </a>
