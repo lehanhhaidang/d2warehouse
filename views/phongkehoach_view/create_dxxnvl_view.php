@@ -109,7 +109,9 @@ if(isset($_POST['tinhnvl']))
     }
     echo '</tbody>';
     echo'</table>'; 
-    echo'<input type="submit" class="btn btn-success" name="insert_dexuat" value="Insert to Dexuat">Insert to Dexuat</input>';    
+    echo '<div class="text-center">
+    <input type="submit" class="btn btn-success" name="insert_dexuat" value="Insert to Dexuat"></input>   
+    </div>';
 
     // Lưu thông tin vào session
     $_SESSION['nguyenVatLieuCanThiet'] = $nguyenVatLieuCanThiet;

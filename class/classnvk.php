@@ -1757,7 +1757,44 @@ public function accept_propose($sql)
     echo'</tbody>
         </table>'; 
 }
+public function CTDXX($sql)
+{
+    $link = $this->connect();
+    $result = mysqli_query($link, $sql); // Thay thế mysql_query bằng mysqli_query
 
+    $count = 1;
+    echo '<table class=" tbldexuat table table-border table-hover">
+        <thead>
+            <tr>
+                <th class="text-center">STT</th>
+                <th class="text-center">Mã nguyên vật liệu</th>
+                <th class="text-center">Tên nguyên vật liệu</th>
+                <th class="text-center">Đơn vị tính</th>
+                <th class="text-center">Số lượng xuất</th>
+            </tr>
+        </thead>
+        <tbody>';
+
+    if (mysqli_num_rows($result) > 0) { // Thay thế mysql_num_rows bằng mysqli_num_rows
+        while ($row = mysqli_fetch_array($result)) { // Thay thế mysql_fetch_array bằng mysqli_fetch_array
+            $maDeXuat = $row['maDeXuat'];
+            $maNguyenVatLieu = $row['maNguyenVatLieu'];
+            $tenNguyenVatLieu = $row['tenNguyenVatLieu'];
+            $donViTinh = $row['donViTinh'];
+            $soLuong = $row['soLuong'];
+            echo '<tr>
+                    <td>'.$count++.'</td> <!-- Số thứ tự -->
+                    <td>'.$maNguyenVatLieu.'</td> <!-- Đơn vị tính -->
+                    <td>'.$tenNguyenVatLieu.'</td> 
+                    <td>'.$donViTinh.'</td> 
+                    <td>'.$soLuong.'</td> 
+
+                </tr>';
+        }
+    } 
+    echo'</tbody>
+        </table>'; 
+}
 
 public function DPXNVL($sql)
 {

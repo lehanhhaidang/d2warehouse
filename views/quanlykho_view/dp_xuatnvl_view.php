@@ -3,7 +3,7 @@
 if (isset($_REQUEST['idDX'])) {
     $idDX = $_REQUEST['idDX'];   
 }
-$p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl.maNguyenVatlieu where madexuat='$idDX' ");
+$p->CTDXX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl.maNguyenVatlieu where madexuat='$idDX' ");
 ?>
 <form action="" method="post">
 <div class="text-center">
@@ -35,7 +35,7 @@ $p->CTDX("select * from dexuat dx inner join nguyenvatlieu nvl on dx.maNVL = nvl
                 
                 <label for="input">Tên người nhận: </label>
                 <input type="name" class="name input form-control" name="tennguoinhan" placeholder="Nhập tên người nhận" required>
-                <label for="date"></label>
+                <label for="date">Ngày xuất</label>
                 <input type="date" class="date input form-control" name="date" id="" required>
                 </div>
 

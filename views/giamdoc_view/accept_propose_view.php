@@ -33,8 +33,14 @@ Dựa vào thông tin trong kho, phòng kế hoạch đề xuất kế hoạch n
     </div>
     <div class="button text-center" style="align-items: center;">
         <button type="button" class="btn btn-success" onclick="window.history.back()">Trở lại</button>
-        <button class="btn btn-warning" type="submit" name="button" value="tuchoi" formaction="">Từ chối</button>
-        <button class="btn btn-primary" type="submit" name="button" value="duyet" formaction="">Duyệt phiếu</button>
+        <?php
+            if($p->pickColumn("select trangThai from dexuat where maDeXuat = '$idDX'") == "Chờ duyệt")
+            {
+                echo '<button class="btn btn-warning" type="submit" name="button" value="tuchoi" formaction="">Từ chối</button>
+                <button class="btn btn-primary" type="submit" name="button" value="duyet" formaction="">Duyệt phiếu</button>';
+                
+            }
+        ?>
     </div>
 </form>
 <?php

@@ -33,18 +33,14 @@ if (isset($_REQUEST['idBMX'])) {
                     $maKho = $p->pickColumn("select loaiXuat from bieumauxuat where maBMXuat = '$idBMX'");
                     if(strpos($maKho,"Nguyên vật liệu") !== false)
                     {
-                                 $p->DSLNVL("SELECT
-                                 nv.tenNguyenVatLieu,
-                                 lgl.soLuong,
-                                 nv.donViTinh,
-                                 lgl.NSX,
-                                 lgl.NHH
-                             FROM
-                                 bieumauxuat bmx
+                                 $p->DSLNVL("SELECT nv.tenNguyenVatLieu, dx.soLuong, nv.donViTinh, lgl.NSX, lgl.NHH
+                                 FROM bieumauxuat bmx
                                  JOIN longuyenvatlieu lgl ON bmx.maBMXuat = lgl.maBMXuat
                                  JOIN nguyenvatlieu nv ON lgl.maNguyenVatLieu = nv.maNguyenVatLieu
-                             WHERE
-                                 bmx.maBMXuat = '$idBMX'"); 
+                                 JOIN dexuat dx ON dx.maDeXuat = bmx.maDeXuat
+                                 AND dx.maNVL = lgl.maNguyenVatLieu
+                                 WHERE bmx.maBMXuat = '$idBMX'
+                                 GROUP BY nv.tenNguyenVatLieu, nv.donViTinh, lgl.NSX, lgl.NHH"); 
                     }
                     else
                     {

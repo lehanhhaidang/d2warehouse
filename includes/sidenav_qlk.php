@@ -98,6 +98,29 @@
                                     </ul>
                                 </li>
                                 <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Quản lý phiếu xuất nhập</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class=" ">
+                                            <a href="list_px.php">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert" style="font-weight: 400;" >Phiếu xuất</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="list_pn.php">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert" style="font-weight: 400;" >Phiếu nhập</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="pcoded-hasmenu">
                                     <a href="chatapp.php">
                                         <span class="pcoded-micon"><i class="ti-layout-grid2-alt"></i><b>D</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Trò chuyện</span>

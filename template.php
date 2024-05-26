@@ -115,7 +115,11 @@ include("includes/head.php")
                                                     include("views/nhanvienkho_view/create_pnnvl_view.php");
                                                 } elseif ($views == "create_pntp") {
                                                     include("views/nhanvienkho_view/create_pntp_view.php");
-                                                } else {
+                                                } elseif($views == "list_pn"){
+                                                    include("views/list_pn_view.php");
+                                                }elseif($views == "list_px"){
+                                                    include("views/list_px_view.php");
+                                                }else {
                                                     include("views/404_view.php");
                                                 }
 
@@ -159,7 +163,11 @@ include("includes/head.php")
                                                     include("views/quanlykho_view/dpn_view.php");
                                                 } elseif ($views == "dp_nhapnvl") {
                                                     include("views/quanlykho_view/dp_nhapnvl_view.php");
-                                                } else {
+                                                } elseif($views == "list_pn"){
+                                                    include("views/list_pn_view.php");
+                                                }elseif($views == "list_px"){
+                                                    include("views/list_px_view.php");
+                                                }else {
                                                     include("views/404_view.php");
                                                 }
 
